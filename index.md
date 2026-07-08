@@ -52,16 +52,30 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 * **[Log 016: Why Geometry.md Exists](log-016.md)**
   An explanation of the three-layered project architecture (Narrative, Index, Implementation) and the rationale behind separating documentation from source code.
 
+* **[Log 017: Stable References in a Formal Mathematics Project](log-017.md)**
+  Introduction of a permanent identifier system (DEF, AXM, LEM, THM) to decouple mathematical documentation from the evolving implementation.
+
+* **[Log 018: Why a Single Geometry.lean File?](log-018.md)**
+  Justification for adopting a centralized formal library (Geometry.lean) over a modular file structure, emphasizing the coherence of synthetic geometry.
+
+* **[Log 019: Organizing Geometry.lean](log-019.md)**
+  Establishment of the internal organizational principles for the central implementation file, prioritizing logical mathematical dependencies over chronological development history.
+
+* **[Log 020: From Research Project to Formal Geometry Library](log-020.md)**
+  Conclusion of the methodological phase and transition to systematic formal development; consolidation of the three-layered project architecture.
+
 ---
 
 ### Formal Geometry Library
 
 The library serves as the central architectural index of the project, documenting the formal development and dependency graph.
 
+
+
 * **[Geometry Library Index (Geometry.md)](./Geometry.md)**
   The architectural map detailing definitions, axioms, lemmas, and theorems.
 
-* **[Geometry Implementation (Geometry.html)](./Geometry_lean.html)**
+* **[Geometry Implementation (Geometry_lean.html)](./Geometry_lean.html)**
   The formal source code in Lean, organized for modular verification.
 
 ---
