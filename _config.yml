@@ -1,5 +1,1 @@
-title: CGJteam Lab
-description: Analiza syntetyczna w geometrii trójkąta.
-markdown: kramdown
-kramdown:
-  math_engine: mathjax
+theme: jekyll-theme-minimal
