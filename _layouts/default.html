@@ -12,7 +12,10 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-<section class="giscus" style="margin-top: 50px; border-top: 1px solid #ccc; padding-top: 20px;">
+   
+<body>
+    {{ content }}
+    <section class="giscus" style="margin-top: 50px; border-top: 1px solid #ccc; padding-top: 20px;">
     <script src="https://giscus.app/client.js"
             data-repo="cgjteam/cgjteam.github.io"
             data-repo-id="R_kgDOH..." 
@@ -28,8 +31,6 @@
             crossorigin="anonymous"
             async>
     </script>
-</section>    
-<body>
-    {{ content }}
+</section>
 </body>
 </html>
