@@ -3,7 +3,7 @@ Version: 1.0
 Last updated: 2026-07-08
 
 ## Repository
-- **Main Lean source:** [Geometry.lean](./Geometry.lean)
+- **Main Lean source:** [View Geometry.lean](./Geometry.lean)
   
 This document serves as the architectural map of the CGJteam Lab formalization project.
 
