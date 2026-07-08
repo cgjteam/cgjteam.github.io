@@ -16,7 +16,8 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
  * **[Log 004: The First Hidden Assumption](log-004.md)**
   An investigation into the existence and uniqueness of the intersection point of two medians, identifying the necessity of proving they are not parallel.
 
-
+  * **[Log 005: The Midsegment Theorem as the Engine of the Proof](log-005.md)**
+  An examination of the dual role of the Midsegment Theorem, analyzing its contribution to both parallelism and triangle similarity within Finlay's construction.
 
 ---
 *Status: Active research project.*
