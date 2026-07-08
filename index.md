@@ -31,6 +31,15 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   * **[Log 009: Towards a Minimal Dependency Set](log-009.md)**
   A critical analysis separating necessary logical dependencies from creative construction choices, aiming to identify the minimal mathematical core of the proof.
 
+  * **[Log 010: From a Single Proof to a General Methodology](log-010.md)**
+  Formalization of the CGJteam Lab workflow, establishing a systematic, repeatable methodology for decomposing and analyzing classical synthetic proofs.
+
+  * **[Log 011: Is Finlay's Proof Minimal?](log-011.md)**
+  Initiation of a minimality analysis, questioning the necessity of specific auxiliary constructions and investigating the potential for reducing the logical dependency set.
+
+  * **[Log 012: A Proof as a Directed Dependency Graph](log-012.md)**
+  Reinterpretation of Finlay's proof as a formal directed graph, emphasizing the distinction between linear narrative and logical structure required for formal verification.
+
 
 
   
