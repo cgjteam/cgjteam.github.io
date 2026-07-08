@@ -13,5 +13,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 * **[Log 003: Why Finlay's Proof Is Different](log-003.md)**
   An exploration of the minimal synthetic philosophy underlying Finlay's argument and the motivation for logical decomposition.
 
+ * **[Log 004: The First Hidden Assumption](log-004.md)**
+  An investigation into the existence and uniqueness of the intersection point of two medians, identifying the necessity of proving they are not parallel.
+
+
+
 ---
 *Status: Active research project.*
