@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+# Log 007 — The Diagonals of a Parallelogram
+
+### Introduction
+The final step of Ian Finlay's construction relies on a single classical property of parallelograms. Once the quadrilateral $BGCP$ has been established as a parallelogram, the remainder of the proof follows from the behavior of its diagonals. This log isolates that property and explains its role in the overall argument.
+
+### Theorem
+The diagonals of a parallelogram bisect each other. Equivalently, if the diagonals intersect at a point $M$, then:
+$$BM = MC \quad \text{and} \quad GM = MP$$
+Thus, the intersection point is the midpoint of both diagonals.
+
+
+
+### Application to Finlay's Construction
+In the previous log, the quadrilateral $BGCP$ was shown to be a parallelogram. Its diagonals are $BC$ and $GP$. Let $M = BC \cap GP$. Since the diagonals of a parallelogram bisect one another, the point $M$ is the midpoint of segment $BC$.
+
+Because $M$ also lies on the diagonal $GP$, and $A, G,$ and $P$ are collinear by construction, it follows that $A, G, M$ are collinear. Therefore, the line through $A$ and $G$ passes through the midpoint of side $BC$. Hence, $AG$ is the third median of $\triangle ABC$.
+
+### Logical Role
+This theorem completes the transition from the auxiliary construction to the original geometric statement. The midpoint of $BC$ is not introduced directly; instead, it is recovered through the geometry of the parallelogram. This is the final logical bridge in Finlay's proof.
+
+### Sources
+* Primary source: Ian Finlay, *Proving that the medians of a triangle are concurrent*, Mathematics Stack Exchange, 2015.
+
+---
+*Status: The final geometric ingredient of Finlay's construction has been isolated. Together with the previous logs, every major geometric component of the proof has now been identified.*
+
+**Next Step:** Reconstruct the complete proof from the verified components and produce the first dependency graph of Finlay's synthetic construction.
