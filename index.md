@@ -19,5 +19,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   * **[Log 005: The Midsegment Theorem as the Engine of the Proof](log-005.md)**
   An examination of the dual role of the Midsegment Theorem, analyzing its contribution to both parallelism and triangle similarity within Finlay's construction.
 
+  * **[Log 006: Why Does a Parallelogram Appear?](log-006.md)**
+  An analysis of the auxiliary parallelogram as a logical bridge, transforming midpoint and parallelism data into a conclusion about the concurrency of the third median.
+
+
+
 ---
 *Status: Active research project.*
