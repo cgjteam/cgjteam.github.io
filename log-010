@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+# Log 010 — From a Single Proof to a General Methodology
+
+### Introduction
+The previous logs examined Ian Finlay's synthetic proof of the concurrency of the medians from several complementary perspectives. The theorem itself has been identified, its construction reconstructed, its principal geometric components isolated, and its logical dependencies analyzed. At this stage, the project reaches an important transition: the objective is no longer to study a single proof, but to establish a repeatable methodology for analyzing classical geometric arguments.
+
+### The CGJteam Lab Workflow
+The analysis carried out in the previous logs suggests the following workflow:
+
+1. **Identify** the theorem.
+2. **Reconstruct** the original proof.
+3. **Decompose** the proof into elementary geometric steps.
+4. **Identify** explicit and implicit dependencies.
+5. **Separate** external theorems from intermediate constructions.
+6. **Build** a dependency graph.
+7. **Determine** the minimal logical core.
+8. **Prepare** the proof for formal verification.
+
+This workflow will be applied to every proof analyzed in this project.
+
+### Why a Workflow?
+Classical geometry books usually present finished proofs, but formal verification requires a different perspective. Before a proof can be translated into a system like Lean, its logical architecture must first be understood. The workflow above provides a systematic procedure for performing that analysis.
+
+### Generality
+Although developed from Finlay's proof of the concurrency of the medians, the methodology is not specific to this theorem. Any synthetic proof can be analyzed using the same sequence of steps. The long-term objective of CGJteam Lab is therefore not the formalization of a single theorem, but the development of a reusable framework for studying classical geometry.
+
+### Sources
+* Primary source: Ian Finlay, *Proving that the medians of a triangle are concurrent*, Mathematics Stack Exchange, 2015.
+* Methodological framework developed by CGJteam Lab.
+
+---
+*Status: The methodology for analyzing classical synthetic proofs has been established. Future logs will apply this workflow to additional geometric theorems.*
+
+**Next Step:** Begin the analysis of another classical theorem using the same methodological framework.
