@@ -40,6 +40,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   * **[Log 012: A Proof as a Directed Dependency Graph](log-012.md)**
   Reinterpretation of Finlay's proof as a formal directed graph, emphasizing the distinction between linear narrative and logical structure required for formal verification.
 
+  * **[Log 013: From Proof to Formal Proof](log-013.md)**
+  Analysis of the conceptual gap between classical geometric narrative and the rigorous requirements of formal proof assistants, establishing the framework for Lean 4 development.
+
+
 
 
   
