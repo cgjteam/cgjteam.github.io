@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+# Log 011 — Is Finlay's Proof Minimal?
+
+### Introduction
+The previous logs reconstructed Ian Finlay's synthetic proof of the concurrency of the medians and identified its logical dependencies. A natural question now arises: is every component of the proof genuinely necessary? Or does the construction contain steps that can be simplified, replaced, or eliminated? This log begins the investigation of the minimality of Finlay's argument.
+
+### What Does "Minimal" Mean?
+A proof may be considered minimal in several different senses:
+* It may use the smallest possible number of geometric constructions.
+* It may depend on the smallest possible collection of previous theorems.
+* It may have the smallest logical dependency graph.
+
+These notions are not necessarily equivalent; one proof may be shorter in terms of steps, while another may require fewer mathematical prerequisites.
+
+### Finlay's Construction
+Finlay's proof relies on four principal ideas:
+1. Midpoints.
+2. The Midsegment Theorem.
+3. A parallelogram construction.
+4. The theorem on the diagonals of a parallelogram.
+
+The present question is whether each of these components is indispensable.
+
+### Questions for Investigation
+Several questions naturally arise regarding the minimality of the argument:
+* Can the parallelogram be avoided?
+* Can the Midsegment Theorem be replaced by a weaker result?
+* Can the proof be reconstructed without introducing the auxiliary point $P$?
+* Can the logical dependency graph be reduced?
+
+### Research Perspective
+At this stage, the project moves beyond the reconstruction of an existing proof. The objective is no longer to understand Finlay's argument, but to investigate its mathematical optimality. Whether the current construction is truly minimal remains an open question.
+
+### Sources
+* Primary source: Ian Finlay, *Proving that the medians of a triangle are concurrent*, Mathematics Stack Exchange, 2015.
+* Analysis by CGJteam Lab.
+
+---
+*Status: The investigation of the minimality of Finlay's proof has begun. No conclusion regarding optimality is yet possible.*
+
+**Next Step:** Examine whether the auxiliary point $P$ is an essential part of the proof or merely a convenient construction.
