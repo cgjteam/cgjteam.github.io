@@ -6,6 +6,9 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 
 * **[Log 001: Ian Finlay's Synthetic Proof](log-001.md)**
   An analysis of the synthetic construction for the concurrency of triangle medians using an auxiliary parallelogram.
+  * **[Log 002: The Logical Structure of Finlay's Construction](log-002.md)**
+  * 
+  A decomposition of the proof into elementary components and an initial identification of hidden logical dependencies.
 
 ---
 *Status: Active research project.*
