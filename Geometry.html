@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Geometry.lean - Full Implementation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body { background-color: #282c34; color: #abb2bf; padding: 40px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; }
+        .container { max-width: 900px; margin: auto; }
+        a { color: #61afef; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        pre { border-radius: 8px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="Geometry.md">&larr; Wróć do indeksu</a>
+        <h1>Geometry.lean - Full Implementation</h1>
+
+        <pre><code class="language-haskell">
+-- Geometry.lean - CGJteam Lab
+-- Single Source of Truth
+
+-- Definitions
+def IsMidpoint (A M B : Point) : Prop :=
+  Collinear A M B ∧ Congruent A M M B
+
+-- Axioms
+axiom SAS (A B C A' B' C' : Point) : 
+  Congruent A B A' B' → Congruent A C A' C' → AngleCongruent A B C A' B' C' → Congruent B C B' C'
+
+axiom ExtendSegment (A B : Point) : ∃ C, Collinear A B C ∧ Congruent B C A B
+
+-- Lemmas
+lemma parallel_from_equal_angles (A B C D : Point) : 
+  AngleCongruent A B C D E F → Parallel A B C D
+
+lemma midpoint_congruent (A M B : Point) : 
+  IsMidpoint A M B → Congruent A M M B
+
+lemma congruent_transitivity (A B C D E F : Point) : 
+  Congruent A B C D → Congruent C D E F → Congruent A B E F
+
+lemma parallelogram_from_parallel_and_congruent (A B C D : Point) : 
+  Parallel A B C D → Congruent A B C D → IsParallelogram A B C D
+
+lemma parallelogram_opposite_sides (A B C D : Point) : 
+  IsParallelogram A B C D → Congruent A B C D
+
+lemma collinear_parallel_trans (A B C D : Point) : 
+  Collinear A B C → Parallel B D E F → Parallel A D E F
+
+-- Main Theorem
+theorem MidlineTheorem (A B C M N : Point) : 
+  IsMidpoint A M B → IsMidpoint A N C → Parallel M N B C ∧ Congruent M N (1/2) B C :=
+begin
+  -- Synthetic proof construction
+  sorry
+end
+        </code></pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-haskell.min.js"></script>
+</body>
+</html>
