@@ -28,6 +28,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   * **[Log 008: The Dependency Graph of Finlay's Proof](log-008.md)**
   A synthesis of the proof's logical architecture, organizing the results into a hierarchical dependency graph to serve as a roadmap for formal verification.
 
+  * **[Log 009: Towards a Minimal Dependency Set](log-009.md)**
+  A critical analysis separating necessary logical dependencies from creative construction choices, aiming to identify the minimal mathematical core of the proof.
+
+
 
   
 
