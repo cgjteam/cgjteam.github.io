@@ -43,7 +43,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   * **[Log 013: From Proof to Formal Proof](log-013.md)**
   Analysis of the conceptual gap between classical geometric narrative and the rigorous requirements of formal proof assistants, establishing the framework for Lean 4 development.
 
+  * **[Log 014: What Is Actually Being Formalized?](log-014.md)**
+  Conceptual clarification distinguishing between the stability of a mathematical theorem and the variability of its proof architecture, justifying the focus on formalizing Finlay’s specific construction.
 
+  
 
 
   
