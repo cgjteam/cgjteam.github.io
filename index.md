@@ -25,7 +25,11 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   * **[Log 007: The Diagonals of a Parallelogram](log-007.md)**
   Analysis of the diagonal bisection property, which serves as the final logical link to identify the third median and complete the concurrency proof.
 
+  * **[Log 008: The Dependency Graph of Finlay's Proof](log-008.md)**
+  A synthesis of the proof's logical architecture, organizing the results into a hierarchical dependency graph to serve as a roadmap for formal verification.
 
+
+  
 
  
 
