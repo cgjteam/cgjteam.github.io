@@ -1,100 +1,153 @@
 # Geometry Library Index
+Version: 1.0
+Last updated: 2026-07-08
 
-This document is the architectural map of the CGJteam Lab formalization project. It provides the metadata for all mathematical objects, their dependencies, and their status.
+This document serves as the architectural map of the CGJteam Lab formalization project.
 
 ## Definitions
 
 ### IsMidpoint
+- **ID:** DEF-001
 - **Lean declaration:** `IsMidpoint`
-- **Mathematical Role:** Definition
-- **Depends on:** `Collinear`, `Congruent`
+- **Kind:** Definition
+- **Mathematical dependencies:** Collinearity, Segment congruence
+- **Lean dependencies:** `Collinear`, `Congruent`
 - **Used by:** `midpoint_congruent`, `MidlineTheorem`
 - **Related logs:** Log 002
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ## Axioms (Foundations)
 
 ### SAS (Side-Angle-Side)
+- **ID:** AXM-001
 - **Lean declaration:** `SAS`
-- **Mathematical Role:** Axiom
-- **Depends on:** N/A
+- **Kind:** Axiom
+- **Mathematical dependencies:** Congruence
+- **Lean dependencies:** N/A
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 003
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Remarks:** Foundation of congruence proofs.
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ### ExtendSegment
+- **ID:** AXM-002
 - **Lean declaration:** `ExtendSegment`
-- **Mathematical Role:** Axiom
-- **Depends on:** N/A
+- **Kind:** Axiom
+- **Mathematical dependencies:** Segment construction
+- **Lean dependencies:** N/A
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 004
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Remarks:** Enables auxiliary point construction.
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ## Derived Lemmas
 
 ### parallel_from_equal_angles
+- **ID:** LEM-001
 - **Lean declaration:** `parallel_from_equal_angles`
-- **Mathematical Role:** Lemma
-- **Depends on:** `Collinear`, `AngleCongruent`
+- **Kind:** Lemma
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Parallelism
+- **Lean dependencies:** `Collinear`, `AngleCongruent`
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 006
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ### midpoint_congruent
+- **ID:** LEM-002
 - **Lean declaration:** `midpoint_congruent`
-- **Mathematical Role:** Lemma
-- **Depends on:** `IsMidpoint`
+- **Kind:** Lemma
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Midpoints, Segment congruence
+- **Lean dependencies:** `IsMidpoint`
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 005
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ### congruent_transitivity
+- **ID:** LEM-003
 - **Lean declaration:** `congruent_transitivity`
-- **Mathematical Role:** Lemma
-- **Depends on:** `Congruent`
+- **Kind:** Lemma
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Congruence
+- **Lean dependencies:** `Congruent`
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 006
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ### parallelogram_from_parallel_and_congruent
+- **ID:** LEM-004
 - **Lean declaration:** `parallelogram_from_parallel_and_congruent`
-- **Mathematical Role:** Lemma
-- **Depends on:** `Parallel`, `Congruent`
+- **Kind:** Lemma
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Parallelograms
+- **Lean dependencies:** `Parallel`, `Congruent`
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 007
-- **Status:** Verified
+- **Origin:** Classical geometry
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ### parallelogram_opposite_sides
+- **ID:** LEM-005
 - **Lean declaration:** `parallelogram_opposite_sides`
-- **Mathematical Role:** Lemma
-- **Depends on:** `IsParallelogram`
+- **Kind:** Lemma
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Parallelograms
+- **Lean dependencies:** `IsParallelogram`
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 007
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ### collinear_parallel_trans
+- **ID:** LEM-006
 - **Lean declaration:** `collinear_parallel_trans`
-- **Mathematical Role:** Lemma
-- **Depends on:** `Collinear`, `Parallel`
+- **Kind:** Lemma
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Parallelism, Collinearity
+- **Lean dependencies:** `Collinear`, `Parallel`
 - **Used by:** `MidlineTheorem`
 - **Related logs:** Log 007
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
 
 ## Main Theorems
 
 ### MidlineTheorem
+- **ID:** THM-001
 - **Lean declaration:** `MidlineTheorem`
-- **Mathematical Role:** Theorem
-- **Depends on:** `ExtendSegment`, `SAS`, `collinear_rotate`, `parallel_from_equal_angles`, `midpoint_congruent`, `congruent_transitivity`, `parallelogram_from_parallel_and_congruent`, `collinear_parallel_trans`
-- **Used by:** N/A (Project start)
+- **Kind:** Theorem
+- **Proof Method:** Synthetic
+- **Mathematical dependencies:** Midpoints, Parallelism, Parallelograms
+- **Lean dependencies:** `ExtendSegment`, `SAS`, `collinear_rotate`, `parallel_from_equal_angles`, `midpoint_congruent`, `congruent_transitivity`, `parallelogram_from_parallel_and_congruent`, `collinear_parallel_trans`
+- **Used by:** N/A
 - **Related logs:** Log 005
 - **Origin:** Classical geometry
-- **Status:** Verified
+- **Current implementation:** Geometry.lean
+- **Remarks:** Synthetic proof construction.
+- **Documentation Status:** Stable
+- **Formalization Status:** Verified
