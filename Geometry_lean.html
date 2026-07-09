@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
     <style>
         body { 
-            background-color: #fafafa; /* Jasne tło */
-            color: #333;             /* Ciemny tekst */
+            background-color: #fafafa; 
+            color: #333; 
             padding: 40px; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             line-height: 1.6; 
@@ -18,7 +18,7 @@
         h1 { color: #222; }
         pre { 
             border: 1px solid #ddd; 
-            background-color: #f6f8fa !important; /* VS Code-like code block background */
+            background-color: #f6f8fa !important; 
             border-radius: 6px; 
             overflow-x: auto; 
             padding: 20px; 
@@ -60,14 +60,14 @@ axiom CongruentSwapSecond (Geo : Geometry) (A B C D : Geo.Point) : Geo.Congruent
 axiom CollinearSymmetry (Geo : Geometry) (A B C : Geo.Point) : Geo.Collinear A B C → Geo.Collinear C B A
 axiom CollinearRotate (Geo : Geometry) (A B C : Geo.Point) : Geo.Collinear A B C → Geo.Collinear A C B
 
-axiom L6_Parallel (Geo : Geometry) (A C D B E F : Geo.Point) : Geo.Collinear A C D → Geo.AngleCongruent E C D E B F → Geo.Parallel A D B F
-axiom L7_MidpointSegment (Geo : Geometry) (A C D : Geo.Point) : IsMidpoint Geo D A C → Geo.Congruent A D D C
-axiom L8_CongruentTrans (Geo : Geometry) (A D C B F : Geo.Point) : Geo.Congruent A D D C → Geo.Congruent C D B F → Geo.Congruent A D B F
-axiom L9_ParallelogramCriterion (Geo : Geometry) (A B F D : Geo.Point) : Geo.Parallel A D B F → Geo.Congruent A D B F → Geo.IsParallelogram A B F D
-axiom L10_ParallelogramOppositeSides (Geo : Geometry) (A B F D : Geo.Point) : Geo.IsParallelogram A B F D → Geo.Parallel D F A B
-axiom L11_CollinearParallel (Geo : Geometry) (D E F A B : Geo.Point) : Geo.Collinear D E F → Geo.Parallel D F A B → Geo.Parallel D E A B
+axiom parallel_from_equal_angles (Geo : Geometry) (A C D B E F : Geo.Point) : Geo.Collinear A C D → Geo.AngleCongruent E C D E B F → Geo.Parallel A D B F
+axiom midpoint_congruent (Geo : Geometry) (A C D : Geo.Point) : IsMidpoint Geo D A C → Geo.Congruent A D D C
+axiom congruent_transitivity (Geo : Geometry) (A D C B F : Geo.Point) : Geo.Congruent A D D C → Geo.Congruent C D B F → Geo.Congruent A D B F
+axiom parallelogram_from_parallel_and_congruent (Geo : Geometry) (A B F D : Geo.Point) : Geo.Parallel A D B F → Geo.Congruent A D B F → Geo.IsParallelogram A B F D
+axiom parallelogram_opposite_sides (Geo : Geometry) (A B F D : Geo.Point) : Geo.IsParallelogram A B F D → Geo.Parallel D F A B
+axiom collinear_parallel_trans (Geo : Geometry) (D E F A B : Geo.Point) : Geo.Collinear D E F → Geo.Parallel D F A B → Geo.Parallel D E A B
 
-theorem MidlineTheorem (Geo : Geometry) (A B C D E : Geo.Point)
+theorem MedianConcurrency (Geo : Geometry) (A B C D E : Geo.Point)
   (hD : IsMidpoint Geo D A C) (hE : IsMidpoint Geo E B C) :
   Geo.Parallel D E A B := by
   obtain ⟨F, hDEF, hDEEF⟩ := ExtendSegment Geo D E
@@ -76,10 +76,10 @@ theorem MidlineTheorem (Geo : Geometry) (A B C D E : Geo.Point)
   have hVertical := VerticalAngles Geo C E D B E F (CollinearSymmetry Geo B E C hE.left) hDEF
   have hSAS := SAS Geo E C D E B F hEC_EB hVertical hED_EF
   have hCollinearACD := CollinearRotate Geo A D C hD.left
-  have hParallelAD_BF := L6_Parallel Geo A C D B E F hCollinearACD hSAS.correspondingAngle
-  have hCongruentAD_BF := L8_CongruentTrans Geo A D C B F (L7_MidpointSegment Geo A C D hD) hSAS.correspondingSide
-  have hIsParallelogram := L9_ParallelogramCriterion Geo A B F D hParallelAD_BF hCongruentAD_BF
-  exact L11_CollinearParallel Geo D E F A B hDEF (L10_ParallelogramOppositeSides Geo A B F D hIsParallelogram)
+  have hParallelAD_BF := parallel_from_equal_angles Geo A C D B E F hCollinearACD hSAS.correspondingAngle
+  have hCongruentAD_BF := congruent_transitivity Geo A D C B F (midpoint_congruent Geo A C D hD) hSAS.correspondingSide
+  have hIsParallelogram := parallelogram_from_parallel_and_congruent Geo A B F D hParallelAD_BF hCongruentAD_BF
+  exact collinear_parallel_trans Geo D E F A B hDEF (parallelogram_opposite_sides Geo A B F D hIsParallelogram)
 
 end Geometry
         </code></pre>
