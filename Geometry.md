@@ -200,26 +200,16 @@ Each formal object progresses independently through the following stages:
 ---
 
 ## Dependency Graph
-```text
-                DEF-001
-                   |
-                   v
-                LEM-002
-                   |
-AXM-001 ---> LEM-001 ----+
-     |                   |
-     +------> LEM-003    |
-                         |
-AXM-002 -----------------+
-                         |
-                         v
-                      LEM-004
-                         |
-                         v
-                      LEM-005
-                         |
-                         v
-                      LEM-006
-                         |
-                         v
-                      THM-001
+
+```mermaid
+graph TD
+    DEF001[DEF-001 IsMidpoint] --> LEM002[LEM-002 midpoint_congruent]
+    AXM001[AXM-001 SAS] --> LEM001[LEM-001 parallel_from_equal_angles]
+    AXM001 --> LEM003[LEM-003 congruent_transitivity]
+    AXM002[AXM-002 ExtendSegment] --> THM001[THM-001 MedianConcurrency]
+    LEM001 --> LEM004[LEM-004 parallelogram_...]
+    LEM004 --> LEM005[LEM-005 parallelogram_opposite_...]
+    LEM005 --> LEM006[LEM-006 collinear_parallel_trans]
+    LEM002 --> THM001
+    LEM003 --> THM001
+    LEM006 --> THM001
