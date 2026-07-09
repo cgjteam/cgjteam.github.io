@@ -61,38 +61,20 @@ The formal geometry library is organized into four hierarchical layers. Dependen
 
 Every mathematical object receives a permanent identifier.
 
-Examples:
-
-- DEF-001
-- AXM-001
-- LEM-004
-- THM-001
-
-Identifiers remain stable even if
-
-- declaration names change,
-- proofs are rewritten,
-- source files are reorganized,
-- the implementation is refactored.
-
-Research Logs always reference identifiers rather than implementation details.
+Identifiers remain stable even if declaration names change, proofs are rewritten, source files are reorganized, or the implementation is refactored. Research Logs always reference identifiers rather than implementation details.
 
 ---
 
 ## Object Lifecycle
 
 Each formal object progresses independently through the following stages:
-
-```
-Planned → Specified → Implemented → Verified → Stable
-```
+`Planned → Specified → Implemented → Verified → Stable`
 
 ---
 
 ## Formal Objects Registry
 
 ### DEF-001 — IsMidpoint
-
 - **Lean declaration:** `IsMidpoint`
 - **Kind:** Definition
 - **Description:** Predicate defining a point as the midpoint of a line segment.
@@ -105,10 +87,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Documentation status:** Stable
 - **Remarks:** Fundamental for all midpoint constructions.
 
----
-
 ### AXM-001 — SAS
-
 - **Lean declaration:** `SAS`
 - **Kind:** Axiom
 - **Description:** Side–Angle–Side congruence axiom.
@@ -120,10 +99,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### AXM-002 — ExtendSegment
-
 - **Lean declaration:** `ExtendSegment`
 - **Kind:** Axiom
 - **Description:** Segment extension construction.
@@ -135,10 +111,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### LEM-001 — parallel_from_equal_angles
-
 - **Lean declaration:** `parallel_from_equal_angles`
 - **Kind:** Lemma
 - **Description:** Parallelism derived from equal corresponding angles.
@@ -149,10 +122,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### LEM-002 — midpoint_congruent
-
 - **Lean declaration:** `midpoint_congruent`
 - **Kind:** Lemma
 - **Description:** Congruence property implied by the midpoint definition.
@@ -163,10 +133,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### LEM-003 — congruent_transitivity
-
 - **Lean declaration:** `congruent_transitivity`
 - **Kind:** Lemma
 - **Description:** Transitivity of segment congruence.
@@ -177,10 +144,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### LEM-004 — parallelogram_from_parallel_and_congruent
-
 - **Lean declaration:** `parallelogram_from_parallel_and_congruent`
 - **Kind:** Lemma
 - **Description:** Construction criterion for a parallelogram.
@@ -191,10 +155,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### LEM-005 — parallelogram_opposite_sides
-
 - **Lean declaration:** `parallelogram_opposite_sides`
 - **Kind:** Lemma
 - **Description:** Opposite sides of a parallelogram.
@@ -205,10 +166,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### LEM-006 — collinear_parallel_trans
-
 - **Lean declaration:** `collinear_parallel_trans`
 - **Kind:** Lemma
 - **Description:** Collinearity and parallelism transfer.
@@ -219,10 +177,7 @@ Planned → Specified → Implemented → Verified → Stable
 - **Verification status:** Verified
 - **Documentation status:** Stable
 
----
-
 ### THM-001 — MedianConcurrency
-
 - **Lean declaration:** `MedianConcurrency`
 - **Kind:** Theorem
 - **Description:** Synthetic proof of the concurrency of the medians.
@@ -237,36 +192,21 @@ Planned → Specified → Implemented → Verified → Stable
 ---
 
 ## Roadmap
-
-### Planned Definitions
-
-- **DEF-002** — `TriangleAngleSum`
-
-### Planned Axioms
-
-- None
-
-### Planned Lemmas
-
-- **LEM-007** — `ParallelPostulateVariant`
-
-### Planned Theorems
-
-- **THM-002** — *(TBD)*
+- **Planned Definitions:** DEF-002 (TriangleAngleSum)
+- **Planned Axioms:** None
+- **Planned Lemmas:** LEM-007 (ParallelPostulateVariant)
+- **Planned Theorems:** THM-002 (TBD)
 
 ---
 
 ## Dependency Graph
-
 ```text
                 DEF-001
                    |
                    v
-               LEM-002
-                   |
+                LEM-002
                    |
 AXM-001 ---> LEM-001 ----+
-     |                   |
      |                   |
      +------> LEM-003    |
                          |
@@ -282,15 +222,4 @@ AXM-002 -----------------+
                       LEM-006
                          |
                          v
-                     THM-001
-```
-
----
-
-## Research Log Index
-
-| Logs | Topic |
-|:-----|:------|
-| 001–011 | Logical analysis of Ian Finlay's synthetic proof |
-| 012–014 | Formal proof methodology |
-| 015–020 | Architecture of the formal geometry library |
+                      THM-001
