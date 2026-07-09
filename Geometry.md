@@ -71,7 +71,6 @@ Planned -> Specified -> Implemented -> Verified -> Stable
 ## Formal Objects Registry
 
 ### DEF-001 - IsMidpoint
-
 - Lean declaration: `IsMidpoint`
 - Kind: Definition
 - Description: Predicate defining a point as the midpoint of a line segment.
@@ -83,10 +82,9 @@ Planned -> Specified -> Implemented -> Verified -> Stable
 - Documentation status: Stable
 
 ### AXM-001 - SAS
-
 - Lean declaration: `SAS`
 - Kind: Axiom
-- Description: Side–Angle–Side congruence axiom.
+- Description: Side-Angle-Side congruence axiom.
 - Depends on: N/A
 - Directly used by: THM-001
 - Primary research logs: [Log 003](log-003.html)
@@ -95,13 +93,12 @@ Planned -> Specified -> Implemented -> Verified -> Stable
 - Documentation status: Stable
 
 ### THM-001 - MedianConcurrency
-
 - Lean declaration: `MedianConcurrency`
 - Kind: Theorem
 - Description: Concurrency of the medians of a triangle.
 - Depends on: DEF-001, AXM-001, AXM-002, LEM-001, LEM-002, LEM-003, LEM-004, LEM-005, LEM-006
 - Directly used by: None
-- Primary research logs: Logs 001–020
+- Primary research logs: Logs 001-020
 - Implementation status: Implemented
 - Verification status: Verified
 - Documentation status: Stable
@@ -109,7 +106,6 @@ Planned -> Specified -> Implemented -> Verified -> Stable
 ---
 
 ## Roadmap
-
 - Planned Definitions: DEF-002 (TriangleAngleSum)
 - Planned Axioms: None
 - Planned Lemmas: LEM-007 (ParallelPostulateVariant)
