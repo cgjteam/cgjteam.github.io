@@ -201,10 +201,4 @@ Each formal object progresses independently through the following stages:
 
 ## Dependency Graph
 
-(tutaj wklej ten swój ASCII graf)
-    LEM001 --> LEM004[LEM-004 parallelogram_...]
-    LEM004 --> LEM005[LEM-005 parallelogram_opposite_...]
-    LEM005 --> LEM006[LEM-006 collinear_parallel_trans]
-    LEM002 --> THM001
-    LEM003 --> THM001
-    LEM006 --> THM001
+
