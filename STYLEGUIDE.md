@@ -18,7 +18,10 @@ The project adheres to a strict three-layer architecture:
 * Inline mathematics: `$...$`
 * Display mathematics: `$$...$$`
 * **Parentheses:** Avoid embedding formulas directly inside parentheses. Prefer natural formulations such as *namely $A=B$* instead of *($A=B$)*.
-* **Jekyll Compatibility:** Wrap formulas in `{% raw %}` tags if parsing issues occur.
+* **Jekyll Compatibility:** Wrap formulas in `{% raw %}` tags if parsing issues occur. Example:
+{% raw %}
+$DE = \frac{1}{2} AB$
+{% endraw %}
 
 ---
 
