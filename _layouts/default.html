@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <meta charset="utf-8">
+    <title>{{ page.title }}</title>
     <script>
       window.MathJax = {
         tex: {
@@ -12,10 +13,13 @@
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-   
 <body>
-    {{ content }}
-{% raw %}
+
+    <main>
+        {{ content }}
+    </main>
+
+    {% raw %}
     <script src="https://giscus.app/client.js"
             data-repo="cgjteam/cgjteam.github.io"
             data-repo-id="R_kgDOTR02nQ"
@@ -31,8 +35,5 @@
             crossorigin="anonymous"
             async></script>
     {% endraw %}
-</body>
-</html>
-</section>
 </body>
 </html>
