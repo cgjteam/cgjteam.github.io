@@ -35,7 +35,7 @@ lemma collinear_parallel_trans (A B C D : Point) :
   Collinear A B C → Parallel B D E F → Parallel A D E F
 
 -- Main Theorem
-theorem MidlineTheorem (A B C M N : Point) : 
+theorem MedianConcurrency (A B C M N : Point) : 
   IsMidpoint A M B → IsMidpoint A N C → Parallel M N B C ∧ Congruent M N (1/2) B C :=
 begin
   -- Synthetic proof construction

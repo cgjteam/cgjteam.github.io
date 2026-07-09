@@ -67,7 +67,7 @@ axiom collinear_parallel_trans (Geo : Geometry) (D E F A B : Geo.Point) : Geo.Co
 Midline Theorem.
 CGJteam Lab: Related blog post: Log 005
 -/
-theorem MidlineTheorem (Geo : Geometry) (A B C D E : Geo.Point)
+theorem MedianConcurrency (Geo : Geometry) (A B C D E : Geo.Point)
   (hD : IsMidpoint Geo D A C) (hE : IsMidpoint Geo E B C) :
   Geo.Parallel D E A B := by
 
