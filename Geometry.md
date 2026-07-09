@@ -198,7 +198,3 @@ Each formal object progresses independently through the following stages:
 - **Planned Theorems:** THM-002 (TBD)
 
 ---
-
-## Dependency Graph
-
-
