@@ -16,9 +16,8 @@ layout: default
 ## 1. Library Architecture
 
 Geometry library is divided into: 
-- Definitions
-- Core Axioms
-- Construction Axioms
+- Basic Definitions
+- Axioms
 - Derived Lemmas
 - Main Theorems
 
@@ -37,16 +36,16 @@ Geometry library is divided into:
 ## 3. Formal Objects Registry
 
 ### DEF-001 — IsMidpoint
-Lean declaration: `IsMidpoint` | Category: Definition | Status: Stable
+Lean declaration: `IsMidpoint` | Category: Basic Definitions | Status: Stable
 
 ### AXM-001 — SAS
-Lean declaration: `SAS` | Category: Core Axiom | Status: Stable
+Lean declaration: `SAS` | Category: Axioms | Status: Stable
 
 ### AXM-003 — ParallelogramFromFinlayParallel
-Lean declaration: `ParallelogramFromFinlayParallel` | Category: Construction Axiom | Status: Stable
+Lean declaration: `ParallelogramFromFinlayParallel` | Category: Axioms | Status: Stable
 
 ### THM-002 — FinlayProof
-Lean declaration: `FinlayProof` | Category: Main Theorem | Status: Frozen
+Lean declaration: `FinlayProof` | Category: Main Theorems | Status: Frozen
 Remarks: First complete formal proof in the geometry library.
 
 ---
