@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Geometry.lean - Full Implementation</title>
+    <title>Geometry.lean - Version 1.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css">
     <style>
         body { background-color: #fafafa; color: #333; padding: 40px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; }
@@ -14,11 +14,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>Geometry.lean - Full Implementation</h1>
+        <h1>Geometry.lean - Version 1.0</h1>
         <pre><code class="language-haskell">
 namespace Geometry
 
--- Struktura fundamentu
+/-!
+===========================================================
+Geometry Library
+Version : 1.0
+Status  : First verified version
+===========================================================
+-/
+
 structure Geometry where
   Point : Type
   Collinear : Point → Point → Point → Prop
@@ -29,45 +36,78 @@ structure Geometry where
 
 variable {Geo : Geometry}
 
-/-! API -/
+/-! ## Basic Structures -/
 structure SASResult (V X Y V' X' Y' : Geo.Point) where
   correspondingSide : Geo.Congruent X Y X' Y'
   correspondingAngle : Geo.AngleCongruent V X Y V' X' Y'
 
+/-! ## Basic Definitions -/
 def IsMidpoint (M A B : Geo.Point) : Prop := Geo.Collinear A M B ∧ Geo.Congruent A M M B
 def IsMedianIntersection (B E C F G : Geo.Point) : Prop := Geo.Collinear B G E ∧ Geo.Collinear C G F
 def IsSegmentIntersection (A P B C D : Geo.Point) : Prop := Geo.Collinear A D P ∧ Geo.Collinear B D C
 
-/-! AKSJOMATY -/
+/-! ## Axioms -/
+
+/-! ### Congruence -/
 axiom SAS (V X Y V' X' Y' : Geo.Point) : Geo.Congruent V X V' X' → Geo.AngleCongruent X V Y X' V' Y' → Geo.Congruent V Y V' Y' → SASResult V X Y V' X' Y'
-axiom VerticalAngles (C E D B E F : Geo.Point) : Geo.Collinear C E B → Geo.Collinear D E F → Geo.AngleCongruent C E D B E F
 axiom CongruentSymmetry (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent C D A B
 axiom CongruentSwapSecond (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent A B D C
+axiom congruent_transitivity (A D C B F : Geo.Point) : Geo.Congruent A D D C → Geo.Congruent C D B F → Geo.Congruent A D B F
+
+/-! ### Collinearity -/
 axiom CollinearSymmetry (A B C : Geo.Point) : Geo.Collinear A B C → Geo.Collinear C B A
 axiom CollinearRotate (A B C : Geo.Point) : Geo.Collinear A B C → Geo.Collinear A C B
 axiom collinear_trans (A G D P : Geo.Point) : Geo.Collinear A G P → Geo.Collinear A D P → Geo.Collinear G D P
-axiom ParallelSwapFirstLine (A B C D : Geo.Point) : Geo.Parallel A B C D → Geo.Parallel B A C D
+
+/-! ### Parallelism -/
 axiom parallel_from_equal_angles (A C D B E F : Geo.Point) : Geo.Collinear A C D → Geo.AngleCongruent E C D E B F → Geo.Parallel A D B F
+axiom ParallelSwapFirstLine (A B C D : Geo.Point) : Geo.Parallel A B C D → Geo.Parallel B A C D
+axiom collinear_parallel_substitute (F G C B P : Geo.Point) : Geo.Collinear C G F → Geo.Parallel F G B P → Geo.Parallel C G B P
+axiom collinear_parallel_substitute2 (G E B C P : Geo.Point) : Geo.Collinear B G E → Geo.Parallel G E C P → Geo.Parallel B G C P
+
+/-! ### Parallelograms -/
 axiom parallelogram_from_parallel_and_congruent (A B F D : Geo.Point) : Geo.Parallel A D B F → Geo.Congruent A D B F → Geo.IsParallelogram A B F D
 axiom parallelogram_opposite_sides (A B F D : Geo.Point) : Geo.IsParallelogram A B F D → Geo.Parallel D F A B
 axiom parallelogram_from_two_parallel_pairs (A B C D : Geo.Point) : Geo.Parallel A B C D → Geo.Parallel B C D A → Geo.IsParallelogram A B C D
 axiom parallelogram_diagonals_bisect (B P C G D : Geo.Point) : Geo.IsParallelogram B P C G → Geo.Collinear B D C → Geo.Collinear G D P → Geo.Congruent B D D C
-axiom ExtendSegment (D E : Geo.Point) : ∃ F : Geo.Point, Geo.Collinear D E F ∧ Geo.Congruent D E E F
-axiom MidsegmentParallelABAP (A B P F G : Geo.Point) : IsMidpoint F A B → IsMidpoint G A P → Geo.Parallel F G B P
-axiom MidsegmentParallelACAP (A C P E G : Geo.Point) : IsMidpoint E A C → IsMidpoint G A P → Geo.Parallel E G C P
-axiom collinear_parallel_substitute (F G C B P : Geo.Point) : Geo.Collinear C G F → Geo.Parallel F G B P → Geo.Parallel C G B P
-axiom collinear_parallel_substitute2 (G E B C P : Geo.Point) : Geo.Collinear B G E → Geo.Parallel G E C P → Geo.Parallel B G C P
+
+-- Auxiliary construction used only in FinlayProof.
 axiom ParallelogramFromFinlayParallel (B P C G : Geo.Point) : Geo.Parallel C G B P → Geo.Parallel B G C P → Geo.IsParallelogram B P C G
 
-/-! TWIERDZENIA POMOCNICZE -/
+/-! ### Elementary Constructions and Properties -/
+axiom ExtendSegment (D E : Geo.Point) : ∃ F : Geo.Point, Geo.Collinear D E F ∧ Geo.Congruent D E E F
+axiom VerticalAngles (C E D B E F : Geo.Point) : Geo.Collinear C E B → Geo.Collinear D E F → Geo.AngleCongruent C E D B E F
+axiom collinear_parallel_trans (D E F A B : Geo.Point) : Geo.Collinear D E F → Geo.Parallel D F A B → Geo.Parallel D E A B
+axiom collinear_parallel_extension (D E F A B : Geo.Point) : Geo.Collinear D E F → Geo.Parallel D E A B → Geo.Parallel D F A B
+
+/-! ### Midsegment Theorem -/
+axiom MidsegmentParallelABAP (A B P F G : Geo.Point) : IsMidpoint F A B → IsMidpoint G A P → Geo.Parallel F G B P
+axiom MidsegmentParallelACAP (A C P E G : Geo.Point) : IsMidpoint E A C → IsMidpoint G A P → Geo.Parallel E G C P
+
+/-! ## Derived Lemmas -/
 theorem ParallelSwapFirstLine' (E G C P : Geo.Point) (h : Geo.Parallel E G C P) : Geo.Parallel G E C P := ParallelSwapFirstLine E G C P h
 theorem MedianIntersectionCollinearCGF (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear C G F := h.right
 theorem MedianIntersectionCollinearBGE (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear B G E := h.left
 theorem SegmentIntersectionCollinearADP (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear A D P := h.left
 theorem SegmentIntersectionCollinearBDC (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear B D C := h.right
-theorem MidpointCongruent (A C D : Geo.Point) (h : IsMidpoint D A C) : Geo.Congruent A D D C := h.right
 
-/-! DOWÓD GŁÓWNY -/
+/-! ## Main Theorems -/
+
+/-!
+Dependencies
+
+Definitions:
+• IsMidpoint
+• IsMedianIntersection
+• IsSegmentIntersection
+
+Geometric principles:
+• Midsegment theorem
+• Parallel substitution
+• Auxiliary parallelogram
+• Diagonals of a parallelogram bisect each other
+-/
+
 theorem FinlayProof
   (A B C E F G P D : Geo.Point)
   (hE : IsMidpoint E A C)
