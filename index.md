@@ -18,7 +18,7 @@ The library serves as the central architectural index of the project, documentin
 * **[Geometry Library Index](./Geometry.md)**
   The architectural map detailing definitions, axioms, lemmas, and theorems.
 
-* **[Geometry Implementation (Geometry_lean.html)](./Geometry_lean.html)**
+* **[Geometry Implementation](./Geometry_lean.html)**
   The formal source code in Lean, organized for modular verification.
 
 ---
