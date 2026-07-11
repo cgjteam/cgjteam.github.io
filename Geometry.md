@@ -5,7 +5,7 @@ layout: default
 # Geometry Library Index
 
 **Version:** 1.1  
-**Status:** Stable (Refactored to v1.1 Architecture)
+**Status:** Stable (Proof-Driven Architecture)
 
 ## Repository
 
@@ -15,58 +15,70 @@ layout: default
 
 ## 1. Library Architecture
 
-Geometry library is now structured into distinct hierarchical layers:
+The library is structured into hierarchical layers to ensure logical clarity:
 - **Basic Structures & Definitions:** Core geometric primitives.
 - **Primitive Axioms:** Foundational rules (SAS, ExtendSegment, etc.).
-- **Helper Lemmas:** Relational properties and infrastructure lemmas.
+- **Helper Lemmas:** Infrastructure for relational properties.
 - **First Derived Theorem:** MidsegmentParallel (the foundation of synthetic proofs).
-- **Specialized Corollaries:** Direct applications for main proofs.
-- **Main Theorems:** Verified proofs (FinlayProof).
+- **Derived Corollaries:** Direct applications of theorems.
+- **Main Theorems:** Verified formal proofs (e.g., FinlayProof).
 
 ---
 
-## 2. Design Principles
+## 2. Philosophy
 
-1. Library is organized around logical dependency layers.
-2. Axiomatic surface area is minimized by converting API-level axioms to theorems.
-3. Proofs are based on synthetic geometry (independent of coordinate systems).
-4. Reusable components (Helper Lemmas) are separated from specialized geometry results.
+- **Proof-driven methodology:** The architecture evolves alongside the formalization of classical synthetic geometry.
+- **Justified abstractions:** New structures are introduced only when required by multiple independent proofs.
+- **Emergent design:** The library avoids over-engineering in favor of incremental refinement.
 
 ---
 
-## 3. Formal Objects Registry
+## 3. Development Philosophy
 
-### DEF-001 — IsMidpoint
-Lean declaration: `IsMidpoint` | Category: Basic Definitions | Status: Stable
+The Geometry Library is developed incrementally. Rather than designing a complete axiom system upfront, new abstractions and helper lemmas emerge during the formalization of classical synthetic proofs. This approach allows the architecture to evolve naturally together with the underlying mathematics.
 
-### AXM-001 — SAS
-Lean declaration: `SAS` | Category: Primitive Axioms | Status: Stable
+---
+
+## 4. Design Principles
+
+1. The library is organized around geometric concepts, not individual theorems.
+2. Every theorem exposes its logical dependencies.
+3. The primitive axiom set is intentionally kept small while reusable API components are promoted whenever possible.
+4. The library distinguishes between primitive mathematical axioms and reusable API-level infrastructure.
+
+---
+
+## 5. Formal Objects Registry
 
 ### THM-001 — MidsegmentParallel
-Lean declaration: `MidsegmentParallel` | Category: First Derived Theorem | Status: Stable
-*Remarks: The first theorem proved solely from geometry axioms.*
+**Category:** First Derived Theorem | **Status:** Stable
+**Dependencies:** SAS, VerticalAngles, ExtendSegment
 
 ### THM-002 — FinlayProof
-Lean declaration: `FinlayProof` | Category: Main Theorems | Status: Stable
-*Remarks: Verified proof using derived theorems and corollaries.*
+**Category:** Main Theorems | **Status:** Stable
+**Dependencies:** MidsegmentParallel, Parallelogram axioms
 
 ---
 
-## 4. Roadmap
+## 6. Roadmap
 
-- **Phase 2:** Further reduction of axioms by converting infrastructure lemmas into formal theorems.
-- **Phase 3:** Formalization of the `Triangle` structure for coordinate-free geometric reasoning.
+- **Phase 2:** Expansion of the synthetic geometry library through additional classical theorems.
+- **Phase 3:** Evaluation of higher-level geometric abstractions (e.g., Triangle) when justified by future proofs.
 
 ---
 
-## 5. Current Status
+## 7. Current Status
 
 - Geometry API version 1.1 established.
 - Synthetic proof pipeline operational.
-- Library architecture stabilized and documented.
+- Proof-driven architecture stabilized.
 
 ---
 
-## 6. Library Statistics
+## 8. Library Statistics
 
-*Architecture currently supports modular synthetic geometry proofs. Statistics tracking enabled.*
+The library tracks:
+- Primitive axioms
+- Helper lemmas
+- Derived theorems
+- Dependency graph
