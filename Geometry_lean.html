@@ -120,4 +120,10 @@ theorem FinlayProof
   have hBGparallelCP := collinear_parallel_substitute2 G E B C P (MedianIntersectionCollinearBGE B E C F G hG) (ParallelSwapFirstLine' E G C P hGEparallelCP)
   have hPar := ParallelogramFromFinlayParallel B P C G hCGparallelBP hBGparallelCP
   have hGDP := collinear_trans A G D P hP.left (SegmentIntersectionCollinearADP A P B C D hD)
-  exact parallelogram_diagonals_bisect B P C G D hPar (SegmentIntersectionCollinear
+  exact parallelogram_diagonals_bisect B P C G D hPar (SegmentIntersectionCollinearBDC A P B C D hD) hGDP
+
+end Geometry
+</div>
+
+</body>
+</html>
