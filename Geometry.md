@@ -4,8 +4,8 @@ layout: default
 
 # Geometry Library Index
 
-**Version:** 1.0  
-**Status:** Stable
+**Version:** 1.1  
+**Status:** Stable (Refactored to v1.1 Architecture)
 
 ## Repository
 
@@ -15,21 +15,22 @@ layout: default
 
 ## 1. Library Architecture
 
-Geometry library is divided into: 
-- Basic Definitions
-- Axioms
-- Derived Lemmas
-- Main Theorems
+Geometry library is now structured into distinct hierarchical layers:
+- **Basic Structures & Definitions:** Core geometric primitives.
+- **Primitive Axioms:** Foundational rules (SAS, ExtendSegment, etc.).
+- **Helper Lemmas:** Relational properties and infrastructure lemmas.
+- **First Derived Theorem:** MidsegmentParallel (the foundation of synthetic proofs).
+- **Specialized Corollaries:** Direct applications for main proofs.
+- **Main Theorems:** Verified proofs (FinlayProof).
 
 ---
 
 ## 2. Design Principles
 
-1. Library is organized around geometric concepts, not individual theorems.
-2. Every theorem exposes its logical dependencies.
-3. Axioms represent genuine geometric principles.
-4. Derived lemmas are reusable components.
-5. Verified main proofs are stable reference implementations.
+1. Library is organized around logical dependency layers.
+2. Axiomatic surface area is minimized by converting API-level axioms to theorems.
+3. Proofs are based on synthetic geometry (independent of coordinate systems).
+4. Reusable components (Helper Lemmas) are separated from specialized geometry results.
 
 ---
 
@@ -39,31 +40,33 @@ Geometry library is divided into:
 Lean declaration: `IsMidpoint` | Category: Basic Definitions | Status: Stable
 
 ### AXM-001 — SAS
-Lean declaration: `SAS` | Category: Axioms | Status: Stable
+Lean declaration: `SAS` | Category: Primitive Axioms | Status: Stable
 
-### AXM-003 — ParallelogramFromFinlayParallel
-Lean declaration: `ParallelogramFromFinlayParallel` | Category: Axioms | Status: Stable
+### THM-001 — MidsegmentParallel
+Lean declaration: `MidsegmentParallel` | Category: First Derived Theorem | Status: Stable
+*Remarks: The first theorem proved solely from geometry axioms.*
 
 ### THM-002 — FinlayProof
-Lean declaration: `FinlayProof` | Category: Main Theorems | Status: Frozen
-Remarks: First complete formal proof in the geometry library.
+Lean declaration: `FinlayProof` | Category: Main Theorems | Status: Stable
+*Remarks: Verified proof using derived theorems and corollaries.*
 
 ---
 
 ## 4. Roadmap
 
-- THM-003 — TBD
+- **Phase 2:** Further reduction of axioms by converting infrastructure lemmas into formal theorems.
+- **Phase 3:** Formalization of the `Triangle` structure for coordinate-free geometric reasoning.
 
 ---
 
 ## 5. Current Status
 
-- Geometry API established.
-- First synthetic proof formalized.
-- Library architecture stabilized.
+- Geometry API version 1.1 established.
+- Synthetic proof pipeline operational.
+- Library architecture stabilized and documented.
 
 ---
 
 ## 6. Library Statistics
 
-*Work in progress. Statistics will be updated after the API stabilizes.*
+*Architecture currently supports modular synthetic geometry proofs. Statistics tracking enabled.*
