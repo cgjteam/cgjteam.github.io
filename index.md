@@ -20,10 +20,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 
 The library serves as the central architectural index of the project, documenting the formal development and dependency graph.
 
-* **[Geometry Library Index](./Geometry.md)**
+* **[Geometry Library Index](Geometry.md)**
   The architectural map detailing definitions, axioms, lemmas, and theorems.
 
-* **[Geometry Implementation](./Geometry_lean.html)**
+* **[Geometry Implementation](Geometry_lean.html)**
   The formal source code in Lean, organized for modular verification.
 
 ---
