@@ -1,16 +1,309 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <script src="https://cloudflare.com"></script>
-    <script>hljs.highlightAll();</script>
-</head>
-<body>
-    <pre><code class="language-lean">
-    import Mathlib
-
-    example (a b : Nat) : a + b = b + a := by
-      rw [Nat.add_comm]
-    </code></pre>
-</body>
-</html>
+<div style="max-width:100%;overflow:auto">
+<p style="font-family:inherit;margin:0 0 0.25em"><strong>finlay_proof-7.html</strong></p>
+<pre style="white-space:pre-wrap;word-wrap:break-word;background-color:#FFFFFF;color:#202020"><code><span><span style="color:#202020">namespace Geometry</span></span>
+<span></span>
+<span><span style="color:#202020">/-!</span></span>
+<span><span style="color:#202020">===========================================================</span></span>
+<span><span style="color:#202020">Geometry Library v1.0</span></span>
+<span><span style="color:#202020">===========================================================</span></span>
+<span><span style="color:#202020">-/</span></span>
+<span></span>
+<span><span style="color:#202020">structure Geometry where</span></span>
+<span><span style="color:#202020">  Point : Type</span></span>
+<span><span style="color:#202020">  Collinear : Point → Point → Point → Prop</span></span>
+<span><span style="color:#202020">  Congruent : Point → Point → Point → Point → Prop</span></span>
+<span><span style="color:#202020">  Parallel : Point → Point → Point → Point → Prop</span></span>
+<span><span style="color:#202020">  -- Isparallelogram : Point → Point → Point → Point → Prop</span></span>
+<span><span style="color:#202020">  AngleCongruent : Point → Point → Point → Point → Point → Point → Prop</span></span>
+<span></span>
+<span><span style="color:#202020">variable {Geo : Geometry}</span></span>
+<span></span>
+<span><span style="color:#202020">/-! ## Basic Structures &#x26; Definitions -/</span></span>
+<span><span style="color:#202020">structure SASResult (A B C D E F : Geo.Point) where</span></span>
+<span><span style="color:#202020">  sideAB : Geo.Congruent A B D E</span></span>
+<span><span style="color:#202020">  sideBC : Geo.Congruent B C E F</span></span>
+<span><span style="color:#202020">  sideAC : Geo.Congruent A C D F</span></span>
+<span><span style="color:#202020">  angleA : Geo.AngleCongruent B A C E D F</span></span>
+<span><span style="color:#202020">  angleB : Geo.AngleCongruent A B C D E F</span></span>
+<span><span style="color:#202020">  angleC : Geo.AngleCongruent A C B D F E</span></span>
+<span></span>
+<span><span style="color:#202020">def IsMidpoint (M A B : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.Collinear A M B ∧ Geo.Congruent A M M B</span></span>
+<span></span>
+<span><span style="color:#202020">def IsMedianIntersection (B E C F G : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.Collinear B G E ∧ Geo.Collinear C G F</span></span>
+<span></span>
+<span><span style="color:#202020">def IsSegmentIntersection (A P B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.Collinear A D P ∧ Geo.Collinear B D C</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span style="color:#202020">def OppositeSidesParallel (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B C D ∧</span></span>
+<span><span style="color:#202020">  Geo.Parallel B C D A</span></span>
+<span></span>
+<span><span style="color:#202020">def OppositeSidesCongruent (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.Congruent A B C D ∧</span></span>
+<span><span style="color:#202020">  Geo.Congruent B C D A</span></span>
+<span></span>
+<span><span style="color:#202020">def DiagonalsBisect (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  ∃ M : Geo.Point,</span></span>
+<span><span style="color:#202020">    IsMidpoint M A C ∧</span></span>
+<span><span style="color:#202020">    IsMidpoint M B D</span></span>
+<span></span>
+<span><span style="color:#202020">--def IsParallelogram (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  --OppositeSidesParallel A B C D</span></span>
+<span><span style="color:#202020">abbrev IsParallelogram (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  OppositeSidesParallel A B C D</span></span>
+<span></span>
+<span><span style="color:#202020">def OnePairParallelCongruent (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.Parallel A D B C ∧</span></span>
+<span><span style="color:#202020">  Geo.Congruent A D B C</span></span>
+<span><span style="color:#202020">def OppositeAnglesCongruent</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) : Prop :=</span></span>
+<span><span style="color:#202020">  Geo.AngleCongruent A B C C D A ∧</span></span>
+<span><span style="color:#202020">  Geo.AngleCongruent B C D D A B</span></span>
+<span></span>
+<span><span style="color:#202020">/-! ## Axioms &#x26; Properties -/</span></span>
+<span><span style="color:#202020">axiom SAS (V X Y V' X' Y' : Geo.Point) :</span></span>
+<span><span style="color:#202020">  Geo.Congruent V X V' X' → Geo.AngleCongruent X V Y X' V' Y' →</span></span>
+<span><span style="color:#202020">  Geo.Congruent V Y V' Y' → SASResult V X Y V' X' Y'</span></span>
+<span></span>
+<span><span style="color:#202020">axiom CongruentSymmetry (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent C D A B</span></span>
+<span><span style="color:#202020">axiom CongruentSwapSecond (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent A B D C</span></span>
+<span><span style="color:#202020">axiom congruent_transitivity (A D C B F : Geo.Point) : Geo.Congruent A D D C → Geo.Congruent C D B F → Geo.Congruent A D B F</span></span>
+<span><span style="color:#202020">axiom CollinearSymmetry (A B C : Geo.Point) : Geo.Collinear A B C → Geo.Collinear C B A</span></span>
+<span><span style="color:#202020">axiom CollinearRotate (A B C : Geo.Point) : Geo.Collinear A B C → Geo.Collinear A C B</span></span>
+<span><span style="color:#202020">axiom collinear_trans (A G D P : Geo.Point) : Geo.Collinear A G P → Geo.Collinear A D P → Geo.Collinear G D P</span></span>
+<span><span style="color:#202020">axiom parallel_from_equal_angles (A C D B E F : Geo.Point) : Geo.Collinear A C D → Geo.AngleCongruent E C D E B F → Geo.Parallel A D B F</span></span>
+<span><span style="color:#202020">--axiom ParallelSwapFirstLine (A B C D : Geo.Point) : Geo.Parallel A B C D → Geo.Parallel B A C D</span></span>
+<span><span style="color:#202020">axiom collinear_parallel_substitute (F G C B P : Geo.Point) : Geo.Collinear C G F → Geo.Parallel F G B P → Geo.Parallel C G B P</span></span>
+<span><span style="color:#202020">axiom collinear_parallel_substitute2 (G E B C P : Geo.Point) : Geo.Collinear B G E → Geo.Parallel G E C P → Geo.Parallel B G C P</span></span>
+<span><span style="color:#202020">axiom parallelogram_from_parallel_and_congruent (A B F D : Geo.Point) : Geo.Parallel A D B F → Geo.Congruent A D B F → IsParallelogram A B F D</span></span>
+<span><span style="color:#202020">axiom parallelogram_opposite_sides (A B F D : Geo.Point) : IsParallelogram A B F D → Geo.Parallel D F A B</span></span>
+<span><span style="color:#202020">--axiom parallelogram_diagonals_bisect (B P C G D : Geo.Point) : IsParallelogram B P C G → Geo.Collinear B D C → Geo.Collinear G D P → Geo.Congruent B D D C</span></span>
+<span><span style="color:#202020">axiom parallelogram_diagonal_midpoint</span></span>
+<span><span style="color:#202020">  (B P C G D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram B P C G →</span></span>
+<span><span style="color:#202020">  Geo.Collinear B D C →</span></span>
+<span><span style="color:#202020">  Geo.Collinear G D P →</span></span>
+<span><span style="color:#202020">  IsMidpoint D B C</span></span>
+<span><span style="color:#202020">axiom parallelogram_diagonal_midpoints</span></span>
+<span><span style="color:#202020">  (B P C G D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram B P C G →</span></span>
+<span><span style="color:#202020">  Geo.Collinear B D C →</span></span>
+<span><span style="color:#202020">  Geo.Collinear G D P →</span></span>
+<span><span style="color:#202020">  IsMidpoint D B C ∧</span></span>
+<span><span style="color:#202020">  IsMidpoint D G P</span></span>
+<span></span>
+<span><span style="color:#202020">axiom parallelogram_diagonals_bisect_general</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram A B C D →</span></span>
+<span><span style="color:#202020">  DiagonalsBisect A B C D</span></span>
+<span></span>
+<span></span>
+<span><span style="color:#202020">--axiom ParallelogramFromFinlayParallel (B P C G : Geo.Point) : Geo.Parallel C G B P → Geo.Parallel B G C P → IsParallelogram B P C G</span></span>
+<span><span style="color:#202020">axiom ExtendSegment (D E : Geo.Point) : ∃ F : Geo.Point, Geo.Collinear D E F ∧ Geo.Congruent D E E F</span></span>
+<span><span style="color:#202020">axiom VerticalAngles (C E D B E F : Geo.Point) : Geo.Collinear C E B → Geo.Collinear D E F → Geo.AngleCongruent C E D B E F</span></span>
+<span><span style="color:#202020">axiom collinear_parallel_trans (D E F A B : Geo.Point) : Geo.Collinear D E F → Geo.Parallel D F A B → Geo.Parallel D E A B</span></span>
+<span><span style="color:#202020">axiom CongruentReverseFirst (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent B A C D</span></span>
+<span><span style="color:#202020">axiom AngleCongruentReverse (A B C D E F : Geo.Point) : Geo.AngleCongruent A B C D E F → Geo.AngleCongruent C B A F E D</span></span>
+<span><span style="color:#202020">axiom CongruentReverseBoth (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent B A D C</span></span>
+<span><span style="color:#202020">axiom ParallelSwapFirstLine</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B C D →</span></span>
+<span><span style="color:#202020">  Geo.Parallel B A C D</span></span>
+<span><span style="color:#202020">axiom ParallelSwapSecondLine</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B C D →</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B D C</span></span>
+<span></span>
+<span><span style="color:#202020">axiom ParallelSwapBoth</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B C D →</span></span>
+<span><span style="color:#202020">  Geo.Parallel B A D C</span></span>
+<span></span>
+<span><span style="color:#202020">axiom ParallelSymmetry</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B C D →</span></span>
+<span><span style="color:#202020">  Geo.Parallel C D A B</span></span>
+<span></span>
+<span><span style="color:#202020">axiom parallelogram_opposite_sides_congruent</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram A B C D →</span></span>
+<span><span style="color:#202020">  OppositeSidesCongruent A B C D</span></span>
+<span><span style="color:#202020">axiom MidpointUnique</span></span>
+<span><span style="color:#202020">  (A B M N : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsMidpoint M A B →</span></span>
+<span><span style="color:#202020">  IsMidpoint N A B →</span></span>
+<span><span style="color:#202020">  M = N</span></span>
+<span></span>
+<span><span style="color:#202020">/-! ## Derived Lemmas -/</span></span>
+<span><span style="color:#202020">theorem ParallelSwapFirstLine' (E G C P : Geo.Point) (h : Geo.Parallel E G C P) : Geo.Parallel G E C P :=</span></span>
+<span><span style="color:#202020">  ParallelSwapFirstLine E G C P h</span></span>
+<span></span>
+<span><span style="color:#202020">theorem MedianIntersectionCollinearCGF (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear C G F := h.right</span></span>
+<span><span style="color:#202020">theorem MedianIntersectionCollinearBGE (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear B G E := h.left</span></span>
+<span><span style="color:#202020">theorem SegmentIntersectionCollinearADP (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear A D P := h.left</span></span>
+<span><span style="color:#202020">theorem SegmentIntersectionCollinearBDC (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear B D C := h.right</span></span>
+<span><span style="color:#202020">theorem ParallelogramParallelCharacterization</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram A B C D ↔</span></span>
+<span><span style="color:#202020">  OppositeSidesParallel A B C D := by</span></span>
+<span><span style="color:#202020">  rfl</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span style="color:#202020">theorem ParallelogramCongruentCharacterizationPrim</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram A B C D →</span></span>
+<span><span style="color:#202020">  OppositeSidesCongruent A B C D := by</span></span>
+<span><span style="color:#202020">  intro hPar</span></span>
+<span><span style="color:#202020">  exact parallelogram_opposite_sides_congruent A B C D hPar</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span style="color:#202020">theorem ParallelogramDiagonalCharacterizationPrim</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  IsParallelogram A B C D →</span></span>
+<span><span style="color:#202020">  DiagonalsBisect A B C D := by</span></span>
+<span><span style="color:#202020">  intro hPar</span></span>
+<span><span style="color:#202020">  exact parallelogram_diagonals_bisect_general A B C D hPar</span></span>
+<span></span>
+<span></span>
+<span><span style="color:#202020">theorem OnePairParallelCongruentRecognition</span></span>
+<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#202020">  OnePairParallelCongruent A B C D →</span></span>
+<span><span style="color:#202020">  IsParallelogram A B C D := by</span></span>
+<span><span style="color:#202020">  intro h</span></span>
+<span><span style="color:#202020">  rcases h with ⟨hPar, hCong⟩</span></span>
+<span><span style="color:#202020">  exact parallelogram_from_parallel_and_congruent</span></span>
+<span><span style="color:#202020">    A B C D</span></span>
+<span><span style="color:#202020">    hPar</span></span>
+<span><span style="color:#202020">    hCong</span></span>
+<span></span>
+<span><span style="color:#202020">theorem MidpointSymmetry (M A B : Geo.Point) (h : IsMidpoint M A B) : IsMidpoint M B A := by</span></span>
+<span><span style="color:#202020">  rcases h with ⟨hCol, hCong⟩</span></span>
+<span><span style="color:#202020">  constructor</span></span>
+<span><span style="color:#202020">  · exact CollinearSymmetry A M B hCol</span></span>
+<span><span style="color:#202020">  · have h1 := CongruentReverseBoth A M M B hCong</span></span>
+<span><span style="color:#202020">    exact CongruentSymmetry M A B M h1</span></span>
+<span></span>
+<span><span style="color:#202020">theorem MidsegmentParallel (V₁ V₂ V₃ M₁ M₂ : Geo.Point) (hM₁ : IsMidpoint M₁ V₁ V₃) (hM₂ : IsMidpoint M₂ V₂ V₃) : Geo.Parallel M₁ M₂ V₁ V₂ := by</span></span>
+<span><span style="color:#202020">  rcases ExtendSegment M₁ M₂ with ⟨T, hM₁M₂T, hSeg⟩</span></span>
+<span><span style="color:#202020">  have hV₁M₁V₃ := hM₁.left</span></span>
+<span><span style="color:#202020">  have hV₃M₂V₂ := CollinearSymmetry V₂ M₂ V₃ hM₂.left</span></span>
+<span><span style="color:#202020">  have hVert := VerticalAngles V₃ M₂ M₁ V₂ M₂ T hV₃M₂V₂ hM₁M₂T</span></span>
+<span><span style="color:#202020">  have hVert' := AngleCongruentReverse V₃ M₂ M₁ V₂ M₂ T hVert</span></span>
+<span><span style="color:#202020">  have hSideM₁M₂M₂T := CongruentReverseFirst M₁ M₂ M₂ T hSeg</span></span>
+<span><span style="color:#202020">  have hSideV₂M₂M₂V₃ := CongruentReverseBoth V₂ M₂ M₂ V₃ hM₂.right</span></span>
+<span><span style="color:#202020">  have hSideV₃M₂M₂V₂ := CongruentReverseFirst V₃ M₂ M₂ V₂ (CongruentSymmetry M₂ V₂ V₃ M₂ hSideV₂M₂M₂V₃)</span></span>
+<span><span style="color:#202020">  have hSAS := SAS M₂ M₁ V₃ M₂ T V₂ hSideM₁M₂M₂T hVert' hSideV₃M₂M₂V₂</span></span>
+<span><span style="color:#202020">  have hParV₁M₁V₂T := parallel_from_equal_angles V₁ V₃ M₁ V₂ M₂ T (CollinearRotate V₁ M₁ V₃ hV₁M₁V₃) hSAS.angleC</span></span>
+<span><span style="color:#202020">  have hSideM₁V₃TV₂ := hSAS.sideBC</span></span>
+<span><span style="color:#202020">  have hSideV₃M₁TV₂ : Geo.Congruent V₃ M₁ T V₂ := CongruentReverseFirst M₁ V₃ T V₂ hSideM₁V₃TV₂</span></span>
+<span><span style="color:#202020">  have hSideV₃M₁V₂T : Geo.Congruent V₃ M₁ V₂ T := CongruentSwapSecond V₃ M₁ T V₂ hSideV₃M₁TV₂</span></span>
+<span><span style="color:#202020">  have hSideV₁M₁V₂T := congruent_transitivity V₁ M₁ V₃ V₂ T hM₁.right hSideV₃M₁V₂T</span></span>
+<span><span style="color:#202020">  have hParallelogram := parallelogram_from_parallel_and_congruent V₁ V₂ T M₁ hParV₁M₁V₂T hSideV₁M₁V₂T</span></span>
+<span><span style="color:#202020">  have hParTM₁V₁V₂ := parallelogram_opposite_sides V₁ V₂ T M₁ hParallelogram</span></span>
+<span><span style="color:#202020">  exact collinear_parallel_trans M₁ M₂ T V₁ V₂ hM₁M₂T hParTM₁V₁V₂</span></span>
+<span></span>
+<span><span style="color:#202020">theorem ParallelogramFromFinlayParallelPrim</span></span>
+<span><span style="color:#202020">  (B P C G : Geo.Point)</span></span>
+<span><span style="color:#202020">  (hCGparallelBP : Geo.Parallel C G B P)</span></span>
+<span><span style="color:#202020">  (hBGparallelCP : Geo.Parallel B G C P) :</span></span>
+<span><span style="color:#202020">  IsParallelogram B P C G := by</span></span>
+<span><span style="color:#202020">  dsimp [IsParallelogram]</span></span>
+<span></span>
+<span><span style="color:#202020">  have hBPparallelCG :=</span></span>
+<span><span style="color:#202020">    ParallelSymmetry C G B P hCGparallelBP</span></span>
+<span></span>
+<span><span style="color:#202020">  have hCPparallelBG :=</span></span>
+<span><span style="color:#202020">    ParallelSymmetry B G C P hBGparallelCP</span></span>
+<span></span>
+<span><span style="color:#202020">  constructor</span></span>
+<span><span style="color:#202020">  · exact hBPparallelCG</span></span>
+<span><span style="color:#202020">  · exact ParallelSwapBoth C P B G hCPparallelBG</span></span>
+<span></span>
+<span><span style="color:#202020">theorem FinlayParallelogramStep</span></span>
+<span><span style="color:#202020">  (B P C G D : Geo.Point)</span></span>
+<span><span style="color:#202020">  (hPar : IsParallelogram B P C G)</span></span>
+<span><span style="color:#202020">  (hBDC : Geo.Collinear B D C)</span></span>
+<span><span style="color:#202020">  (hGDP : Geo.Collinear G D P) :</span></span>
+<span><span style="color:#202020">  IsMidpoint D B C := by</span></span>
+<span><span style="color:#202020">  have hMid :=</span></span>
+<span><span style="color:#202020">  parallelogram_diagonal_midpoints</span></span>
+<span><span style="color:#202020">    B P C G D</span></span>
+<span><span style="color:#202020">    hPar</span></span>
+<span><span style="color:#202020">    hBDC</span></span>
+<span><span style="color:#202020">    hGDP</span></span>
+<span></span>
+<span><span style="color:#202020">  exact hMid.left</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span style="color:#202020">/-! ## Main Theorem -/</span></span>
+<span><span style="color:#202020">theorem FinlayProof (A B C E F G P D : Geo.Point)</span></span>
+<span><span style="color:#202020">  (hE : IsMidpoint E A C) (hF : IsMidpoint F A B) (hG : IsMedianIntersection B E C F G)</span></span>
+<span><span style="color:#202020">  (hP : IsMidpoint G A P) (hD : IsSegmentIntersection A P B C D) : Geo.Congruent B D D C := by</span></span>
+<span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span><span style="color:#202020">  -- Step 1.</span></span>
+<span><span style="color:#202020">  -- Apply the Midsegment Theorem</span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span></span>
+<span><span style="color:#202020">  -- In triangle ABP, we obtain FG ∥ BP,</span></span>
+<span><span style="color:#202020">  -- and since C,G,F are collinear, CG ∥ BP also holds.</span></span>
+<span><span style="color:#202020">  have hFB := MidpointSymmetry F A B hF</span></span>
+<span><span style="color:#202020">  have hGP := MidpointSymmetry G A P hP</span></span>
+<span><span style="color:#202020">  have hFGparallelBP := MidsegmentParallel B P A F G hFB hGP</span></span>
+<span><span style="color:#202020">  have hCGparallelBP := collinear_parallel_substitute F G C B P (MedianIntersectionCollinearCGF B E C F G hG) hFGparallelBP</span></span>
+<span></span>
+<span><span style="color:#202020">  -- In triangle ACP, we obtain GE ∥ PC,</span></span>
+<span><span style="color:#202020">  -- and since B,G,E are collinear, BG ∥ PC also holds.</span></span>
+<span><span style="color:#202020">  have hEA := MidpointSymmetry E A C hE</span></span>
+<span><span style="color:#202020">  have hGA := MidpointSymmetry G A P hP</span></span>
+<span><span style="color:#202020">  have hEGparallelCP := MidsegmentParallel C P A E G hEA hGA</span></span>
+<span><span style="color:#202020">  have hGEparallelCP := ParallelSwapFirstLine E G C P hEGparallelCP</span></span>
+<span><span style="color:#202020">  have hBGparallelCP := collinear_parallel_substitute2 G E B C P (MedianIntersectionCollinearBGE B E C F G hG) hGEparallelCP</span></span>
+<span></span>
+<span><span style="color:#202020">    ------------------------------------------------------------------</span></span>
+<span><span style="color:#202020">  -- Step 2.</span></span>
+<span><span style="color:#202020">  -- Recognize the parallelogram BPCG.</span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span></span>
+<span><span style="color:#202020">  have hParallelogram :=</span></span>
+<span><span style="color:#202020">    ParallelogramFromFinlayParallelPrim</span></span>
+<span><span style="color:#202020">      B P C G</span></span>
+<span><span style="color:#202020">      hCGparallelBP</span></span>
+<span><span style="color:#202020">      hBGparallelCP</span></span>
+<span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span><span style="color:#202020">  -- Step 3.</span></span>
+<span><span style="color:#202020">  -- Locate the intersection of the diagonals.</span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span></span>
+<span><span style="color:#202020">  have hGDP :=</span></span>
+<span><span style="color:#202020">    collinear_trans</span></span>
+<span><span style="color:#202020">      A G D P</span></span>
+<span><span style="color:#202020">      hP.left</span></span>
+<span><span style="color:#202020">      (SegmentIntersectionCollinearADP A P B C D hD)</span></span>
+<span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span><span style="color:#202020">  -- Step 4.</span></span>
+<span><span style="color:#202020">  -- Apply the parallelogram lemma.</span></span>
+<span><span style="color:#202020">  ------------------------------------------------------------------</span></span>
+<span></span>
+<span><span style="color:#202020">  have hMidBC :=</span></span>
+<span><span style="color:#202020">  FinlayParallelogramStep</span></span>
+<span><span style="color:#202020">    B P C G D</span></span>
+<span><span style="color:#202020">    hParallelogram</span></span>
+<span><span style="color:#202020">    (SegmentIntersectionCollinearBDC A P B C D hD)</span></span>
+<span><span style="color:#202020">    hGDP</span></span>
+<span></span>
+<span><span style="color:#202020">  exact hMidBC.right</span></span>
+<span></span>
+<span><span style="color:#202020">end Geometry</span></span>
+<span></span></code></pre>
+</div>
