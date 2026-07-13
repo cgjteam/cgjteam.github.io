@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Geometry_Finlay.lean - Pełna treść</title>
+    <title>Geometry_Finlay_Full.lean</title>
     <style>
         body { background-color: #1e1e1e; color: #d4d4d4; font-family: 'Consolas', 'Monaco', monospace; padding: 20px; }
         .code { white-space: pre; line-height: 1.5; overflow-x: auto; }
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<h3>Geometry_Finlay.lean </h3>
+<h3>Geometry_Finlay_Full.lean</h3>
 <div class="code">
 <span class="kw">namespace</span> Geometry
 
@@ -70,6 +70,7 @@
 <span class="kw">axiom</span> CongruentReverseFirst (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent B A C D
 <span class="kw">axiom</span> AngleCongruentReverse (A B C D E F : Geo.Point) : Geo.AngleCongruent A B C D E F → Geo.AngleCongruent C B A F E D
 <span class="kw">axiom</span> CongruentReverseBoth (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent B A D C
+
 <span class="kw">axiom</span> MidsegmentParallelABAP (A B P F G : Geo.Point) : IsMidpoint F A B → IsMidpoint G A P → Geo.Parallel F G B P
 <span class="kw">axiom</span> MidsegmentParallelACAP (A C P E G : Geo.Point) : IsMidpoint E A C → IsMidpoint G A P → Geo.Parallel E G C P
 
@@ -116,7 +117,7 @@
   have hGDP := collinear_trans A G D P hP.left (SegmentIntersectionCollinearADP A P B C D hD)
   exact parallelogram_diagonals_bisect B P C G D hPar (SegmentIntersectionCollinearBDC A P B C D hD) hGDP
 
-<span class="kw">theorem</span> FinlayProofNew
+<span class="thm">theorem</span> FinlayProofNew
   (A B C E F G P D : Geo.Point)
   (hE : IsMidpoint E A C)
   (hF : IsMidpoint F A B)
