@@ -81,15 +81,23 @@
 <span class="kw">axiom</span> MidpointUnique (A B M N : Geo.Point) : IsMidpoint M A B → IsMidpoint N A B → M = N
 
 <span class="cmt">/-! ## Derived Lemmas -/</span>
-<span class="thm">theorem</span> ParallelSwapFirstLine' (E G C P : Geo.Point) (h : Geo.Parallel E G C P) : Geo.Parallel G E C P := ParallelSwapFirstLine E G C P h
-<span class="thm">theorem</span> MedianIntersectionCollinearCGF (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear C G F := h.right
-<span class="thm">theorem</span> MedianIntersectionCollinearBGE (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear B G E := h.left
-<span class="thm">theorem</span> SegmentIntersectionCollinearADP (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear A D P := h.left
-<span class="thm">theorem</span> SegmentIntersectionCollinearBDC (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear B D C := h.right
-
 <span class="thm">theorem</span> MidsegmentParallel (V₁ V₂ V₃ M₁ M₂ : Geo.Point) (hM₁ : IsMidpoint M₁ V₁ V₃) (hM₂ : IsMidpoint M₂ V₂ V₃) : Geo.Parallel M₁ M₂ V₁ V₂ := <span class="kw">by</span>
   rcases ExtendSegment M₁ M₂ <span class="kw">with</span> ⟨T, hM₁M₂T, hSeg⟩
-  ...
+  have hV₁M₁V₃ := hM₁.left
+  have hV₃M₂V₂ := CollinearSymmetry V₂ M₂ V₃ hM₂.left
+  have hVert := VerticalAngles V₃ M₂ M₁ V₂ M₂ T hV₃M₂V₂ hM₁M₂T
+  have hVert' := AngleCongruentReverse V₃ M₂ M₁ V₂ M₂ T hVert
+  have hSideM₁M₂M₂T := CongruentReverseFirst M₁ M₂ M₂ T hSeg
+  have hSideV₂M₂M₂V₃ := CongruentReverseBoth V₂ M₂ M₂ V₃ hM₂.right
+  have hSideV₃M₂M₂V₂ := CongruentReverseFirst V₃ M₂ M₂ V₂ (CongruentSymmetry M₂ V₂ V₃ M₂ hSideV₂M₂M₂V₃)
+  have hSAS := SAS M₂ M₁ V₃ M₂ T V₂ hSideM₁M₂M₂T hVert' hSideV₃M₂M₂V₂
+  have hParV₁M₁V₂T := parallel_from_equal_angles V₁ V₃ M₁ V₂ M₂ T (CollinearRotate V₁ M₁ V₃ hV₁M₁V₃) hSAS.angleC
+  have hSideM₁V₃TV₂ := hSAS.sideBC
+  have hSideV₃M₁TV₂ : Geo.Congruent V₃ M₁ T V₂ := CongruentReverseFirst M₁ V₃ T V₂ hSideM₁V₃TV₂
+  have hSideV₃M₁V₂T : Geo.Congruent V₃ M₁ V₂ T := CongruentSwapSecond V₃ M₁ T V₂ hSideV₃M₁TV₂
+  have hSideV₁M₁V₂T := congruent_transitivity V₁ M₁ V₃ V₂ T hM₁.right hSideV₃M₁V₂T
+  have hParallelogram := parallelogram_from_parallel_and_congruent V₁ V₂ T M₁ hParV₁M₁V₂T hSideV₁M₁V₂T
+  have hParTM₁V₁V₂ := parallelogram_opposite_sides V₁ V₂ T M₁ hParallelogram
   exact collinear_parallel_trans M₁ M₂ T V₁ V₂ hM₁M₂T hParTM₁V₁V₂
 
 <span class="thm">theorem</span> FinlayProof (A B C E F G P D : Geo.Point)
