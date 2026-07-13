@@ -100,4 +100,73 @@
   have hSideM₁M₂M₂T := CongruentReverseFirst M₁ M₂ M₂ T hSeg
   have hSideV₂M₂M₂V₃ := CongruentReverseBoth V₂ M₂ M₂ V₃ hM₂.right
   have hSideV₃M₂M₂V₂ := CongruentReverseFirst V₃ M₂ M₂ V₂ (CongruentSymmetry M₂ V₂ V₃ M₂ hSideV₂M₂M₂V₃)
-  have hSAS := SAS M₂ M₁ V₃ M₂ T
+  have hSAS := SAS M₂ M₁ V₃ M₂ T V₂ hSideM₁M₂M₂T hVert' hSideV₃M₂M₂V₂
+  have hParV₁M₁V₂T := parallel_from_equal_angles V₁ V₃ M₁ V₂ M₂ T (CollinearRotate V₁ M₁ V₃ hV₁M₁V₃) hSAS.angleC
+  have hSideM₁V₃TV₂ := hSAS.sideBC
+  have hSideV₃M₁TV₂ : Geo.Congruent V₃ M₁ T V₂ := CongruentReverseFirst M₁ V₃ T V₂ hSideM₁V₃TV₂
+  have hSideV₃M₁V₂T : Geo.Congruent V₃ M₁ V₂ T := CongruentSwapSecond V₃ M₁ T V₂ hSideV₃M₁TV₂
+  have hSideV₁M₁V₂T := congruent_transitivity V₁ M₁ V₃ V₂ T hM₁.right hSideV₃M₁V₂T
+  have hParallelogram := parallelogram_from_parallel_and_congruent V₁ V₂ T M₁ hParV₁M₁V₂T hSideV₁M₁V₂T
+  have hParTM₁V₁V₂ := parallelogram_opposite_sides V₁ V₂ T M₁ hParallelogram
+  exact collinear_parallel_trans M₁ M₂ T V₁ V₂ hM₁M₂T hParTM₁V₁V₂
+
+<span class="cmt">/-! ## Main Theorem -/</span>
+<span class="thm">theorem</span> FinlayProof (A B C E F G P D : Geo.Point) 
+  (hE : IsMidpoint E A C) (hF : IsMidpoint F A B) (hG : IsMedianIntersection B E C F G) 
+  (hP : IsMidpoint G A P) (hD : IsSegmentIntersection A P B C D) : Geo.Congruent B D D C := <span class="kw">by</span>
+  
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 1.</span>
+  <span class="cmt">-- Apply the Midsegment Theorem</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  <span class="cmt">-- In triangle ABP, we obtain FG ∥ BP,</span>
+  <span class="cmt">-- and since C,G,F are collinear, CG ∥ BP also holds.</span>
+  have hFB := MidpointSymmetry F A B hF
+  have hGP := MidpointSymmetry G A P hP
+  have hFGparallelBP := MidsegmentParallel B P A F G hFB hGP
+  have hCGparallelBP := collinear_parallel_substitute F G C B P (MedianIntersectionCollinearCGF B E C F G hG) hFGparallelBP
+
+  <span class="cmt">-- In triangle ACP, we obtain GE ∥ PC,</span>
+  <span class="cmt">-- and since B,G,E are collinear, BG ∥ PC also holds.</span>
+  have hEA := MidpointSymmetry E A C hE
+  have hGA := MidpointSymmetry G A P hP
+  have hEGparallelCP := MidsegmentParallel C P A E G hEA hGA
+  have hGEparallelCP := ParallelSwapFirstLine E G C P hEGparallelCP
+  have hBGparallelCP := collinear_parallel_substitute2 G E B C P (MedianIntersectionCollinearBGE B E C F G hG) hGEparallelCP
+
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 2.</span>
+  <span class="cmt">-- From two pairs of parallel opposite sides,</span>
+  <span class="cmt">-- we conclude that BPCG is a parallelogram.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  have hParallelogram := ParallelogramFromFinlayParallel B P C G hCGparallelBP hBGparallelCP
+  <span class="cmt">-- We have proven that BPCG is a parallelogram.</span>
+
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 3.</span>
+  <span class="cmt">-- Determine the intersection point of the parallelogram diagonals.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  have hGDP := collinear_trans A G D P hP.left (SegmentIntersectionCollinearADP A P B C D hD)
+
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 4.</span>
+  <span class="cmt">-- Property of parallelogram diagonals:</span>
+  <span class="cmt">-- diagonals bisect each other.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  have hBD_eq_DC := parallelogram_diagonals_bisect B P C G D hParallelogram (SegmentIntersectionCollinearBDC A P B C D hD) hGDP
+  <span class="cmt">-- We have proven that BD ≅ DC.</span>
+
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 5.</span>
+  <span class="cmt">-- We obtain BD = DC, which completes the proof.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  exact hBD_eq_DC
+<span class="kw">end</span> Geometry
+</div>
+</body>
+</html>
