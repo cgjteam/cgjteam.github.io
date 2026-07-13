@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Geometry_Finlay_Full.lean</title>
+    <title>Geometry_Finlay.lean</title>
     <style>
         body { background-color: #1e1e1e; color: #d4d4d4; font-family: 'Consolas', 'Monaco', monospace; padding: 20px; }
         .code { white-space: pre; line-height: 1.5; overflow-x: auto; }
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<h3>Geometry_Finlay_Full.lean</h3>
+<h3>Geometry_Finlay.lean</h3>
 <div class="code">
 <span class="kw">namespace</span> Geometry
 
@@ -109,38 +109,67 @@
   (hP : IsMidpoint G A P)
   (hD : IsSegmentIntersection A P B C D) :
   Geo.Congruent B D D C := <span class="kw">by</span>
-  have hFGparallelBP := MidsegmentParallelABAP A B P F G hF hP
-  have hCGparallelBP := collinear_parallel_substitute F G C B P (MedianIntersectionCollinearCGF B E C F G hG) hFGparallelBP
-  have hGEparallelCP := MidsegmentParallelACAP A C P E G hE hP
-  have hBGparallelCP := collinear_parallel_substitute2 G E B C P (MedianIntersectionCollinearBGE B E C F G hG) (ParallelSwapFirstLine' E G C P hGEparallelCP)
-  have hPar := ParallelogramFromFinlayParallel B P C G hCGparallelBP hBGparallelCP
-  have hGDP := collinear_trans A G D P hP.left (SegmentIntersectionCollinearADP A P B C D hD)
-  exact parallelogram_diagonals_bisect B P C G D hPar (SegmentIntersectionCollinearBDC A P B C D hD) hGDP
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 1.</span>
+  <span class="cmt">-- Apply the Midsegment Theorem</span>
+  <span class="cmt">------------------------------------------------------------------</span>
 
-<span class="thm">theorem</span> FinlayProofNew
-  (A B C E F G P D : Geo.Point)
-  (hE : IsMidpoint E A C)
-  (hF : IsMidpoint F A B)
-  (hG : IsMedianIntersection B E C F G)
-  (hP : IsMidpoint G A P)
-  (hD : IsSegmentIntersection A P B C D) :
-  Geo.Congruent B D D C := <span class="kw">by</span>
-  <span class="cmt">-- Step 1. Apply the Midsegment Theorem</span>
+  <span class="cmt">-- In triangle ABP, we obtain FG ∥ BP,</span>
+  <span class="cmt">-- and since C,G,F are collinear, CG ∥ BP also holds.</span>
   have hFGparallelBP := MidsegmentParallelABAP A B P F G hF hP
-  have hCGparallelBP := collinear_parallel_substitute F G C B P (MedianIntersectionCollinearCGF B E C F G hG) hFGparallelBP
+  have hCGparallelBP := collinear_parallel_substitute
+    F G C B P
+    (MedianIntersectionCollinearCGF B E C F G hG)
+    hFGparallelBP
+
+  <span class="cmt">-- In triangle ACP, we obtain GE ∥ PC,</span>
+  <span class="cmt">-- and since B,G,E are collinear, BG ∥ PC also holds.</span>
   have hGEparallelCP := MidsegmentParallelACAP A C P E G hE hP
-  have hBGparallelCP := collinear_parallel_substitute2 G E B C P (MedianIntersectionCollinearBGE B E C F G hG) (ParallelSwapFirstLine' E G C P hGEparallelCP)
-  
-  <span class="cmt">-- Step 2. From two pairs of parallel opposite sides, conclude BPCG is a parallelogram.</span>
-  have hParallelogram := ParallelogramFromFinlayParallel B P C G hCGparallelBP hBGparallelCP
-  
-  <span class="cmt">-- Step 3. Determine the intersection point of the parallelogram diagonals.</span>
-  have hGDP := collinear_trans A G D P hP.left (SegmentIntersectionCollinearADP A P B C D hD)
-  
-  <span class="cmt">-- Step 4. Parallelogram diagonals property: diagonals bisect each other.</span>
-  have hBD_eq_DC := parallelogram_diagonals_bisect B P C G D hParallelogram (SegmentIntersectionCollinearBDC A P B C D hD) hGDP
-  
-  <span class="cmt">-- Step 5. Obtain BD = DC, completing the proof.</span>
+  have hBGparallelCP := collinear_parallel_substitute2
+    G E B C P
+    (MedianIntersectionCollinearBGE B E C F G hG)
+    (ParallelSwapFirstLine' E G C P hGEparallelCP)
+
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 2.</span>
+  <span class="cmt">-- From two pairs of parallel opposite sides,</span>
+  <span class="cmt">-- we conclude that BPCG is a parallelogram.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  have  hParallelogram := ParallelogramFromFinlayParallel
+    B P C G
+    hCGparallelBP
+    hBGparallelCP
+  <span class="cmt">-- We have proven that BPCG is a parallelogram.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 3.</span>
+  <span class="cmt">-- Determine the intersection point of the parallelogram diagonals.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  have hGDP :=
+    collinear_trans
+      A G D P
+      hP.left
+      (SegmentIntersectionCollinearADP A P B C D hD)
+
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 4.</span>
+  <span class="cmt">-- Property of parallelogram diagonals:</span>
+  <span class="cmt">-- diagonals bisect each other.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
+  have hBD_eq_DC :=
+    parallelogram_diagonals_bisect
+      B P C G D
+       hParallelogram
+      (SegmentIntersectionCollinearBDC A P B C D hD)
+      hGDP
+  <span class="cmt">-- We have proven that BD≅DC.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+  <span class="cmt">-- Step 5.</span>
+  <span class="cmt">-- We obtain BD = DC, which completes the proof.</span>
+  <span class="cmt">------------------------------------------------------------------</span>
+
   exact hBD_eq_DC
 
 <span class="kw">end</span> Geometry
