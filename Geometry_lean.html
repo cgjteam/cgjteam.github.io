@@ -1,65 +1,50 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <!-- Kluczowe kodowanie dla symboli matematycznych Lean 4 -->
+    <!-- Ten znacznik jest kluczowy, aby symbole takie jak ∀, ∃, ⊢ wyświetlały się poprawnie -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mój Kod w Lean 4</title>
     
-    <!-- 1. Pobieranie motywu kolorystycznego (tutaj ciemny motyw z VS Code) -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    
-    <!-- 2. Główny silnik kolorowania składni -->
-    <script src="https://cloudflare.com"></script>
-    
-    <!-- 3. Oficjalne rozszerzenie społeczności Lean, które poprawnie czyta wszystkie symbole i słowa kluczowe Lean 4 -->
-    <script src="https://unpkg.com"></script>
-    
-    <!-- 4. Automatyczne uruchomienie kolorowania po załadowaniu strony -->
-    <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            hljs.highlightAll();
-        });
-    </script>
-
     <style>
+        /* Dodatkowe opcjonalne style, aby strona ładnie wyglądała na ekranie */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            max-width: 850px;
+            line-height: 1.6;
+            max-width: 800px;
             margin: 40px auto;
             padding: 0 20px;
             background-color: #f9f9f9;
             color: #333;
         }
-        /* Stylizacja bloku kodu */
-        pre {
-            border-radius: 8px;
-            overflow-x: auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        h1 {
+            color: #111;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
         }
-        code {
-            /* Czcionka systemowa obsługująca symbole matematyczne */
-            font-family: "Courier New", Courier, monospace; 
-            font-size: 14px;
-            line-height: 1.5;
+        /* Styl dla bloku kodu, który wkleisz z VS Code */
+        .kod-kontener {
+            margin: 20px 0;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
     </style>
 </head>
 <body>
 
-    <h1>Prezentacja kodu Lean 4</h1>
-    <p>Poniższy kod został wklejony jako zwykły tekst, a przeglądarka automatycznie nałożyła na niego kolory:</p>
+    <h1>Przykładowy program w Lean 4</h1>
+    <p>Poniżej znajduje się statyczna prezentacja kodu wyeksportowana bezpośrednio z edytora:</p>
 
-    <!-- TUTAJ WKLEJASZ SWÓJ KOD LEAN 4 (ZWYKŁY TEKST ZE SCHOWKA) -->
-    <pre><code class="language-lean">
-def hello : String := "Witaj świecie!"
+    <!-- TUTAJ WSTAWISZ TO, CO SKOPIOWAŁO ROZSZERZENIE "COPY AS HTML" -->
+    <div class="kod-kontener">
+        
+        <!-- Wklej zawartość schowka dokładnie w tym miejscu (Zastąp ten komentarz swoim kodem) -->
+        
+    </div>
+    <!-- KONIEC MIEJSCA NA TWÓJ KOD -->
 
-theorem add_comm (n m : Nat) : n + m = m + n := by
-  induction n with
-  | zero => simp
-  | succ n ih => simp [ih]
-    </code></pre>
-    <!-- KONIEC BLOKU KODU -->
+    <p>Więcej informacji o tym dowodzie znajdziesz w dokumentacji.</p>
 
 </body>
 </html>
