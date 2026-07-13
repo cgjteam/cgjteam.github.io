@@ -1,83 +1,65 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <!-- Ten znacznik jest kluczowy, aby symbole takie jak ∀, ∃, ⊢ wyświetlały się poprawnie -->
+    <!-- Kluczowe kodowanie dla symboli matematycznych Lean 4 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mój Kod w Lean 4</title>
     
+    <!-- 1. Pobieranie motywu kolorystycznego (tutaj ciemny motyw z VS Code) -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+    <!-- 2. Główny silnik kolorowania składni -->
+    <script src="https://cloudflare.com"></script>
+    
+    <!-- 3. Oficjalne rozszerzenie społeczności Lean, które poprawnie czyta wszystkie symbole i słowa kluczowe Lean 4 -->
+    <script src="https://unpkg.com"></script>
+    
+    <!-- 4. Automatyczne uruchomienie kolorowania po załadowaniu strony -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            hljs.highlightAll();
+        });
+    </script>
+
     <style>
-        /* Dodatkowe opcjonalne style, aby strona ładnie wyglądała na ekranie */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            max-width: 850px;
             margin: 40px auto;
             padding: 0 20px;
             background-color: #f9f9f9;
             color: #333;
         }
-        h1 {
-            color: #111;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+        /* Stylizacja bloku kodu */
+        pre {
+            border-radius: 8px;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        /* Styl dla bloku kodu, który wkleisz z VS Code */
-        .kod-kontener {
-            margin: 20px 0;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        code {
+            /* Czcionka systemowa obsługująca symbole matematyczne */
+            font-family: "Courier New", Courier, monospace; 
+            font-size: 14px;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
-<div class="kod-kontener">  
-    <div style="max-width:100%;overflow:auto">
-<p style="font-family:inherit;margin:0 0 0.25em"><strong>finlay_proof-8.lean</strong></p>
-<pre style="white-space:pre-wrap;word-wrap:break-word;background-color:#FFFFFF;color:#202020"><code><span><span style="color:#CF222E">namespace</span><span style="color:#202020"> Geometry</span></span>
-<span></span>
-<span><span style="color:#202020">-- Brakujące definicje struktur, które Lean zgłaszał jako nieznane</span></span>
-<span><span style="color:#CF222E">structure</span><span style="color:#8250DF"> Geometry</span><span style="color:#CF222E"> where</span></span>
-<span><span style="color:#202020">  Point : </span><span style="color:#CF222E">Type</span></span>
-<span><span style="color:#202020">  Collinear : Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
-<span><span style="color:#202020">  Congruent : Point → Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
-<span><span style="color:#202020">  Parallel : Point → Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
-<span><span style="color:#202020">  AngleCongruent : Point → Point → Point → Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
-<span></span>
-<span><span style="color:#CF222E">variable</span><span style="color:#202020"> {Geo : Geometry}</span></span>
-<span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsMidpoint</span><span style="color:#202020"> (M A B : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> := </span></span>
-<span><span style="color:#202020">  Geo.Collinear A M B ∧ Geo.Congruent A M M B</span></span>
-<span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsMedianIntersection</span><span style="color:#202020"> (B E C F G : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> := </span></span>
-<span><span style="color:#202020">  Geo.Collinear B G E ∧ Geo.Collinear C G F</span></span>
-<span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsSegmentIntersection</span><span style="color:#202020"> (A P B C D : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> := </span></span>
-<span><span style="color:#202020">  Geo.Collinear A D P ∧ Geo.Collinear B D C</span></span>
-<span></span>
-<span><span style="color:#202020">-- Definicja MidpointSymmetry, której brakowało</span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> MidpointSymmetry</span><span style="color:#202020"> (M A B : Geo.Point) : IsMidpoint M A B → IsMidpoint M B A</span></span>
-<span></span>
-<span><span style="color:#202020">-- (Pamiętaj, aby dodać tutaj pozostałe aksjomaty, których używasz w dowodzie,</span></span>
-<span><span style="color:#202020">-- np. MidsegmentParallel, ParallelogramFromFinlayParallelPrim, etc.)</span></span>
-<span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayProof</span></span>
-<span><span style="color:#202020">  (A B C E F G P D : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hE : IsMidpoint E A C)</span></span>
-<span><span style="color:#202020">  (hF : IsMidpoint F A B)</span></span>
-<span><span style="color:#202020">  (hG : IsMedianIntersection B E C F G)</span></span>
-<span><span style="color:#202020">  (hP : IsMidpoint G A P)</span></span>
-<span><span style="color:#202020">  (hD : IsSegmentIntersection A P B C D) :</span></span>
-<span><span style="color:#202020">  Geo.Congruent B D D C := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">  -- Teraz Lean będzie rozpoznawał te identyfikatory</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hFB := MidpointSymmetry F A B hF</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hGP := MidpointSymmetry G A P hP</span></span>
-<span><span style="color:#202020">  -- ... (reszta Twojego dowodu)</span></span>
-<span><span style="color:#82071E;font-style:italic">  sorry</span><span style="color:#202020"> </span></span>
-<span></span>
-<span><span style="color:#CF222E">end</span><span style="color:#202020"> Geometry</span></span></code></pre>
-</div>
-</div>
+
+    <h1>Prezentacja kodu Lean 4</h1>
+    <p>Poniższy kod został wklejony jako zwykły tekst, a przeglądarka automatycznie nałożyła na niego kolory:</p>
+
+    <!-- TUTAJ WKLEJASZ SWÓJ KOD LEAN 4 (ZWYKŁY TEKST ZE SCHOWKA) -->
+    <pre><code class="language-lean">
+def hello : String := "Witaj świecie!"
+
+theorem add_comm (n m : Nat) : n + m = m + n := by
+  induction n with
+  | zero => simp
+  | succ n ih => simp [ih]
+    </code></pre>
+    <!-- KONIEC BLOKU KODU -->
+
 </body>
 </html>
