@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Geometry_Finlay.lean</title>
+    <title>Geometry_Finlay_Proof.lean</title>
     <style>
         body { background-color: #1e1e1e; color: #d4d4d4; font-family: 'Consolas', 'Monaco', monospace; padding: 20px; }
-        .code { white-space: pre; line-height: 1.5; overflow-x: auto; }
+        .code { white-space: pre; line-height: 1.4; overflow-x: auto; font-size: 14px; }
         .kw { color: #569cd6; font-weight: bold; }
         .cmt { color: #6a9955; }
         .def { color: #dcdcaa; }
@@ -15,15 +15,13 @@
 </head>
 <body>
 
-<h3>Geometry_Finlay.lean</h3>
+<h3>Geometry_Finlay_Proof.lean</h3>
 <div class="code">
 <span class="kw">namespace</span> Geometry
 
-<span class="cmt">/-!</span>
-<span class="cmt">===========================================================</span>
-<span class="cmt">Geometry Library v1.0</span>
-<span class="cmt">===========================================================</span>
-<span class="cmt">-/</span>
+<span class="cmt">/-! =========================================================== -/</span>
+<span class="cmt">/-! Geometry Library v1.0                                       -/</span>
+<span class="cmt">/-! =========================================================== -/</span>
 
 <span class="kw">structure</span> Geometry <span class="kw">where</span>
   Point : <span class="typ">Type</span>
@@ -44,12 +42,16 @@
   angleB : Geo.AngleCongruent A B C D E F
   angleC : Geo.AngleCongruent A C B D F E
 
-<span class="def">def</span> IsMidpoint (M A B : Geo.Point) : <span class="typ">Prop</span> := Geo.Collinear A M B ∧ Geo.Congruent A M M B
-<span class="def">def</span> IsMedianIntersection (B E C F G : Geo.Point) : <span class="typ">Prop</span> := Geo.Collinear B G E ∧ Geo.Collinear C G F
-<span class="def">def</span> IsSegmentIntersection (A P B C D : Geo.Point) : <span class="typ">Prop</span> := Geo.Collinear A D P ∧ Geo.Collinear B D C
+<span class="def">def</span> IsMidpoint (M A B : Geo.Point) : <span class="typ">Prop</span> := 
+  Geo.Collinear A M B ∧ Geo.Congruent A M M B
+<span class="def">def</span> IsMedianIntersection (B E C F G : Geo.Point) : <span class="typ">Prop</span> := 
+  Geo.Collinear B G E ∧ Geo.Collinear C G F
+<span class="def">def</span> IsSegmentIntersection (A P B C D : Geo.Point) : <span class="typ">Prop</span> := 
+  Geo.Collinear A D P ∧ Geo.Collinear B D C
 
 <span class="cmt">/-! ## Axioms & Properties -/</span>
-<span class="kw">axiom</span> SAS (V X Y V' X' Y' : Geo.Point) : Geo.Congruent V X V' X' → Geo.AngleCongruent X V Y X' V' Y' → Geo.Congruent V Y V' Y' → SASResult V X Y V' X' Y'
+<span class="kw">axiom</span> SAS (V X Y V' X' Y' : Geo.Point) : Geo.Congruent V X V' X' → 
+  Geo.AngleCongruent X V Y X' V' Y' → Geo.Congruent V Y V' Y' → SASResult V X Y V' X' Y'
 <span class="kw">axiom</span> CongruentSymmetry (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent C D A B
 <span class="kw">axiom</span> CongruentSwapSecond (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent A B D C
 <span class="kw">axiom</span> congruent_transitivity (A D C B F : Geo.Point) : Geo.Congruent A D D C → Geo.Congruent C D B F → Geo.Congruent A D B F
@@ -60,10 +62,13 @@
 <span class="kw">axiom</span> ParallelSwapFirstLine (A B C D : Geo.Point) : Geo.Parallel A B C D → Geo.Parallel B A C D
 <span class="kw">axiom</span> collinear_parallel_substitute (F G C B P : Geo.Point) : Geo.Collinear C G F → Geo.Parallel F G B P → Geo.Parallel C G B P
 <span class="kw">axiom</span> collinear_parallel_substitute2 (G E B C P : Geo.Point) : Geo.Collinear B G E → Geo.Parallel G E C P → Geo.Parallel B G C P
-<span class="kw">axiom</span> parallelogram_from_parallel_and_congruent (A B F D : Geo.Point) : Geo.Parallel A D B F → Geo.Congruent A D B F → Geo.IsParallelogram A B F D
+<span class="kw">axiom</span> parallelogram_from_parallel_and_congruent (A B F D : Geo.Point) : 
+  Geo.Parallel A D B F → Geo.Congruent A D B F → Geo.IsParallelogram A B F D
 <span class="kw">axiom</span> parallelogram_opposite_sides (A B F D : Geo.Point) : Geo.IsParallelogram A B F D → Geo.Parallel D F A B
-<span class="kw">axiom</span> parallelogram_diagonals_bisect (B P C G D : Geo.Point) : Geo.IsParallelogram B P C G → Geo.Collinear B D C → Geo.Collinear G D P → Geo.Congruent B D D C
-<span class="kw">axiom</span> ParallelogramFromFinlayParallel (B P C G : Geo.Point) : Geo.Parallel C G B P → Geo.Parallel B G C P → Geo.IsParallelogram B P C G
+<span class="kw">axiom</span> parallelogram_diagonals_bisect (B P C G D : Geo.Point) : Geo.IsParallelogram B P C G → 
+  Geo.Collinear B D C → Geo.Collinear G D P → Geo.Congruent B D D C
+<span class="kw">axiom</span> ParallelogramFromFinlayParallel (B P C G : Geo.Point) : Geo.Parallel C G B P → 
+  Geo.Parallel B G C P → Geo.IsParallelogram B P C G
 <span class="kw">axiom</span> ExtendSegment (D E : Geo.Point) : ∃ F : Geo.Point, Geo.Collinear D E F ∧ Geo.Congruent D E E F
 <span class="kw">axiom</span> VerticalAngles (C E D B E F : Geo.Point) : Geo.Collinear C E B → Geo.Collinear D E F → Geo.AngleCongruent C E D B E F
 <span class="kw">axiom</span> collinear_parallel_trans (D E F A B : Geo.Point) : Geo.Collinear D E F → Geo.Parallel D F A B → Geo.Parallel D E A B
@@ -71,108 +76,28 @@
 <span class="kw">axiom</span> AngleCongruentReverse (A B C D E F : Geo.Point) : Geo.AngleCongruent A B C D E F → Geo.AngleCongruent C B A F E D
 <span class="kw">axiom</span> CongruentReverseBoth (A B C D : Geo.Point) : Geo.Congruent A B C D → Geo.Congruent B A D C
 
-<span class="kw">axiom</span> MidsegmentParallelABAP (A B P F G : Geo.Point) : IsMidpoint F A B → IsMidpoint G A P → Geo.Parallel F G B P
-<span class="kw">axiom</span> MidsegmentParallelACAP (A C P E G : Geo.Point) : IsMidpoint E A C → IsMidpoint G A P → Geo.Parallel E G C P
-
 <span class="cmt">/-! ## Derived Lemmas -/</span>
-<span class="thm">theorem</span> ParallelSwapFirstLine' (E G C P : Geo.Point) (h : Geo.Parallel E G C P) : Geo.Parallel G E C P := ParallelSwapFirstLine E G C P h
+<span class="thm">theorem</span> ParallelSwapFirstLine' (E G C P : Geo.Point) (h : Geo.Parallel E G C P) : Geo.Parallel G E C P := 
+  ParallelSwapFirstLine E G C P h
 <span class="thm">theorem</span> MedianIntersectionCollinearCGF (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear C G F := h.right
 <span class="thm">theorem</span> MedianIntersectionCollinearBGE (B E C F G : Geo.Point) (h : IsMedianIntersection B E C F G) : Geo.Collinear B G E := h.left
 <span class="thm">theorem</span> SegmentIntersectionCollinearADP (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear A D P := h.left
 <span class="thm">theorem</span> SegmentIntersectionCollinearBDC (A P B C D : Geo.Point) (h : IsSegmentIntersection A P B C D) : Geo.Collinear B D C := h.right
 
-<span class="thm">theorem</span> MidsegmentParallel (A B C D E : Geo.Point) (hD : IsMidpoint D A C) (hE : IsMidpoint E B C) : Geo.Parallel D E A B := <span class="kw">by</span>
-  rcases ExtendSegment D E <span class="kw">with</span> ⟨F, hDEF, hDEEF⟩
-  have hADC := hD.left
-  have hCEB := CollinearSymmetry B E C hE.left
-  have hVert := VerticalAngles C E D B E F hCEB hDEF
-  have hVert' := AngleCongruentReverse C E D B E F hVert
-  have hSideDEEF := CongruentReverseFirst D E E F hDEEF
-  have hSideEBCE := CongruentReverseBoth B E E C hE.right
-  have hSideECEB := CongruentReverseFirst C E E B (CongruentSymmetry E B C E hSideEBCE)
-  have hSAS := SAS E D C E F B hSideDEEF hVert' hSideECEB
-  have hParADBF := parallel_from_equal_angles A C D B E F (CollinearRotate A D C hADC) hSAS.angleC
-  have hSideDCFB := hSAS.sideBC
-  have hSideCDFB := CongruentReverseFirst D C F B hSideDCFB
-  have hSideCDBF := CongruentSwapSecond C D F B hSideCDFB
-  have hSideADBF := congruent_transitivity A D C B F hD.right hSideCDBF
-  have hParallelogram := parallelogram_from_parallel_and_congruent A B F D hParADBF hSideADBF
-  have hParDFAB := parallelogram_opposite_sides A B F D hParallelogram
-  exact collinear_parallel_trans D E F A B hDEF hParDFAB
+<span class="thm">theorem</span> MidpointSymmetry (M A B : Geo.Point) (h : IsMidpoint M A B) : IsMidpoint M B A := <span class="kw">by</span>
+  rcases h <span class="kw">with</span> ⟨hCol, hCong⟩
+  constructor
+  · exact CollinearSymmetry A M B hCol
+  · have h1 := CongruentReverseBoth A M M B hCong
+    exact CongruentSymmetry M A B M h1
 
-<span class="cmt">/-! ## Main Theorems -/</span>
-<span class="thm">theorem</span> FinlayProof
-  (A B C E F G P D : Geo.Point)
-  (hE : IsMidpoint E A C)
-  (hF : IsMidpoint F A B)
-  (hG : IsMedianIntersection B E C F G)
-  (hP : IsMidpoint G A P)
-  (hD : IsSegmentIntersection A P B C D) :
-  Geo.Congruent B D D C := <span class="kw">by</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-  <span class="cmt">-- Step 1.</span>
-  <span class="cmt">-- Apply the Midsegment Theorem</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-
-  <span class="cmt">-- In triangle ABP, we obtain FG ∥ BP,</span>
-  <span class="cmt">-- and since C,G,F are collinear, CG ∥ BP also holds.</span>
-  have hFGparallelBP := MidsegmentParallelABAP A B P F G hF hP
-  have hCGparallelBP := collinear_parallel_substitute
-    F G C B P
-    (MedianIntersectionCollinearCGF B E C F G hG)
-    hFGparallelBP
-
-  <span class="cmt">-- In triangle ACP, we obtain GE ∥ PC,</span>
-  <span class="cmt">-- and since B,G,E are collinear, BG ∥ PC also holds.</span>
-  have hGEparallelCP := MidsegmentParallelACAP A C P E G hE hP
-  have hBGparallelCP := collinear_parallel_substitute2
-    G E B C P
-    (MedianIntersectionCollinearBGE B E C F G hG)
-    (ParallelSwapFirstLine' E G C P hGEparallelCP)
-
-  <span class="cmt">------------------------------------------------------------------</span>
-  <span class="cmt">-- Step 2.</span>
-  <span class="cmt">-- From two pairs of parallel opposite sides,</span>
-  <span class="cmt">-- we conclude that BPCG is a parallelogram.</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-
-  have  hParallelogram := ParallelogramFromFinlayParallel
-    B P C G
-    hCGparallelBP
-    hBGparallelCP
-  <span class="cmt">-- We have proven that BPCG is a parallelogram.</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-  <span class="cmt">-- Step 3.</span>
-  <span class="cmt">-- Determine the intersection point of the parallelogram diagonals.</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-
-  have hGDP :=
-    collinear_trans
-      A G D P
-      hP.left
-      (SegmentIntersectionCollinearADP A P B C D hD)
-
-  <span class="cmt">------------------------------------------------------------------</span>
-  <span class="cmt">-- Step 4.</span>
-  <span class="cmt">-- Property of parallelogram diagonals:</span>
-  <span class="cmt">-- diagonals bisect each other.</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-
-  have hBD_eq_DC :=
-    parallelogram_diagonals_bisect
-      B P C G D
-       hParallelogram
-      (SegmentIntersectionCollinearBDC A P B C D hD)
-      hGDP
-  <span class="cmt">-- We have proven that BD≅DC.</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-  <span class="cmt">-- Step 5.</span>
-  <span class="cmt">-- We obtain BD = DC, which completes the proof.</span>
-  <span class="cmt">------------------------------------------------------------------</span>
-
-  exact hBD_eq_DC
-
-<span class="kw">end</span> Geometry
-</div>
-</body>
-</html>
+<span class="thm">theorem</span> MidsegmentParallel (V₁ V₂ V₃ M₁ M₂ : Geo.Point) (hM₁ : IsMidpoint M₁ V₁ V₃) (hM₂ : IsMidpoint M₂ V₂ V₃) : Geo.Parallel M₁ M₂ V₁ V₂ := <span class="kw">by</span>
+  rcases ExtendSegment M₁ M₂ <span class="kw">with</span> ⟨T, hM₁M₂T, hSeg⟩
+  have hV₁M₁V₃ := hM₁.left
+  have hV₃M₂V₂ := CollinearSymmetry V₂ M₂ V₃ hM₂.left
+  have hVert := VerticalAngles V₃ M₂ M₁ V₂ M₂ T hV₃M₂V₂ hM₁M₂T
+  have hVert' := AngleCongruentReverse V₃ M₂ M₁ V₂ M₂ T hVert
+  have hSideM₁M₂M₂T := CongruentReverseFirst M₁ M₂ M₂ T hSeg
+  have hSideV₂M₂M₂V₃ := CongruentReverseBoth V₂ M₂ M₂ V₃ hM₂.right
+  have hSideV₃M₂M₂V₂ := CongruentReverseFirst V₃ M₂ M₂ V₂ (CongruentSymmetry M₂ V₂ V₃ M₂ hSideV₂M₂M₂V₃)
+  have hSAS := SAS M₂ M₁ V₃ M₂ T
