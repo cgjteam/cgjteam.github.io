@@ -16,7 +16,9 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 
 * **[3. Encapsulating Synthetic Arguments](log-003.md)**
   How classical geometric reasoning gradually evolved into reusable formal theorems during the verification of Finlay's proof.
-  
+
+* **[4. From Finlay's Proof to a Reusable Geometry Library](log-004.md)**
+  How classical geometric reasoning gradually evolved into reusable formal theorems during the verification of Finlay's proof.  
 ---
 
 ### Formal Geometry Library
