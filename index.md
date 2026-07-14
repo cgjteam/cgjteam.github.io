@@ -14,6 +14,9 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 * **[2. The Midsegment Theorem and Parallelograms](log-002.md)**
   An investigation into the distinction between intuitive geometric properties and the minimal logical assumptions required for formal proofs.
 
+* **[3. Encapsulating Synthetic Arguments](log-003.md)**
+  How classical geometric reasoning gradually evolved into reusable formal theorems during the verification of Finlay's proof.
+  
 ---
 
 ### Formal Geometry Library
