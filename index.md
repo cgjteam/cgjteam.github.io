@@ -8,12 +8,17 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 
 ### Research Logs
 
-* **[1: From Finlay's Proof to a Synthetic Geometry Library](log-001.md)**
+* **[1. Finlay's Synthetic Proof](log-001.md)**
   An analysis of the synthetic construction for the concurrency of triangle medians using an auxiliary parallelogram.
 
-* **[2: Local Logical Extraction of Assumptions](log-002.md)**
+* **[2. The Midsegment Theorem and Parallelograms](log-002.md)**
   An investigation into the distinction between intuitive geometric properties and the minimal logical assumptions required for formal proofs.
 
+* **[3. Encapsulating Synthetic Arguments](log-003.md)**
+  How classical geometric reasoning gradually evolved into reusable formal theorems during the verification of Finlay's proof.
+
+* **[4. From Finlay's Proof to a Reusable Geometry Library](log-004.md)**
+  How classical geometric reasoning gradually evolved into reusable formal theorems during the verification of Finlay's proof.  
 ---
 
 ### Formal Geometry Library

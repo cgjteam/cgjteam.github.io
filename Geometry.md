@@ -50,13 +50,10 @@ The Geometry Library is developed incrementally. Rather than designing a complet
 
 ## 5. Formal Objects Registry
 
-### THM-001 — MidsegmentParallel
-**Category:** First Derived Theorem | **Status:** Stable
-**Dependencies:** SAS, VerticalAngles, ExtendSegment
-
-### THM-002 — FinlayProof
-**Category:** Main Theorems | **Status:** Stable
-**Dependencies:** MidsegmentParallel, Parallelogram axioms
+| ID | Name | Category | Status | Dependencies |
+| :--- | :--- | :--- | :--- | :--- |
+| **THM-001** | MidsegmentParallel | First Derived Theorem | Stable | SAS, VerticalAngles, ExtendSegment |
+| **THM-002** | FinlayProof | Main Theorems | Stable | MidsegmentParallel, Parallelogram axioms |
 
 ---
 
