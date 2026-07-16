@@ -19,6 +19,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 
 * **[4. From Finlay's Proof to a Reusable Geometry Library](log-004.md)**
   How classical geometric reasoning gradually evolved into reusable formal theorems during the verification of Finlay's proof.  
+
+* **[5. Beyond the Proof](log-005.md)**
+  This log summarizes the lessons learned after completing the Finlay formalization and the questions that emerged from studying the broader landscape of formal geometry.
+
 ---
 
 ### Formal Geometry Library
