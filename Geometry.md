@@ -4,7 +4,7 @@ layout: default
 
 # Geometry Library Index
 
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Stable (Reusable Geometry Library)
 
 ---
@@ -31,13 +31,11 @@ The library is organized into mathematical layers that emerged during the formal
 
 ## 2. Development Philosophy
 
-The Geometry Library is developed incrementally.
+The Geometry Library is developed incrementally through the formalization of carefully selected classical synthetic proofs.
 
-Rather than designing a complete geometry library in advance, new abstractions emerge naturally during the formalization of classical synthetic proofs.
+Rather than designing a complete geometry library in advance, reusable mathematical structures are allowed to emerge naturally from completed formal developments.
 
-Whenever a mathematical argument appears repeatedly in independent developments, it is encapsulated as a reusable theorem.
-
-As these reusable components accumulate, they gradually evolve into independent mathematical theories.
+The first complete formalization also demonstrated that building verified proofs is only one part of the process. Understanding the resulting architecture and organizing reusable mathematical components become equally important as the library continues to evolve.
 
 ---
 
@@ -48,6 +46,7 @@ As these reusable components accumulate, they gradually evolve into independent 
 3. Primitive axioms are intentionally kept to a minimum.
 4. Internal implementation details are separated from the public theorem interface.
 5. The naming policy reflects mathematical meaning rather than historical origin.
+6. The architecture of the library should remain understandable as the collection of formal proofs grows.
 
 ---
 
@@ -73,25 +72,28 @@ The current version of the library contains:
 - accessor theorems for compound geometric definitions,
 - reusable synthetic arguments,
 - the first independent theory of parallelograms,
-- a complete formal verification of Finlay's proof built upon these reusable components.
+- a complete formal verification of Finlay's proof.
+
+The completion of the first full formalization marks the transition from constructing individual proofs toward developing a coherent reusable geometry library.
 
 ---
 
 ## 6. Roadmap
 
-Future development will continue extending the library through additional classical results in synthetic geometry.
+Future development will continue through additional classical results in synthetic geometry.
 
-The primary objective is no longer the formal verification of individual proofs, but the systematic construction of reusable mathematical theories whose components naturally support subsequent developments.
+Alongside new formal proofs, increasing attention will be devoted to maintaining a coherent library architecture, refining reusable mathematical interfaces, and organizing independent geometric theories that naturally emerge from successive formalizations.
 
 ---
 
 ## 7. Library Evolution
 
-The development of the library follows four successive stages:
+The development of the library currently follows five successive stages:
 
 1. Formal verification of a classical synthetic proof.
-2. Encapsulation of recurring synthetic arguments.
-3. Construction of reusable mathematical theories.
-4. Gradual expansion into a general-purpose synthetic geometry library.
+2. Extraction of reusable synthetic arguments.
+3. Construction of independent mathematical theories.
+4. Continuous refinement of the library architecture.
+5. Gradual expansion into a general-purpose synthetic geometry library.
 
 This evolution is documented in the accompanying development logs.
