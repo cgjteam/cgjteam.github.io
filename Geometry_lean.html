@@ -32,334 +32,162 @@
 <body>
 <div class="kod-kontener">
 
-<div style="max-width:100%;overflow:auto">
-<p style="font-family:inherit;margin:0 0 0.25em"><strong>FinlayProof.lean</strong></p>
+    <div style="max-width:100%;overflow:auto">
+<p style="font-family:inherit;margin:0 0 0.25em"><strong>test-3.lean</strong></p>
 <pre style="white-space:pre-wrap;word-wrap:break-word;background-color:#FFFFFF;color:#202020"><code><span><span style="color:#CF222E">namespace</span><span style="color:#202020"> Geometry</span></span>
 <span></span>
 <span><span style="color:#CF222E">universe</span><span style="color:#202020"> u</span></span>
 <span></span>
 <span><span style="color:#CF222E">structure</span><span style="color:#8250DF"> Geo</span><span style="color:#CF222E"> where</span></span>
 <span><span style="color:#202020">  Point : </span><span style="color:#CF222E">Type</span><span style="color:#202020"> u</span></span>
-<span></span>
-<span><span style="color:#202020">  Collinear :</span></span>
-<span><span style="color:#202020">    Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
-<span></span>
-<span><span style="color:#202020">  Parallel :</span></span>
-<span><span style="color:#202020">    Point → Point →</span></span>
-<span><span style="color:#202020">    Point → Point →</span></span>
-<span><span style="color:#CF222E">    Prop</span></span>
-<span></span>
-<span><span style="color:#202020">  Congruent :</span></span>
-<span><span style="color:#202020">    Point → Point →</span></span>
-<span><span style="color:#202020">    Point → Point →</span></span>
-<span><span style="color:#CF222E">    Prop</span></span>
+<span><span style="color:#202020">  Collinear : Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
+<span><span style="color:#202020">  Parallel : Point → Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
+<span><span style="color:#202020">  Congruent : Point → Point → Point → Point → </span><span style="color:#CF222E">Prop</span></span>
 <span></span>
 <span><span style="color:#CF222E">variable</span><span style="color:#202020"> (Geo : Geo)</span></span>
 <span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> collinear_swap</span><span style="color:#202020"> (A B C : Geo.Point) :</span></span>
+<span><span style="color:#202020">  Geo.Collinear A B C → Geo.Collinear A C B</span></span>
 <span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> collinear_swap</span></span>
-<span><span style="color:#202020">  (A B C : Geo.Point) :</span></span>
-<span><span style="color:#202020">  Geo.Collinear A B C →</span></span>
-<span><span style="color:#202020">  Geo.Collinear A C B</span></span>
+<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsMidpoint</span><span style="color:#202020"> (Geo : Geometry.Geo) (M A B : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
+<span><span style="color:#202020">  Geo.Collinear A M B ∧ Geo.Congruent A M M B</span></span>
 <span></span>
-<span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsMidpoint</span></span>
-<span><span style="color:#202020">    (Geo : Geometry.Geo)</span></span>
-<span><span style="color:#202020">    (M A B : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
-<span><span style="color:#202020">  Geo.Collinear A M B ∧</span></span>
-<span><span style="color:#202020">  Geo.Congruent A M M B</span></span>
-<span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> midpoint_collinear</span></span>
-<span><span style="color:#202020">    (Geo : Geometry.Geo)</span></span>
-<span><span style="color:#202020">    (A B M : Geo.Point) :</span></span>
-<span><span style="color:#202020">    IsMidpoint Geo M A B →</span></span>
-<span><span style="color:#202020">    Geo.Collinear A M B := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> midpoint_collinear</span><span style="color:#202020"> (Geo : Geometry.Geo) (A B M : Geo.Point) :</span></span>
+<span><span style="color:#202020">    IsMidpoint Geo M A B → Geo.Collinear A M B := </span><span style="color:#CF222E">by</span></span>
 <span><span style="color:#202020">  intro h</span></span>
 <span><span style="color:#202020">  exact h.left</span></span>
 <span></span>
+<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsIntersection</span><span style="color:#202020"> (A B C D P : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
+<span><span style="color:#202020">  Geo.Collinear A P B ∧ Geo.Collinear C P D</span></span>
 <span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsIntersection</span></span>
-<span><span style="color:#202020">  (A B C D P : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
-<span><span style="color:#202020">  Geo.Collinear A P B ∧</span></span>
-<span><span style="color:#202020">  Geo.Collinear C P D</span></span>
-<span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsMedian</span></span>
-<span><span style="color:#202020">    (Geo : Geometry.Geo)</span></span>
-<span><span style="color:#202020">    (_ M B C : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
+<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsMedian</span><span style="color:#202020"> (Geo : Geometry.Geo) (_ M B C : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
 <span><span style="color:#202020">  IsMidpoint Geo M B C</span></span>
+<span></span>
 <span><span style="color:#6E7781">/--</span></span>
 <span><span style="color:#6E7781">A median is currently represented only by the midpoint</span></span>
 <span><span style="color:#6E7781">of the opposite side. The first argument (vertex) is</span></span>
 <span><span style="color:#6E7781">kept for compatibility with the existing API.</span></span>
 <span><span style="color:#6E7781">-/</span></span>
-<span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> MidsegmentTheorem</span></span>
-<span><span style="color:#202020">  (A B C M N : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> MidsegmentTheorem</span><span style="color:#202020"> (A B C M N : Geo.Point) :</span></span>
 <span><span style="color:#202020">  IsMidpoint Geo M A B →</span></span>
 <span><span style="color:#202020">  IsMidpoint Geo N A C →</span></span>
 <span><span style="color:#202020">  Geo.Parallel M N B C</span></span>
 <span></span>
-<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsParallelogram</span></span>
-<span><span style="color:#202020">    (Geo : Geometry.Geo)</span></span>
-<span><span style="color:#202020">    (A B C D : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
-<span><span style="color:#202020">  Geo.Parallel A B C D ∧</span></span>
-<span><span style="color:#202020">  Geo.Parallel A D B C</span></span>
+<span><span style="color:#CF222E">def</span><span style="color:#8250DF"> IsParallelogram</span><span style="color:#202020"> (Geo : Geometry.Geo) (A B C D : Geo.Point) : </span><span style="color:#CF222E">Prop</span><span style="color:#202020"> :=</span></span>
+<span><span style="color:#202020">  Geo.Parallel A B C D ∧ Geo.Parallel A D B C</span></span>
 <span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelogramDiagonals</span></span>
-<span><span style="color:#202020">  (A B C D M : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelogramDiagonals</span><span style="color:#202020"> (A B C D M : Geo.Point) :</span></span>
 <span><span style="color:#202020">  IsParallelogram Geo A B C D →</span></span>
 <span><span style="color:#202020">  Geo.Collinear A M C →</span></span>
 <span><span style="color:#202020">  Geo.Collinear B M D →</span></span>
 <span><span style="color:#202020">  IsMidpoint Geo M A C</span></span>
 <span></span>
-<span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> MidpointMedian</span></span>
-<span><span style="color:#202020">    (Geo : Geometry.Geo)</span></span>
-<span><span style="color:#202020">    (A B C M : Geo.Point) :</span></span>
-<span><span style="color:#202020">    IsMidpoint Geo M B C →</span></span>
-<span><span style="color:#202020">    IsMedian Geo A M B C := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> MidpointMedian</span><span style="color:#202020"> (Geo : Geometry.Geo) (A B C M : Geo.Point) :</span></span>
+<span><span style="color:#202020">    IsMidpoint Geo M B C → IsMedian Geo A M B C := </span><span style="color:#CF222E">by</span></span>
 <span><span style="color:#202020">  intro h</span></span>
 <span><span style="color:#202020">  exact h</span></span>
 <span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelCollinearLeft</span></span>
-<span><span style="color:#202020">  (A B C D E : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelCollinearLeft</span><span style="color:#202020"> (A B C D E : Geo.Point) :</span></span>
 <span><span style="color:#202020">  Geo.Parallel A B D E →</span></span>
 <span><span style="color:#202020">  Geo.Collinear C A B →</span></span>
 <span><span style="color:#202020">  Geo.Parallel C B D E</span></span>
 <span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelSymm</span></span>
-<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelSymm</span><span style="color:#202020"> (A B C D : Geo.Point) :</span></span>
 <span><span style="color:#202020">  Geo.Parallel A B C D →</span></span>
 <span><span style="color:#202020">  Geo.Parallel C D A B</span></span>
 <span></span>
-<span><span style="color:#6E7781">/-</span></span>
-<span><span style="color:#6E7781">axiom ParallelogramOfParallel</span></span>
-<span><span style="color:#6E7781">  (A B C D : Geo.Point) :</span></span>
-<span><span style="color:#6E7781">  Geo.Parallel A B C D →</span></span>
-<span><span style="color:#6E7781">  Geo.Parallel A D B C →</span></span>
-<span><span style="color:#6E7781">  Geo.IsParallelogram A B C D</span></span>
-<span><span style="color:#6E7781">-/</span></span>
-<span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelFlipRight</span></span>
-<span><span style="color:#202020">  (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> ParallelFlipRight</span><span style="color:#202020"> (A B C D : Geo.Point) :</span></span>
 <span><span style="color:#202020">  Geo.Parallel A B C D →</span></span>
 <span><span style="color:#202020">  Geo.Parallel A B D C</span></span>
 <span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> IntersectionOnSameLine</span></span>
-<span><span style="color:#202020">  (A G P B C D : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> IntersectionOnSameLine</span><span style="color:#202020"> (A G P B C D : Geo.Point) :</span></span>
 <span><span style="color:#202020">  Geo.Collinear A G P →</span></span>
 <span><span style="color:#202020">  IsIntersection Geo A P B C D →</span></span>
 <span><span style="color:#202020">  IsIntersection Geo P G B C D</span></span>
 <span></span>
-<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> CollinearTrans</span></span>
-<span><span style="color:#202020">  (A G P D : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">axiom</span><span style="color:#8250DF"> CollinearTrans</span><span style="color:#202020"> (A G P D : Geo.Point) :</span></span>
 <span><span style="color:#202020">  Geo.Collinear A G P →</span></span>
 <span><span style="color:#202020">  Geo.Collinear P D G →</span></span>
 <span><span style="color:#202020">  Geo.Collinear A G D</span></span>
 <span></span>
-<span></span>
-<span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> ParallelogramOfParallel</span></span>
-<span><span style="color:#202020">    (Geo : Geometry.Geo)</span></span>
-<span><span style="color:#202020">    (A B C D : Geo.Point) :</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> ParallelogramOfParallel</span><span style="color:#202020"> (Geo : Geometry.Geo) (A B C D : Geo.Point) :</span></span>
 <span><span style="color:#202020">    Geo.Parallel A B C D →</span></span>
 <span><span style="color:#202020">    Geo.Parallel A D B C →</span></span>
 <span><span style="color:#202020">    IsParallelogram Geo A B C D := </span><span style="color:#CF222E">by</span></span>
 <span><span style="color:#202020">  intro h1 h2</span></span>
 <span><span style="color:#202020">  exact And.intro h1 h2</span></span>
 <span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep1</span></span>
-<span><span style="color:#202020">  (A B C E F G P : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hE : IsMidpoint Geo E A C)</span></span>
-<span><span style="color:#202020">  (hF : IsMidpoint Geo F A B)</span></span>
-<span><span style="color:#202020">  (hG : IsMidpoint Geo G A P)</span></span>
-<span><span style="color:#202020">  (hCFG : Geo.Collinear C F G)</span></span>
-<span><span style="color:#202020">  (hBEG : Geo.Collinear B E G) :</span></span>
-<span><span style="color:#202020">  Geo.Parallel C G B P ∧</span></span>
-<span><span style="color:#202020">  Geo.Parallel B G C P := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep1</span><span style="color:#202020"> (A B C E F G P : Geo.Point)</span></span>
+<span><span style="color:#202020">    (hE : IsMidpoint Geo E A C)</span></span>
+<span><span style="color:#202020">    (hF : IsMidpoint Geo F A B)</span></span>
+<span><span style="color:#202020">    (hG : IsMidpoint Geo G A P)</span></span>
+<span><span style="color:#202020">    (hCFG : Geo.Collinear C F G)</span></span>
+<span><span style="color:#202020">    (hBEG : Geo.Collinear B E G) :</span></span>
+<span><span style="color:#202020">    Geo.Parallel C G B P ∧ Geo.Parallel B G C P := </span><span style="color:#CF222E">by</span></span>
 <span><span style="color:#202020">  constructor</span></span>
-<span><span style="color:#202020">  ·</span></span>
-<span><span style="color:#CF222E">    have</span><span style="color:#202020"> hFG : Geo.Parallel F G B P := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">      exact MidsegmentTheorem Geo A B P F G hF hG</span></span>
+<span><span style="color:#202020">  · </span><span style="color:#CF222E">have</span><span style="color:#202020"> hFG : Geo.Parallel F G B P := MidsegmentTheorem Geo A B P F G hF hG</span></span>
+<span><span style="color:#202020">    exact ParallelCollinearLeft Geo F G C B P hFG hCFG</span></span>
+<span><span style="color:#202020">  · </span><span style="color:#CF222E">have</span><span style="color:#202020"> hEG : Geo.Parallel E G C P := MidsegmentTheorem Geo A C P E G hE hG</span></span>
+<span><span style="color:#202020">    exact ParallelCollinearLeft Geo E G B C P hEG hBEG</span></span>
 <span></span>
-<span><span style="color:#202020">    exact ParallelCollinearLeft</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      F G C</span></span>
-<span><span style="color:#202020">      B P</span></span>
-<span><span style="color:#202020">      hFG</span></span>
-<span><span style="color:#202020">      hCFG</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep2</span><span style="color:#202020"> (B C G P : Geo.Point)</span></span>
+<span><span style="color:#202020">    (hCG : Geo.Parallel C G B P)</span></span>
+<span><span style="color:#202020">    (hBG : Geo.Parallel B G C P) :</span></span>
+<span><span style="color:#202020">    IsParallelogram Geo B P C G := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> h1 : Geo.Parallel B P C G := ParallelSymm Geo C G B P hCG</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> h2 : Geo.Parallel B G P C := ParallelFlipRight Geo B G C P hBG</span></span>
+<span><span style="color:#202020">  exact ParallelogramOfParallel Geo B P C G h1 h2</span></span>
 <span></span>
-<span><span style="color:#202020">  ·</span></span>
-<span><span style="color:#CF222E">    have</span><span style="color:#202020"> hEG : Geo.Parallel E G C P := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">      exact MidsegmentTheorem Geo A C P E G hE hG</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep3</span><span style="color:#202020"> (A B C G P D : Geo.Point)</span></span>
+<span><span style="color:#202020">    (hAGP : Geo.Collinear A G P)</span></span>
+<span><span style="color:#202020">    (hInt : IsIntersection Geo A P B C D) :</span></span>
+<span><span style="color:#202020">    IsIntersection Geo P G B C D := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#202020">  exact IntersectionOnSameLine Geo A G P B C D hAGP hInt</span></span>
 <span></span>
-<span><span style="color:#202020">    exact ParallelCollinearLeft</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      E G B</span></span>
-<span><span style="color:#202020">      C P</span></span>
-<span><span style="color:#202020">      hEG</span></span>
-<span><span style="color:#202020">      hBEG</span></span>
-<span></span>
-<span></span>
-<span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep2</span></span>
-<span><span style="color:#202020">  (B C G P : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hCG : Geo.Parallel C G B P)</span></span>
-<span><span style="color:#202020">  (hBG : Geo.Parallel B G C P) :</span></span>
-<span><span style="color:#202020">  IsParallelogram Geo B P C G := </span><span style="color:#CF222E">by</span></span>
-<span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> h1 : Geo.Parallel B P C G := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact ParallelSymm Geo C G B P hCG</span></span>
-<span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> h2 : Geo.Parallel B G P C := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact ParallelFlipRight Geo B G C P hBG</span></span>
-<span></span>
-<span><span style="color:#202020">  exact</span></span>
-<span><span style="color:#202020">    ParallelogramOfParallel</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      B P C G</span></span>
-<span><span style="color:#202020">      h1</span></span>
-<span><span style="color:#202020">      h2</span></span>
-<span></span>
-<span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep3</span></span>
-<span><span style="color:#202020">  (A B C G P D : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hAGP : Geo.Collinear A G P)</span></span>
-<span><span style="color:#202020">  (hInt : IsIntersection Geo A P B C D) :</span></span>
-<span><span style="color:#202020">  IsIntersection Geo P G B C D := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">  exact</span></span>
-<span><span style="color:#202020">    IntersectionOnSameLine</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      A G P B C D</span></span>
-<span><span style="color:#202020">      hAGP</span></span>
-<span><span style="color:#202020">      hInt</span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep4</span></span>
-<span><span style="color:#202020">  (B C G P D : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hPar : IsParallelogram Geo B P C G)</span></span>
-<span><span style="color:#202020">  (hInt : IsIntersection Geo P G B C D) :</span></span>
-<span><span style="color:#202020">  IsMidpoint Geo D B C := </span><span style="color:#CF222E">by</span></span>
-<span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep4</span><span style="color:#202020"> (B C G P D : Geo.Point)</span></span>
+<span><span style="color:#202020">    (hPar : IsParallelogram Geo B P C G)</span></span>
+<span><span style="color:#202020">    (hInt : IsIntersection Geo P G B C D) :</span></span>
+<span><span style="color:#202020">    IsMidpoint Geo D B C := </span><span style="color:#CF222E">by</span></span>
 <span><span style="color:#CF222E">  have</span><span style="color:#202020"> hPG : Geo.Collinear P D G := hInt.left</span></span>
 <span><span style="color:#CF222E">  have</span><span style="color:#202020"> hBC : Geo.Collinear B D C := hInt.right</span></span>
+<span><span style="color:#202020">  exact ParallelogramDiagonals Geo B P C G D hPar hBC hPG</span></span>
 <span></span>
-<span><span style="color:#202020">  exact</span></span>
-<span><span style="color:#202020">    ParallelogramDiagonals</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      B P C G D</span></span>
-<span><span style="color:#202020">      hPar</span></span>
-<span><span style="color:#202020">      hBC</span></span>
-<span><span style="color:#202020">      hPG</span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep5</span><span style="color:#202020"> (A B C D : Geo.Point) (hMid : IsMidpoint Geo D B C) :</span></span>
+<span><span style="color:#202020">    IsMedian Geo A D B C := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#202020">  exact MidpointMedian Geo A B C D hMid</span></span>
 <span></span>
+<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> Finlay</span><span style="color:#202020"> (A B C E F G P D : Geo.Point)</span></span>
+<span><span style="color:#202020">    (hE : IsMidpoint Geo E A C)</span></span>
+<span><span style="color:#202020">    (hF : IsMidpoint Geo F A B)</span></span>
+<span><span style="color:#202020">    (hG : IsMidpoint Geo G A P)</span></span>
+<span><span style="color:#202020">    (hBE : Geo.Collinear B G E)</span></span>
+<span><span style="color:#202020">    (hCF : Geo.Collinear C G F)</span></span>
+<span><span style="color:#202020">    (hAP : Geo.Collinear A D P)</span></span>
+<span><span style="color:#202020">    (hBC : Geo.Collinear B D C) :</span></span>
+<span><span style="color:#202020">    IsMedian Geo A D B C ∧ Geo.Collinear A G D := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hCFG : Geo.Collinear C F G := collinear_swap Geo C G F hCF</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hBEG : Geo.Collinear B E G := collinear_swap Geo B G E hBE</span></span>
 <span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> FinlayStep5</span></span>
-<span><span style="color:#202020">  (A B C D : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hMid : IsMidpoint Geo D B C) :</span></span>
-<span><span style="color:#202020">  IsMedian Geo A D B C := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">  exact</span></span>
-<span><span style="color:#202020">    MidpointMedian</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      A B C D</span></span>
-<span><span style="color:#202020">      hMid</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hStep1 := FinlayStep1 Geo A B C E F G P hE hF hG hCFG hBEG</span></span>
 <span></span>
-<span><span style="color:#CF222E">theorem</span><span style="color:#8250DF"> Finlay</span></span>
-<span><span style="color:#202020">  (A B C E F G P D : Geo.Point)</span></span>
-<span><span style="color:#202020">  (hE : IsMidpoint Geo E A C)</span></span>
-<span><span style="color:#202020">  (hF : IsMidpoint Geo F A B)</span></span>
-<span><span style="color:#202020">  (hG : IsMidpoint Geo G A P)</span></span>
-<span><span style="color:#202020">  (hBE : Geo.Collinear B G E)</span></span>
-<span><span style="color:#202020">  (hCF : Geo.Collinear C G F)</span></span>
-<span><span style="color:#202020">  (hAP : Geo.Collinear A D P)</span></span>
-<span><span style="color:#202020">  (hBC : Geo.Collinear B D C) :</span></span>
-<span><span style="color:#202020">  IsMedian Geo A D B C ∧</span></span>
-<span><span style="color:#202020">  Geo.Collinear A G D := </span><span style="color:#CF222E">by</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hPar : IsParallelogram Geo B P C G :=</span></span>
+<span><span style="color:#202020">    FinlayStep2 Geo B C G P hStep1.left hStep1.right</span></span>
 <span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hCFG : Geo.Collinear C F G := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact collinear_swap Geo C G F hCF</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hAGP : Geo.Collinear A G P := midpoint_collinear Geo A P G hG</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hIntAP : IsIntersection Geo A P B C D := And.intro hAP hBC</span></span>
 <span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hBEG : Geo.Collinear B E G := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact collinear_swap Geo B G E hBE</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hIntPG : IsIntersection Geo P G B C D :=</span></span>
+<span><span style="color:#202020">    FinlayStep3 Geo A B C G P D hAGP hIntAP</span></span>
 <span></span>
-<span><span style="color:#202020">  -- Step </span><span style="color:#098658">1</span><span style="color:#202020">.</span></span>
-<span><span style="color:#202020">  -- Apply the Midsegment Theorem twice to obtain</span></span>
-<span><span style="color:#202020">  -- CG ∥ BP and BG ∥ CP.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hStep1 :=</span></span>
-<span><span style="color:#202020">    FinlayStep1</span></span>
-<span><span style="color:#202020">      Geo</span></span>
-<span><span style="color:#202020">      A B C E F G P</span></span>
-<span><span style="color:#202020">      hE</span></span>
-<span><span style="color:#202020">      hF</span></span>
-<span><span style="color:#202020">      hG</span></span>
-<span><span style="color:#202020">      hCFG</span></span>
-<span><span style="color:#202020">      hBEG</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hMid : IsMidpoint Geo D B C :=</span></span>
+<span><span style="color:#202020">    FinlayStep4 Geo B C G P D hPar hIntPG</span></span>
 <span></span>
-<span><span style="color:#202020">  -- Step </span><span style="color:#098658">2</span><span style="color:#202020">.</span></span>
-<span><span style="color:#202020">  -- A quadrilateral whose opposite sides are parallel</span></span>
-<span><span style="color:#202020">  -- is a parallelogram.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hPar : IsParallelogram Geo B P C G := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact</span></span>
-<span><span style="color:#202020">      FinlayStep2</span></span>
-<span><span style="color:#202020">        Geo</span></span>
-<span><span style="color:#202020">        B C G P</span></span>
-<span><span style="color:#202020">        hStep1.left</span></span>
-<span><span style="color:#202020">        hStep1.right</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hMedian : IsMedian Geo A D B C :=</span></span>
+<span><span style="color:#202020">    FinlayStep5 Geo A B C D hMid</span></span>
 <span></span>
-<span><span style="color:#202020">  -- G is the midpoint of AP, hence A, G and P are collinear.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hAGP : Geo.Collinear A G P := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact midpoint_collinear Geo A P G hG</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hPG : Geo.Collinear P D G := hIntPG.left</span></span>
+<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hAGD : Geo.Collinear A G D := CollinearTrans Geo A G P D hAGP hPG</span></span>
 <span></span>
-<span><span style="color:#202020">  -- D is assumed to lie on AP and BC,</span></span>
-<span><span style="color:#202020">  -- so it is the intersection of these two lines.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hIntAP : IsIntersection Geo A P B C D := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact And.intro hAP hBC</span></span>
-<span></span>
-<span><span style="color:#202020">  -- Step </span><span style="color:#098658">3</span><span style="color:#202020">.</span></span>
-<span><span style="color:#202020">  -- Since A, G and P are collinear, the same intersection</span></span>
-<span><span style="color:#202020">  -- can be regarded as lying on the diagonal PGeo.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hIntPG : IsIntersection Geo P G B C D := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact</span></span>
-<span><span style="color:#202020">      FinlayStep3</span></span>
-<span><span style="color:#202020">        Geo</span></span>
-<span><span style="color:#202020">        A B C G P D</span></span>
-<span><span style="color:#202020">        hAGP</span></span>
-<span><span style="color:#202020">        hIntAP</span></span>
-<span></span>
-<span><span style="color:#202020">  -- Step </span><span style="color:#098658">4</span><span style="color:#202020">.</span></span>
-<span><span style="color:#202020">  -- In a parallelogram the diagonals bisect each other,</span></span>
-<span><span style="color:#202020">  -- therefore D is the midpoint of BC.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hMid : IsMidpoint Geo D B C := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact</span></span>
-<span><span style="color:#202020">      FinlayStep4</span></span>
-<span><span style="color:#202020">        Geo</span></span>
-<span><span style="color:#202020">        B C G P D</span></span>
-<span><span style="color:#202020">        hPar</span></span>
-<span><span style="color:#202020">        hIntPG</span></span>
-<span></span>
-<span><span style="color:#202020">  -- Step </span><span style="color:#098658">5</span><span style="color:#202020">.</span></span>
-<span><span style="color:#202020">  -- The segment joining a vertex </span><span style="color:#CF222E">with</span><span style="color:#202020"> the midpoint</span></span>
-<span><span style="color:#202020">  -- of the opposite side is a median.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hMedian : IsMedian Geo A D B C := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact</span></span>
-<span><span style="color:#202020">      FinlayStep5</span></span>
-<span><span style="color:#202020">        Geo</span></span>
-<span><span style="color:#202020">        A B C D</span></span>
-<span><span style="color:#202020">        hMid</span></span>
-<span></span>
-<span><span style="color:#202020">  -- Extract the collinearity of P, D and G</span></span>
-<span><span style="color:#202020">  -- </span><span style="color:#CF222E">from</span><span style="color:#202020"> the intersection property.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hPG : Geo.Collinear P D G := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact hIntPG.left</span></span>
-<span></span>
-<span><span style="color:#202020">  -- Since A, G, P and P, D, G are collinear,</span></span>
-<span><span style="color:#202020">  -- points A, G and D are collinear.</span></span>
-<span><span style="color:#CF222E">  have</span><span style="color:#202020"> hAGD : Geo.Collinear A G D := </span><span style="color:#CF222E">by</span></span>
-<span><span style="color:#202020">    exact</span></span>
-<span><span style="color:#202020">      CollinearTrans</span></span>
-<span><span style="color:#202020">        Geo</span></span>
-<span><span style="color:#202020">        A G P D</span></span>
-<span><span style="color:#202020">        hAGP</span></span>
-<span><span style="color:#202020">        hPG</span></span>
-<span></span>
-<span><span style="color:#202020">  -- The line AD is a median and passes through Geo.</span></span>
 <span><span style="color:#202020">  exact And.intro hMedian hAGD</span></span>
 <span></span>
 <span><span style="color:#CF222E">end</span><span style="color:#202020"> Geometry</span></span>
