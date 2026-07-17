@@ -4,8 +4,8 @@ layout: default
 
 # Geometry Library Index
 
-**Version:** 1.3  
-**Status:** Stable (Reusable Geometry Library)
+**Version:** 1.4  
+**Status:** First Stable Milestone
 
 ---
 
@@ -17,36 +17,43 @@ layout: default
 
 ## 1. Library Architecture
 
-The library is organized into mathematical layers that emerged during the formal verification of classical synthetic geometry.
+The library is developed through the formal verification of classical synthetic geometry proofs.
 
-- **Basic Structures & Definitions** – Fundamental geometric objects and predicates.
-- **Primitive Axioms** – Minimal axiomatic foundation of the library.
-- **Elementary Transformations** – Reusable symmetry and orientation theorems.
-- **Accessor Theorems** – Direct access to components of compound geometric definitions.
-- **Synthetic Arguments** – Complete reusable geometric arguments extracted from formal proofs.
-- **Geometric Theories** – Independent mathematical theories developed from reusable arguments.
-- **Main Formal Proofs** – Complete verified synthetic proofs.
+The current architecture emerged from the formalization of Ian Finlay's proof of the concurrency of triangle medians.
+
+The library is organized into the following layers:
+
+- **Basic Structures** - Fundamental geometric objects and predicates.
+- **Primitive Axioms** - Minimal assumptions required by formal proofs.
+- **Elementary Geometric Lemmas** - Reusable synthetic transformations.
+- **Synthetic Proof Steps** - Complete intermediate arguments extracted from classical proofs.
+- **Main Formal Proofs** - Complete verified geometric results.
 
 ---
 
 ## 2. Development Philosophy
 
-The Geometry Library is developed incrementally through the formalization of carefully selected classical synthetic proofs.
+The Geometry Library is not designed as a complete axiomatic geometry system in advance.
 
-Rather than designing a complete geometry library in advance, reusable mathematical structures are allowed to emerge naturally from completed formal developments.
+Instead, mathematical structures and reusable components emerge from the formal analysis of concrete synthetic proofs.
 
-The first complete formalization also demonstrated that building verified proofs is only one part of the process. Understanding the resulting architecture and organizing reusable mathematical components become equally important as the library continues to evolve.
+The formalization process separates:
+
+- geometric intuition,
+- necessary logical dependencies,
+- reusable mathematical arguments.
+
+The resulting library grows from verified mathematics rather than from a predefined implementation framework.
 
 ---
 
 ## 3. Design Principles
 
-1. The library is organized around mathematical theories rather than individual proofs.
-2. Frequently recurring synthetic arguments are encapsulated as reusable theorems.
-3. Primitive axioms are intentionally kept to a minimum.
-4. Internal implementation details are separated from the public theorem interface.
-5. The naming policy reflects mathematical meaning rather than historical origin.
-6. The architecture of the library should remain understandable as the collection of formal proofs grows.
+1. Primitive geometric assumptions are kept explicit.
+2. Reusable arguments are separated from individual proofs.
+3. Classical synthetic reasoning is preserved in the formal structure.
+4. The library grows through mathematical dependencies revealed by proofs.
+5. Formal statements should reflect mathematical meaning.
 
 ---
 
@@ -54,46 +61,72 @@ The first complete formalization also demonstrated that building verified proofs
 
 | Layer | Representative components |
 | :--- | :--- |
-| **Basic Structures** | `IsMidpoint`, `IsMedianIntersection`, `IsSegmentIntersection`, `IsParallelogram` |
-| **Elementary Transformations** | `MidpointSymmetry`, `ParallelSymmetry`, `ParallelSwapFirstLine`, `ParallelSwapSecondLine`, `ParallelSwapBoth` |
-| **Accessor Theorems** | `MedianIntersectionCollinearCGF`, `MedianIntersectionCollinearBGE`, `SegmentIntersectionCollinearADP`, `SegmentIntersectionCollinearBDC` |
-| **Synthetic Arguments** | `MidsegmentParallel` |
-| **Parallelogram Theory** | `ParallelogramParallelCharacterization`, `ParallelogramOppositeSidesParallel`, `ParallelogramOppositeSidesCongruent`, `ParallelogramDiagonalsBisect`, `OnePairParallelCongruentRecognition`, `ParallelogramParallelRecognition` |
-| **Main Formal Proofs** | `FinlayProof` |
+| **Basic Structures** | `Geo`, `Point`, `Collinear`, `Parallel`, `IsMidpoint`, `IsMedian`, `IsParallelogram` |
+| **Basic Definitions** | `IsIntersection` |
+| **Elementary Lemmas** | `midpoint_collinear`, `collinear_swap`, `MidsegmentTheorem`, `ParallelCollinearLeft` |
+| **Parallelogram Tools** | `ParallelSymm`, `ParallelFlipRight`, `ParallelogramOfParallel`, `ParallelogramDiagonals` |
+| **Synthetic Proof Steps** | `FinlayStep1`, `FinlayStep2`, `FinlayStep3`, `FinlayStep4`, `FinlayStep5` |
+| **Main Formal Proofs** | `Finlay` |
 
 ---
 
-## 5. Current Status
+## 5. First Formal Result
 
-The current version of the library contains:
+The first complete formal proof verifies Ian Finlay's synthetic construction for the concurrency of triangle medians.
 
-- a stable collection of basic geometric structures,
-- a reusable API for elementary synthetic transformations,
-- accessor theorems for compound geometric definitions,
-- reusable synthetic arguments,
-- the first independent theory of parallelograms,
-- a complete formal verification of Finlay's proof.
+The proof is decomposed into five independent steps:
 
-The completion of the first full formalization marks the transition from constructing individual proofs toward developing a coherent reusable geometry library.
+1. Midsegment theorem produces the required parallel lines.
+2. Parallel lines define a parallelogram.
+3. The intersection point is transferred to the diagonal.
+4. Diagonals of the parallelogram determine the midpoint of the opposite side.
+5. The midpoint property gives the third median.
 
----
+The final theorem proves:
 
-## 6. Roadmap
+- `AD` is a median of triangle `ABC`.
+- The centroid point `G` lies on `AD`.
 
-Future development will continue through additional classical results in synthetic geometry.
-
-Alongside new formal proofs, increasing attention will be devoted to maintaining a coherent library architecture, refining reusable mathematical interfaces, and organizing independent geometric theories that naturally emerge from successive formalizations.
+Therefore all three medians are concurrent.
 
 ---
 
-## 7. Library Evolution
+## 6. Current Status
 
-The development of the library currently follows five successive stages:
+The current version contains:
 
-1. Formal verification of a classical synthetic proof.
-2. Extraction of reusable synthetic arguments.
-3. Construction of independent mathematical theories.
-4. Continuous refinement of the library architecture.
-5. Gradual expansion into a general-purpose synthetic geometry library.
+- a minimal geometric structure,
+- basic synthetic lemmas,
+- reusable proof components,
+- a complete formal verification of Finlay's synthetic proof.
+
+The first milestone establishes the methodology for future development of the library.
+
+---
+
+## 7. Future Development
+
+Future work will extend the library through additional classical synthetic constructions.
+
+Possible directions include:
+
+- further triangle geometry results,
+- systematic development of parallelogram theory,
+- reusable synthetic transformations,
+- comparison of different proof perspectives.
+
+The long-term goal is a coherent reusable library for formal synthetic geometry.
+
+---
+
+## 8. Library Evolution
+
+The current development follows the following pattern:
+
+1. Formal verification of a classical proof.
+2. Extraction of reusable mathematical components.
+3. Development of independent geometric theories.
+4. Refinement of library architecture.
+5. Expansion toward a general synthetic geometry framework.
 
 This evolution is documented in the accompanying development logs.
