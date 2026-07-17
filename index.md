@@ -38,6 +38,10 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 * **[10. From Formal Proof to Geometry Atlas](log-010.md)**
   - This log marks the transition from a single verified proof toward a broader program of organizing geometric concepts, structures and relationships into a Geometry Atlas.
 
+* **[11. Primitive Relations, Definitions and the Geometry Core](log-011.md)**
+  - This log documents the reduction of the logical kernel of the Geometry library by replacing several primitive predicates with definitions, revealing a layered architecture separating primitive relations, derived concepts, and geometric theorems.
+ 
+ 
 ---
 
 ### Formal Geometry Library
