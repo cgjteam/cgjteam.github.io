@@ -2,11 +2,21 @@
 layout: default
 ---
 
-# CGJteam Lab — Archive
+# CGJteam Lab
 
-Welcome to the CGJteam research laboratory. This archive documents our systematic analysis of classical geometric proofs, focusing on logical dependencies and formal verification.
+Welcome to the CGJteam research laboratory.
 
-### Research Logs
+CGJteam Lab is an open research project dedicated to the formal verification of synthetic Euclidean geometry in Lean 4.
+
+The project combines the development of a reusable geometry library with detailed documentation of the formalization process through technical logs, architectural notes and mathematical case studies.
+
+The source code is publicly available on GitHub:
+
+**https://github.com/cgjteam/CGJteamLab**
+
+---
+
+## Research Logs
 
 * **[1. Finlay's Synthetic Proof](log-001.md)**
   - This log documents the first complete formal verification of Ian Finlay's synthetic proof of the concurrency of triangle medians and the initial extraction of the proof structure.
@@ -39,22 +49,30 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
   - This log marks the transition from a single verified proof toward a broader program of organizing geometric concepts, structures and relationships into a Geometry Atlas.
 
 * **[11. Primitive Relations, Definitions and the Geometry Core](log-011.md)**
-  - This log documents the reduction of the logical kernel of the Geometry library by replacing several primitive predicates with definitions, revealing a layered architecture separating primitive relations, derived concepts, and geometric theorems.
+  - This log documents the reduction of the logical kernel of the Geometry library by replacing several primitive predicates with definitions, revealing a layered architecture separating primitive relations, derived concepts and geometric theorems.
 
- * **[12. Eliminating the First Axiom](log-012.md)**
+* **[12. Eliminating the First Axiom](log-012.md)**
   - This log describes the first successful elimination of an axiom from the geometry library, replacing it with a formal Lean proof without modifying any dependent developments.
- 
+
 ---
 
-### Formal Geometry Library
+## Geometry Library
 
-The library serves as the central architectural index of the project, documenting the formal development and dependency graph.
+The reusable Lean 4 geometry library developed within the project.
 
 * **[Geometry Library Index](Geometry.md)**
-  The architectural map detailing definitions, axioms, lemmas, and theorems.
+  - Architectural overview of definitions, axioms, lemmas and theorems.
 
-* **[Geometry Implementation](Geometry_lean.html)**
-  The formal source code in Lean, organized for modular verification.
+* **GitHub Repository**
+  - https://github.com/cgjteam/CGJteamLab
+
+* **Project Wiki**
+  - https://github.com/cgjteam/CGJteamLab/wiki
 
 ---
-*Status: Active research project.*
+
+## Project Status
+
+**Active research project.**
+
+Current development focuses on expanding the reusable geometry library and systematically replacing temporary axioms with formally verified Lean theorems while preserving backward compatibility of the public API.
