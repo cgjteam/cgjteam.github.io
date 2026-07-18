@@ -40,7 +40,9 @@ Welcome to the CGJteam research laboratory. This archive documents our systemati
 
 * **[11. Primitive Relations, Definitions and the Geometry Core](log-011.md)**
   - This log documents the reduction of the logical kernel of the Geometry library by replacing several primitive predicates with definitions, revealing a layered architecture separating primitive relations, derived concepts, and geometric theorems.
- 
+
+ * **[12. Eliminating the First Axiom](log-012.md)**
+  - This log describes the first successful elimination of an axiom from the geometry library, replacing it with a formal Lean proof without modifying any dependent developments.
  
 ---
 
