@@ -54,6 +54,9 @@ The source code is publicly available on GitHub:
 * **[12. Eliminating the First Axiom](log-012.md)**
   - This log describes the first successful elimination of an axiom from the geometry library, replacing it with a formal Lean proof without modifying any dependent developments.
 
+* **[13. Refactoring the Incidence Layer](log-013.md)**
+  - This log documents the transition from primitive collinearity to an incidence-based foundation inspired by Hilbert's axioms, showing how the logical kernel of the geometry library was simplified while preserving the complete Finlay formalization.
+    
 ---
 
 ## Geometry Library
