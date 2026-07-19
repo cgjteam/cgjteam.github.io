@@ -63,7 +63,7 @@ The source code is publicly available on GitHub:
 * **[13. Refactoring the Incidence Layer](log-013.md)**
   - Introducing an incidence-based foundation inspired by Hilbert's axioms.
 
-* **[14. From Finlay's Proof to the Theory of Parallelograms](log-014.md)**
+* **[14. From Finlay's Proof to Parallelograms](log-014.md)**
   - This log documents the extraction of the Theory of Parallelograms as an independent module of the Geometry Library, originating from the formal analysis of Finlay's synthetic proof.
     
 ---
