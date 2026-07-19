@@ -4,8 +4,8 @@ layout: default
 
 # Geometry Library Index
 
-**Version:** 1.4  
-**Status:** First Stable Milestone
+**Version:** 1.5  
+**Status:** First Stable Incidence Architecture
 
 ---
 
@@ -17,116 +17,171 @@ layout: default
 
 ## 1. Library Architecture
 
-The library is developed through the formal verification of classical synthetic geometry proofs.
+The Geometry Library is developed through the formal verification of classical synthetic geometry.
 
-The current architecture emerged from the formalization of Ian Finlay's proof of the concurrency of triangle medians.
+Rather than designing a complete axiomatic system in advance, the library evolves by extracting reusable mathematical structures from formally verified proofs.
 
-The library is organized into the following layers:
+The current architecture consists of the following layers.
 
-- **Basic Structures** - Fundamental geometric objects and predicates.
-- **Primitive Axioms** - Minimal assumptions required by formal proofs.
-- **Elementary Geometric Lemmas** - Reusable synthetic transformations.
-- **Synthetic Proof Steps** - Complete intermediate arguments extracted from classical proofs.
-- **Main Formal Proofs** - Complete verified geometric results.
+| Layer | Purpose |
+|:------|:--------|
+| **GeometryCore** | Primitive geometric objects. |
+| **HilbertAxioms** | Point-line incidence and incidence-based collinearity. |
+| **GeometryBase** | Fundamental geometric definitions and reusable synthetic theorems. |
+| **Synthetic Geometry** | Midsegment, parallelograms and related constructions. |
+| **Formal Proofs** | Complete formalized geometric proofs. |
+
+The current architecture is
+
+```
+GeometryCore
+        ↓
+HilbertAxioms
+        ↓
+GeometryBase
+        ↓
+MidsegmentParallel
+        ↓
+FinlayProof
+```
 
 ---
 
 ## 2. Development Philosophy
 
-The Geometry Library is not designed as a complete axiomatic geometry system in advance.
+The Geometry Library is **not** developed by implementing a complete axiomatic geometry from the beginning.
 
-Instead, mathematical structures and reusable components emerge from the formal analysis of concrete synthetic proofs.
+Instead, reusable mathematical structures emerge from the formal analysis of concrete synthetic proofs.
 
-The formalization process separates:
+The formalization process separates
 
-- geometric intuition,
-- necessary logical dependencies,
-- reusable mathematical arguments.
+- mathematical intuition,
+- primitive logical assumptions,
+- derived geometric concepts,
+- reusable proof techniques.
 
-The resulting library grows from verified mathematics rather than from a predefined implementation framework.
+As the library evolves, primitive notions are replaced by derived definitions whenever possible, reducing the logical kernel while preserving the public API.
 
 ---
 
 ## 3. Design Principles
 
-1. Primitive geometric assumptions are kept explicit.
-2. Reusable arguments are separated from individual proofs.
-3. Classical synthetic reasoning is preserved in the formal structure.
-4. The library grows through mathematical dependencies revealed by proofs.
-5. Formal statements should reflect mathematical meaning.
+The development follows several guiding principles.
+
+1. Keep primitive assumptions as small as possible.
+2. Replace primitive notions by mathematical definitions whenever possible.
+3. Replace elementary axioms by formally verified Lean theorems.
+4. Separate reusable geometric arguments from individual proofs.
+5. Preserve the mathematical structure of classical synthetic geometry.
+6. Maintain compatibility of higher-level modules during architectural refactoring.
 
 ---
 
 ## 4. Current Library Structure
 
 | Layer | Representative components |
-| :--- | :--- |
-| **Basic Structures** | `Geo`, `Point`, `Collinear`, `Parallel`, `IsMidpoint`, `IsMedian`, `IsParallelogram` |
-| **Basic Definitions** | `IsIntersection` |
-| **Elementary Lemmas** | `midpoint_collinear`, `collinear_swap`, `MidsegmentTheorem`, `ParallelCollinearLeft` |
-| **Parallelogram Tools** | `ParallelSymm`, `ParallelFlipRight`, `ParallelogramOfParallel`, `ParallelogramDiagonals` |
+|:------|:--------------------------|
+| **GeometryCore** | `Geo`, `Point`, `Line` |
+| **HilbertAxioms** | `HilbertIncidence`, `OnLine`, `PrimCollinear`, `PrimCollinearRotate`, `PrimCollinearSymm` |
+| **GeometryBase** | `Collinear`, `Parallel`, `Congruent`, `AngleCongruent`, `IsMidpoint`, `IsMedian`, `IsParallelogram` |
+| **Synthetic Geometry** | `MidsegmentTheorem`, `ParallelCollinearLeft`, `ParallelogramDiagonals`, `SAS` |
 | **Synthetic Proof Steps** | `FinlayStep1`, `FinlayStep2`, `FinlayStep3`, `FinlayStep4`, `FinlayStep5` |
-| **Main Formal Proofs** | `Finlay` |
+| **Formal Proofs** | `Finlay` |
 
 ---
 
-## 5. First Formal Result
+## 5. First Architectural Refactoring
+
+One of the major milestones of the project was the introduction of the **Hilbert Incidence Layer**.
+
+Previously,
+
+```
+Collinear
+```
+
+was a primitive relation of the geometry.
+
+The new architecture introduces
+
+```
+OnLine
+```
+
+as the primitive relation and defines
+
+```
+PrimCollinear(A,B,C)
+    :=
+∃ l,
+OnLine(A,l) ∧
+OnLine(B,l) ∧
+OnLine(C,l)
+```
+
+As a consequence,
+
+- collinearity becomes a derived notion,
+- elementary properties such as symmetry and rotation become ordinary Lean theorems,
+- the logical kernel of the library is reduced,
+- higher-level modules remain unchanged.
+
+---
+
+## 6. First Formal Result
 
 The first complete formal proof verifies Ian Finlay's synthetic construction for the concurrency of triangle medians.
 
-The proof is decomposed into five independent steps:
+The proof is decomposed into five reusable steps.
 
-1. Midsegment theorem produces the required parallel lines.
-2. Parallel lines define a parallelogram.
+1. Midsegment theorem establishes the required parallel lines.
+2. Parallelism identifies a parallelogram.
 3. The intersection point is transferred to the diagonal.
-4. Diagonals of the parallelogram determine the midpoint of the opposite side.
-5. The midpoint property gives the third median.
+4. The diagonals determine the midpoint.
+5. The midpoint establishes the third median.
 
-The final theorem proves:
-
-- `AD` is a median of triangle `ABC`.
-- The centroid point `G` lies on `AD`.
-
-Therefore all three medians are concurrent.
+The final theorem proves that the three medians of a triangle are concurrent.
 
 ---
 
-## 6. Current Status
+## 7. Current Status
 
-The current version contains:
+The current version contains
 
-- a minimal geometric structure,
-- basic synthetic lemmas,
-- reusable proof components,
-- a complete formal verification of Finlay's synthetic proof.
+- a minimal geometry kernel,
+- an incidence layer based on Hilbert's ideas,
+- reusable synthetic geometry,
+- modular proof components,
+- a complete formalization of Finlay's proof.
 
-The first milestone establishes the methodology for future development of the library.
-
----
-
-## 7. Future Development
-
-Future work will extend the library through additional classical synthetic constructions.
-
-Possible directions include:
-
-- further triangle geometry results,
-- systematic development of parallelogram theory,
-- reusable synthetic transformations,
-- comparison of different proof perspectives.
-
-The long-term goal is a coherent reusable library for formal synthetic geometry.
+The introduction of the incidence layer establishes the first stable architectural foundation of the library.
 
 ---
 
-## 8. Library Evolution
+## 8. Future Development
 
-The current development follows the following pattern:
+Future work will continue reducing the logical kernel of the library by introducing additional axiomatic layers.
+
+Planned directions include
+
+- order and betweenness,
+- congruence,
+- transformations,
+- additional synthetic constructions,
+- multiple formal proofs of the same theorem.
+
+The long-term objective is a reusable Lean library for classical synthetic geometry.
+
+---
+
+## 9. Library Evolution
+
+The Geometry Library evolves according to the following methodology.
 
 1. Formal verification of a classical proof.
 2. Extraction of reusable mathematical components.
-3. Development of independent geometric theories.
-4. Refinement of library architecture.
-5. Expansion toward a general synthetic geometry framework.
+3. Separation of primitive and derived notions.
+4. Architectural refactoring of the logical kernel.
+5. Development of reusable synthetic theories.
 
-This evolution is documented in the accompanying development logs.
+Each completed stage is documented in the project wiki and development logs.
