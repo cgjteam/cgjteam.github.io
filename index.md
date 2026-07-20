@@ -65,7 +65,10 @@ The source code is publicly available on GitHub:
 
 * **[14. From Finlay's Proof to Parallelogram Reasoning](log-014.md)**
   - This log documents the extraction of the Theory of Parallelograms as an independent module of the Geometry Library, originating from the formal analysis of Finlay's synthetic proof.
-    
+
+* **[15. MidsegmentParallel: A Reusable Construction Pattern](log-015.md)**
+  - This log analyzes the reusable construction behind MidsegmentParallel.
+
 ---
 
 ## Geometry Library
