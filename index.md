@@ -69,6 +69,9 @@ The source code is publicly available on GitHub:
 * **[15. MidsegmentParallel: A Reusable Construction Pattern](log-015.md)**
   - This log analyzes the reusable construction behind MidsegmentParallel.
 
+* **[16. Reconstructing Suppes' Midsegment Theorem](log-016.md)**
+  - Reconstruction of Suppes' constructive proof of the Midsegment Theorem from the midpoint and doubling operations.
+   
 ---
 
 ## Geometry Library
