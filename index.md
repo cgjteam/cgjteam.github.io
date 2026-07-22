@@ -71,6 +71,9 @@ The source code is publicly available on GitHub:
 
 * **[16. Reconstructing Suppes' Midsegment Theorem](log-016.md)**
   - Reconstruction of Suppes' constructive proof of the Midsegment Theorem from the midpoint and doubling operations.
+
+* **[17. Suppes as an Alternative Midsegment Route](log-017.md)**
+  - A Suppes-based alternative to the existing MidsegmentParallel development and Finlay proof.
    
 ---
 
