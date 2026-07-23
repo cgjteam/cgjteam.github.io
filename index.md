@@ -74,7 +74,10 @@ The source code is publicly available on GitHub:
 
 * **[17. Suppes as an Alternative Midsegment Route](log-017.md)**
   - A Suppes-based alternative to the existing MidsegmentParallel development and Finlay proof.
-   
+
+* **[18. Refactoring the Hilbert and Suppes Architecture](log-018.md)**
+  - A more compact dependency structure preserving GeometryBase as the shared language of the Hilbert and Suppes proof routes.
+     
 ---
 
 ## Geometry Library
