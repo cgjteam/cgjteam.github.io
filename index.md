@@ -77,6 +77,9 @@ The source code is publicly available on GitHub:
 
 * **[18. Refactoring the Hilbert and Suppes Architecture](log-018.md)**
   - A more compact dependency structure preserving GeometryBase as the shared language of the Hilbert and Suppes proof routes.
+
+* **[19. Tarski as a Third Route to Finlay's Proof](log-019.md)**
+  - An independent Tarski-based route through primitive betweenness and congruence, an explicit GeometryBase bridge, the Midsegment Theorem and Finlay's proof.
      
 ---
 
