@@ -81,6 +81,15 @@ Rather than designing an axiomatic geometry library from first principles, the p
 * **[21. The Hilbert Route to Finlay's Proof](log-021.md)**
   - Reconstruction of the current Hilbert-based route from the primitive geometric language through the Hilbert axioms and interface to the Midsegment Theorem and Finlay's proof.
 
+* **[22. The Axiomatic Structure of the Hilbert Route](log-022.md)**
+  - Reconstruction of the Hilbert axiom hierarchy and the logical boundary between neutral and Euclidean geometry.
+
+* **[23. The Hilbert Interface: From Axioms to Synthetic Geometry](log-023.md)**
+  - Analysis of the reduction layer connecting Hilbert's foundational geometry with the reusable synthetic API.
+
+* **[24. Finlay's Proof on the Hilbert Route](log-024.md)**
+  - Reconstruction of the complete Hilbert-based Finlay argument, from the construction of the auxiliary configuration to the concurrency of the three medians.
+
 ---
 
 ## Geometry Library
