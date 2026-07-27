@@ -90,6 +90,19 @@ Rather than designing an axiomatic geometry library from first principles, the p
 * **[24. Finlay's Proof on the Hilbert Route](log-024.md)**
   - Reconstruction of the complete Hilbert-based Finlay argument, from the construction of the auxiliary configuration to the concurrency of the three medians.
 
+
+* **[25. The Axiomatic Structure of the Suppes Route](log-025.md)**
+  - Reconstruction of the active Suppes foundation based on midpoint, doubling and collinearity, including the separation of `SuppesCore` from the current proof route.
+
+* **[26. The Suppes Interface: From Primitive Operations to Affine Geometry](log-026.md)**
+  - Analysis of the main Suppes theory layer, including primitive triangles, primitive parallelograms, `SuppesParallel`, derived affine results and the remaining explicit assumptions.
+
+* **[27. The Midsegment Theorem on the Suppes Route](log-027.md)**
+  - Reconstruction of the compact Suppes Midsegment proof through Theorem 11, primitive parallelograms and derived parallelism.
+
+* **[28. Finlay's Proof on the Suppes Route](log-028.md)**
+  - Reconstruction of the current Suppes-based Finlay argument and identification of the remaining explicit assumptions in parallel extension, parallelogram recognition and diagonal bisection.
+
 ---
 
 ## Geometry Library
