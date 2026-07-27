@@ -79,8 +79,7 @@ Rather than designing an axiomatic geometry library from first principles, the p
   - Development of the Suppes parallelism interface, parallelogram recognition, and completion of the Suppes route to Finlay's proof.
 
 * **[21. The Hilbert Route to Finlay's Proof](log-021.md)**
-
-  * Reconstruction of the current Hilbert-based route from the primitive geometric language through the Hilbert axioms and interface to the Midsegment Theorem and Finlay's proof.
+  - Reconstruction of the current Hilbert-based route from the primitive geometric language through the Hilbert axioms and interface to the Midsegment Theorem and Finlay's proof.
 
 ---
 
