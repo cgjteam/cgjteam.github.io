@@ -16,12 +16,6 @@ The project combines three complementary goals:
 
 Rather than designing an axiomatic geometry library from first principles, the project develops its architecture by analysing formally verified proofs and extracting their reusable mathematical components.
 
-The source code is publicly available on GitHub:
-
-**https://github.com/cgjteam/CGJteamLab**
-
----
-
 ## Research Logs
 
 * **[1. Finlay's Synthetic Proof](log-001.md)**
@@ -80,7 +74,14 @@ The source code is publicly available on GitHub:
 
 * **[19. Tarski as a Third Route to Finlay's Proof](log-019.md)**
   - An independent Tarski-based route through primitive betweenness and congruence, an explicit GeometryBase bridge, the Midsegment Theorem and Finlay's proof.
-     
+
+* **[20. Suppes Parallelism and Parallelogram Recognition](log-020.md)**
+  - Development of the Suppes parallelism interface, parallelogram recognition, and completion of the Suppes route to Finlay's proof.
+
+* **[21. The Hilbert Route to Finlay's Proof](log-021.md)**
+
+  * Reconstruction of the current Hilbert-based route from the primitive geometric language through the Hilbert axioms and interface to the Midsegment Theorem and Finlay's proof.
+
 ---
 
 ## Geometry Library
