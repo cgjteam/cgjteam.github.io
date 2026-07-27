@@ -1,11 +1,12 @@
 ---
 layout: default
+title: "Geometry Library Index"
 ---
 
 # Geometry Library Index
 
-**Version:** 2.0
-**Status:** Multiple Axiomatic Routes
+**Version:** 3.0  
+**Status:** Multiple Axiomatic Routes under Reconstruction
 
 ---
 
@@ -20,11 +21,7 @@ layout: default
 The Geometry Library studies classical synthetic geometry through formal
 verification in Lean 4.
 
-The current architecture no longer consists of a single foundational
-route. The same higher-level geometric argument is developed over
-different axiomatic foundations.
-
-The three principal routes are:
+The project currently develops three foundational routes:
 
 ```text
 Hilbert
@@ -32,59 +29,64 @@ Suppes
 Tarski
 ```
 
-Each route provides its own foundational language and reduction path
-toward reusable synthetic geometry.
+These routes do not share one complete foundational theory.
 
-The project therefore separates two levels:
+Instead, each begins from a different primitive language and develops enough
+geometry to support higher-level synthetic arguments.
+
+Finlay's proof of the concurrency of the medians of a triangle remains the
+principal comparison theorem.
+
+The current project therefore studies two related questions:
 
 ```text
-axiomatic foundations
-        |
-        v
-synthetic geometric structures
-        |
-        v
-formal proofs
+How can a classical synthetic proof be formalized?
 ```
 
-Finlay's proof of the concurrency of triangle medians is the principal
-test case through which these routes are compared.
+and
+
+```text
+How does the proof change when reconstructed over different foundations?
+```
 
 ---
 
 ## 2. Development Philosophy
 
-The Geometry Library is not designed by fixing one complete axiomatic
-system in advance.
+The library architecture was not fixed in advance.
 
-Instead, its architecture emerges from the formal analysis of classical
-proofs.
+It emerged from the formalization and subsequent reverse engineering of
+classical proofs.
 
 The development process distinguishes:
 
-- primitive geometric relations,
-- axiomatic laws governing those relations,
-- derived geometric notions,
-- reusable synthetic theorems,
-- complete formal proofs.
+- primitive objects, operations, and relations,
+- genuine axioms,
+- definitions,
+- formally derived geometric theory,
+- interface theorems,
+- explicit deferred results that have not yet been reduced,
+- high-level synthetic proofs.
 
-A central objective is to determine how much geometric structure is
-actually required by a proof and which parts of a convenient synthetic
-API can be derived from weaker foundations.
+A central principle is that compilation alone does not determine the
+foundational status of a theorem.
 
-This has led naturally to several independent foundational routes rather
-than a single universal geometry kernel.
+For every route, the project therefore asks:
+
+```text
+Which declarations are primitive?
+Which are derived?
+Which remain explicit assumptions?
+What is the actual dependency path of the final proof?
+```
 
 ---
 
-## 3. The Three Foundational Routes
+# Part I. Hilbert Route
 
-### Hilbert Route
+## 3. Hilbert Architecture
 
-The Hilbert route uses a point-line language together with incidence,
-order, congruence, and the Euclidean parallel principle.
-
-Its current foundational hierarchy is:
+The active Hilbert route is:
 
 ```text
 HilbertCore
@@ -102,123 +104,32 @@ MidsegmentParallel
 FinlayProof
 ```
 
-The Hilbert axioms themselves form a hierarchy:
-
-```text
-HilbertIncidence
-        |
-        v
-HilbertPlaneIncidence       Group I
-        |
-        v
-HilbertOrder                Group II
-        |
-        v
-HilbertCongruence           Group III
-        |
-        v
-Neutral Geometry
-        |
-        v
-HilbertEuclideanPlane       Group IV
-        |
-        v
-Euclidean Geometry
-        |
-        v
-HilbertArchimedeanPlane     Group V
-```
-
-This route distinguishes sharply between neutral and specifically
-Euclidean geometry.
+This is currently the most fully reconstructed route.
 
 ---
 
-### Suppes Route
+## 4. HilbertCore
 
-The Suppes route uses a different primitive language based on
-betweenness and equidistance.
+`HilbertCore.lean` defines the primitive language and representation-level
+objects used by the Hilbert route.
 
-Its synthetic notions are reconstructed through the Suppes interface,
-including midpoint constructions, parallelism, and parallelogram
-recognition.
-
-The route leads independently to a Suppes version of the Midsegment
-Theorem and Finlay's proof.
-
-Schematically:
+The primitive objects include:
 
 ```text
-SuppesCore
-    |
-    v
-SuppesInterface
-    |
-    v
-MidsegmentParallelSuppes
-    |
-    v
-FinlayProofSuppes
-```
-
-The Suppes development demonstrates that the synthetic structure used
-by Finlay's argument can be reconstructed from a foundation very
-different from the Hilbert point-line system.
-
----
-
-### Tarski Route
-
-The Tarski route provides a third foundation based on primitive
-betweenness and congruence.
-
-An explicit bridge connects the Tarski foundation with the synthetic
-language required by the higher-level proof.
-
-Schematically:
-
-```text
-Tarski foundation
-        |
-        v
-synthetic interface
-        |
-        v
-Midsegment Theorem
-        |
-        v
-Finlay proof
-```
-
-The Tarski route provides an independent comparison with both Hilbert
-and Suppes geometry.
-
----
-
-## 4. The Hilbert Core
-
-`HilbertCore.lean` defines the primitive language and the
-representations used by the Hilbert route.
-
-The primitive objects are:
-
-```lean
 Point
 Line
 ```
 
-and the primitive relations include:
+and the primitive geometric relations include:
 
-```lean
+```text
 OnLine
 Between
 SegmentCongruent
 UnorientedAngleCongruent
 ```
 
-Several important notions are already derived at this level.
-
-These include:
+The core also constructs higher-level objects and relations such as:
 
 ```text
 Segment
@@ -231,61 +142,75 @@ PointLine
 Parallel
 ```
 
-Thus parallelism is not primitive in the Hilbert route.
+Several symmetry and reversal laws are consequences of these representations
+rather than additional Hilbert axioms.
 
-It is defined through nondegenerate point-defined lines and their
-disjointness.
-
-Similarly, many symmetry and reversal laws follow from the
-representation of segments, angles, and lines rather than from
-additional geometric axioms.
+In particular, `Parallel` is derived from point-defined lines and
+disjointness; it is not primitive.
 
 ---
 
-## 5. The Hilbert Axiom Hierarchy
+## 5. Hilbert Axiom Hierarchy
 
-`HilbertAxioms.lean` imposes geometric laws on the primitive language.
+`HilbertAxioms.lean` introduces the actual Hilbert-style axiomatic hierarchy:
 
-The principal classes correspond to the Hilbert groups:
+```text
+HilbertIncidence
+        |
+        v
+HilbertPlaneIncidence
+        |
+        v
+HilbertOrder
+        |
+        v
+HilbertCongruence
+        |
+        v
+HilbertEuclideanPlane
+        |
+        v
+HilbertArchimedeanPlane
+```
 
-| Layer | Role |
-|:------|:-----|
-| `HilbertPlaneIncidence` | Plane incidence axioms |
-| `HilbertOrder` | Betweenness and Pasch |
-| `HilbertCongruence` | Segment and angle congruence, SAS |
+These levels correspond broadly to the Hilbert groups:
+
+| Layer | Mathematical role |
+|:------|:------------------|
+| `HilbertPlaneIncidence` | incidence axioms |
+| `HilbertOrder` | betweenness and Pasch |
+| `HilbertCongruence` | segment and angle congruence, SAS |
 | `HilbertEuclideanPlane` | Euclidean parallel axiom |
 | `HilbertArchimedeanPlane` | Archimedean extension |
 
-The file also develops a substantial derived theory between these
-axiomatic levels.
+A substantial neutral theory is already derived below the Euclidean parallel
+axiom.
 
-In particular, the neutral geometry generated by Groups I-III already
-contains results such as:
+This includes results such as:
 
 ```text
-SAS consequences
 strong Pasch theorems
+triangle congruence consequences
 midpoint existence
 equal alternate angles -> parallel
 ```
 
-The Euclidean parallel axiom is required for the converse direction:
+The converse direction
 
 ```text
 parallel -> equal alternate angles
 ```
 
-and for the stronger Euclidean theory of parallelograms used later in
-Finlay's proof.
+is exposed at the Euclidean level.
 
 ---
 
-## 6. The Hilbert Interface
+## 6. HilbertInterface
 
-`HilbertInterface.lean` is the reduction boundary between the Hilbert
-foundation and the reusable synthetic API.
+`HilbertInterface.lean` is the reduction and packaging boundary between the
+Hilbert foundation and the higher-level synthetic language.
 
-It exposes notions such as:
+It exposes notions including:
 
 ```text
 Collinear
@@ -295,7 +220,7 @@ IsIntersection
 IsParallelogram
 ```
 
-and synthetic operations such as:
+and operations including:
 
 ```text
 SAS
@@ -305,318 +230,799 @@ MidpointMedian
 ParallelogramDiagonals
 ```
 
-The current interface is not an additional axiomatic layer.
+The active interface is not intended as a second independent axiomatic
+system.
 
-Earlier provisional interface axioms have been replaced systematically
-by theorems derived from the Hilbert foundation.
+Earlier provisional assumptions have been progressively replaced by theorems
+whose dependencies terminate in the Hilbert foundation.
 
-Its architecture is:
+The interface is logically stratified:
 
 ```text
-Hilbert foundation
+representation-level results
         |
-        | formal derivation
-        v
-HilbertInterface
+incidence-level results
         |
-        | mathematical packaging
-        v
-synthetic geometry
+order-level results
+        |
+congruence-level results
+        |
+Euclidean-level results
 ```
-
-This preserves a readable classical proof language while keeping the
-actual foundational dependencies explicit.
 
 ---
 
-## 7. Midsegment Geometry
+## 7. Hilbert Midsegment Route
 
-The Midsegment Theorem is a central reusable component of the library.
-
-On the Hilbert route its proof has the conceptual structure:
+The proof in `MidsegmentParallel.lean` has the structure:
 
 ```text
-Auxiliary Construction
+auxiliary construction
         |
         v
 SAS
         |
         v
-Equal Angles
+equal angles
         |
         v
-Parallelogram Recognition
+parallelism
         |
         v
-Adjacent Parallel
+parallelogram recognition
         |
         v
-Transfer Along Collinear
+parallelogram property
+        |
+        v
+parallel transfer along collinearity
 ```
 
-The theorem is important both mathematically and architecturally.
+The public Midsegment Theorem packages this longer internal argument into a
+reusable high-level result.
 
-It isolates a reusable construction that originally appeared inside
-Finlay's proof and makes it available independently.
-
-The existence of corresponding Hilbert, Suppes, and Tarski routes also
-makes the Midsegment Theorem a natural comparison point between the
-different foundations.
+This explains why angle and congruence theory may disappear from the surface
+of later proofs even though they remain present in the dependency tree.
 
 ---
 
-## 8. Parallelogram Theory
+## 8. Hilbert Finlay Route
 
-Parallelograms form another reusable layer extracted from the Finlay
-formalization.
+`FinlayProof.lean` constructs the auxiliary Finlay configuration internally.
 
-On the Hilbert route:
-
-```lean
-IsParallelogram A B C D
-```
-
-is defined by two pairs of opposite sides being parallel.
-
-Thus parallelogram recognition from these two parallelisms is
-essentially definitional.
-
-The stronger classical theory is derived separately and includes
-results concerning:
-
-```text
-opposite-side congruence
-diagonal intersection
-diagonal crossing
-diagonal bisection
-```
-
-In the current Hilbert development these stronger results belong to the
-Euclidean layer.
-
-This distinction separates:
-
-```text
-definition of parallelogram
-```
-
-from:
-
-```text
-Euclidean theory of parallelograms.
-```
-
----
-
-## 9. Finlay's Proof
-
-The Hilbert route reconstructs the complete Finlay configuration from
-the single assumption that `ABC` is a noncollinear triangle.
-
-The auxiliary points are produced internally:
+From a noncollinear triangle \(ABC\), the proof constructs:
 
 ```text
 E and F  by midpoint existence
-G        by strong inner Pasch
-P        by segment extension
-D        by the parallelogram diagonal-intersection theorem
+G        through strong inner Pasch
+P        through segment extension
+D        through parallelogram diagonal machinery
 ```
 
-After the configuration has been constructed, the proof follows the
-classical five-step structure:
+The high-level argument then follows the classical route:
 
 ```text
-Step 1
-two applications of the Midsegment Theorem
+Midsegment Theorem
         |
         v
-CG || BP and BG || CP
-
-Step 2
-two pairs of opposite sides parallel
+two pairs of parallel sides
         |
         v
-BPCG is a parallelogram
-
-Step 3
-diagonals of BPCG intersect
+BPCG parallelogram
         |
         v
-D lies on BC and AP
-
-Step 4
-diagonals of a parallelogram bisect each other
+diagonal midpoint
         |
         v
-D is the midpoint of BC
+third median
         |
         v
-AD is the third median
-
-Step 5
-collinearity transfer
-        |
-        v
-G lies on AD
+concurrency.
 ```
 
-Therefore all three medians pass through `G`.
+In the current implementation, the strongest Hilbert-level dependencies are
+concentrated in the parallelogram diagonal theory rather than distributed
+uniformly throughout the proof.
 
 ---
 
-## 10. Logical Profile of the Hilbert Proof
+# Part II. Suppes Route
 
-The Hilbert proof does not use the full strength of the Hilbert
-hierarchy uniformly.
+## 9. Active Suppes Architecture
 
-A substantial part of the construction belongs to neutral geometry:
+The current active Suppes route is:
 
 ```text
-midpoint existence
-Pasch construction of G
-segment extension
-SAS
-equal angles -> parallel
-parallel transport along collinear points
+SuppesAxioms
+    |
+    v
+SuppesInterface
+    |
+    v
+MidsegmentParallelSuppes
+    |
+    v
+FinlayProofSuppes
 ```
 
-The specifically Euclidean strength is concentrated in the stronger
-parallelogram theory, especially:
+A separate file
+
+```lean
+SuppesCore.lean
+```
+
+currently defines a structure `SuppesGeo` with primitive data
+
+```text
+Point
+S
+I
+alpha
+beta
+gamma
+```
+
+but this structure is not part of the active dependency chain above.
+
+Therefore the current route should not be represented as
+
+```text
+SuppesCore -> SuppesAxioms.
+```
+
+The relation between `SuppesGeo` and the active `SuppesGeometry` structure
+remains a separate architectural question.
+
+---
+
+## 10. SuppesAxioms
+
+The active Suppes foundation is defined through
+
+```lean
+SuppesGeometry
+```
+
+with primitive operations and relation:
+
+```text
+Mid
+Dbl
+Col
+```
+
+schematically:
+
+```text
+Point
+ |
+ +--> Mid
+ |
+ +--> Dbl
+ |
+ `--> Col.
+```
+
+The axiom families include declarations labelled:
+
+```text
+L2
+L3
+
+B1
+B2
+B3
+B4
+
+D1
+D2
+D3
+
+BD
+LB
+LL
+```
+
+The important structural feature is that midpoint and doubling are primitive
+operations of the active Suppes language.
+
+This differs fundamentally from the Tarski route, where midpoint is defined
+from betweenness and congruence.
+
+---
+
+## 11. SuppesInterface
+
+`SuppesInterface.lean` develops the affine geometry used by the later proofs.
+
+It defines:
+
+```text
+PrimTriangle
+PrimParallelogram
+SuppesParallel
+```
+
+and derives a substantial theory involving:
+
+```text
+midpoint identities
+collinearity transformations
+primitive parallelograms
+Suppes Theorem 11
+parallel reversal
+parallel symmetry
+```
+
+The primitive parallelogram is midpoint-based:
+
+```text
+noncollinearity
+      +
+equality of diagonal midpoints
+      |
+      v
+PrimParallelogram.
+```
+
+This differs from the Hilbert definition of a parallelogram through opposite
+parallel sides.
+
+### Remaining explicit assumptions
+
+The current interface is not yet completely reduced to `SuppesAxioms`.
+
+Explicit assumptions still include results such as:
+
+```text
+suppes_parallel_transitivity
+collinear_doubling_common_center
+```
+
+Thus `SuppesInterface` is best described as:
+
+> a largely derived affine theory with a small amount of explicit remaining
+> foundational debt.
+
+---
+
+## 12. Suppes Midsegment Route
+
+`MidsegmentParallelSuppes.lean` is especially compact.
+
+The proof is:
+
+```text
+PrimTriangle
+     |
+     v
+Suppes Theorem 11
+     |
+     v
+PrimParallelogram
+     |
+     v
+parallelogram_parallel_second
+     |
+     v
+MidsegmentTheoremSuppes.
+```
+
+The difficult midpoint algebra is already contained in the Suppes theory.
+
+Importantly, the additional assumptions needed later for parallelogram
+recognition do not belong to this direct Midsegment path.
+
+---
+
+## 13. Suppes Parallelogram Recognition
+
+The Finlay proof needs the converse transition:
+
+```text
+two pairs of opposite parallel sides
+        |
+        v
+PrimParallelogram.
+```
+
+This is developed separately in
+
+```lean
+ParallelogramRecognitionSuppes.lean.
+```
+
+The theorem is mathematically general and is a natural candidate for eventual
+integration into the Suppes interface.
+
+At present its dependency tree still contains the explicit assumption
+
+```text
+parallel_vertex_unique.
+```
+
+Keeping the recognition theorem in a separate file currently makes this
+remaining dependency visible.
+
+---
+
+## 14. Suppes Finlay Route
+
+`FinlayProofSuppes.lean` preserves the classical Finlay narrative at a high
+level, but the route is not yet fully reduced to `SuppesAxioms`.
+
+The main remaining transitions include:
+
+```text
+parallel_extend_midsegment            [explicit assumption]
+
+parallel_vertex_unique                [below recognition]
+
+parallelogram_diagonals_bisect        [explicit assumption]
+```
+
+Schematically:
+
+```text
+MidsegmentTheoremSuppes
+        |
+        v
+parallel extension
+        |
+        v
+two parallel pairs
+        |
+        v
+parallelogram recognition
+        |
+        v
+PrimParallelogram
+        |
+        v
+diagonal bisection
+        |
+        v
+third median.
+```
+
+The high-level proof is structurally complete, but several general affine
+principles still remain to be reduced.
+
+---
+
+# Part III. Tarski Route
+
+## 15. Active Tarski Architecture
+
+The current Tarski route is:
+
+```text
+TarskiAxioms
+    |
+    v
+TarskiInterface
+    |
+    v
+MidSegmentTarski
+    |
+    v
+FinlayProofTarski
+```
+
+`TarskiAxioms.lean` imports `HilbertCore.lean` only to reuse the shared
+primitive vocabulary, especially:
+
+```text
+Point
+Between
+Congruent.
+```
+
+The Tarski route does not depend on the Hilbert axiom classes.
+
+---
+
+## 16. Tarski Axiom Hierarchy
+
+The active hierarchy is:
+
+```text
+TarskiNeutral
+      |
+      v
+TarskiPlane
+      |
+      v
+TarskiEuclideanPlane.
+```
+
+`TarskiNeutral` contains the neutral axioms corresponding to:
+
+```text
+congruence reversal
+congruence transitivity
+congruence identity
+segment construction
+five-segment axiom
+betweenness identity
+inner Pasch.
+```
+
+`TarskiPlane` adds the two-dimensional assumptions.
+
+`TarskiEuclideanPlane` adds the Euclidean axiom.
+
+Continuity is not currently included.
+
+---
+
+## 17. TarskiInterface
+
+`TarskiInterface.lean` reconstructs higher geometric notions from the
+point-based Tarski language.
+
+Important definitions include:
+
+```text
+TarskiCollinear
+TarskiIsMidpoint
+TarskiParallelogram
+TarskiParallelStrict.
+```
+
+The dependencies begin schematically as:
+
+```text
+Between + Congruent
+        |
+        +--> TarskiCollinear
+        |
+        +--> TarskiIsMidpoint
+        |
+        +--> TarskiParallelogram
+        |
+        `--> TarskiParallelStrict.
+```
+
+A substantial order theory has already been derived formally above
+`TarskiNeutral`.
+
+### Deferred results
+
+The interface still contains explicit deferred theorems, including results
+concerning:
+
+```text
+outer connectivity
+central symmetry
+midpoint uniqueness
+parallelogram recognition
+opposite-side parallelism.
+```
+
+These declarations are not part of the primitive Tarski axiom classes; they
+are remaining reconstruction obligations.
+
+---
+
+## 18. Tarski Midsegment Route
+
+`MidSegmentTarski.lean` contains a genuinely Tarski-specific proof.
+
+For
+
+$$
+P=\operatorname{Mid}(B,C),
+\qquad
+Q=\operatorname{Mid}(A,C),
+$$
+
+the proof constructs \(X\) such that
+
+$$
+Q=\operatorname{Mid}(P,X).
+$$
+
+The route is:
+
+```text
+midpoints
+   |
+central symmetry
+   |
+congruence + strict parallelism
+   |
+parallelogram cases
+   |
+eliminate the wrong orientation
+   |
+opposite sides parallel
+   |
+collinear transfer
+   |
+Midsegment Theorem.
+```
+
+This is structurally different from both the Hilbert and Suppes proofs.
+
+The theorem is exposed under `TarskiNeutral`, although some results in its
+current dependency tree remain deferred in `TarskiInterface`.
+
+---
+
+## 19. Tarski Finlay Route
+
+`FinlayProofTarski.lean` imports
+
+```lean
+MidSegmentTarski
+```
+
+directly.
+
+The current route therefore no longer uses the older mixed module
+
+```lean
+MidsegmentParallelTarski.lean,
+```
+
+which translated Tarski input into Hilbert-oriented machinery.
+
+The Tarski Finlay proof uses:
+
+```text
+Tarski Midsegment relations
+        |
+        v
+strict parallel pairs
+        |
+        v
+TarskiParallelogram
+        |
+        v
+common diagonal midpoint
+        |
+        v
+third median.
+```
+
+A distinctive feature is the definition of `TarskiParallelogram` through a
+common midpoint of the diagonals.
+
+Consequently, the classical steps
 
 ```text
 diagonal intersection
 diagonal bisection
 ```
 
-This gives the Hilbert route the logical profile:
+are largely absorbed into the parallelogram representation itself.
+
+The main additional deferred dependency visible at the Finlay level is
+currently the recognition theorem
 
 ```text
-neutral Hilbert geometry
-        |
-        v
-construction and midsegment geometry
-        |
-        v
-parallelogram configuration
-        |
-        v
-Euclidean parallelogram theory
-        |
-        v
-median concurrency
+tarski_parallelogram_of_two_parallel_pairs.
 ```
 
 ---
 
-## 11. Comparative Architecture
+# Part IV. Comparative Geometry
 
-The current project no longer treats the geometry library as a single
-linear dependency chain.
+## 20. Three Midsegment Proofs
 
-Its broader architecture is comparative:
+The project now contains three structurally different routes to the same
+classical Midsegment configuration.
 
-```text
-                 Classical Synthetic Geometry
-                            |
-          +-----------------+-----------------+
-          |                 |                 |
-       Hilbert            Suppes            Tarski
-          |                 |                 |
-          v                 v                 v
-      interfaces        interfaces        interfaces
-          |                 |                 |
-          +-----------------+-----------------+
-                            |
-                            v
-                reusable geometric patterns
-                            |
-                  +---------+---------+
-                  |                   |
-             Midsegment          Parallelograms
-                  |                   |
-                  +---------+---------+
-                            |
-                            v
-                       Finlay proof
-```
-
-The three routes need not implement identical internal theories.
-
-Their comparison is useful precisely because they expose different
-foundational mechanisms behind similar synthetic arguments.
-
----
-
-## 12. Research Method
-
-The library is developed through repeated reconstruction of the logical
-dependencies of formal proofs.
-
-The general method is:
-
-1. formalize a classical synthetic argument,
-2. identify the mathematical operations actually used,
-3. separate primitive assumptions from derived results,
-4. extract reusable geometric theories,
-5. reduce provisional interface assumptions where possible,
-6. compare the resulting structure across different foundations.
-
-The architecture is therefore an outcome of proof analysis rather than
-a fixed design imposed in advance.
-
----
-
-## 13. Current Status
-
-The project currently contains:
-
-- a reconstructed Hilbert foundational hierarchy,
-- a Hilbert synthetic interface reduced to proved foundational results,
-- an independent Suppes route,
-- an independent Tarski route,
-- reusable Midsegment geometry,
-- reusable parallelogram theory,
-- complete formalizations of Finlay's median-concurrency argument,
-- research logs documenting the evolution and logical structure of the
-  library.
-
-The current stage of the project is therefore no longer accurately
-described as a "first stable incidence architecture."
-
-The library has developed into a comparative formal study of synthetic
-geometry over multiple axiomatic foundations.
-
----
-
-## 14. Library Evolution
-
-The development of the Geometry Library can be summarized as:
+### Hilbert
 
 ```text
-single formal proof
-        |
-        v
-reusable proof steps
-        |
-        v
-synthetic geometric theories
-        |
-        v
-reduction of primitive assumptions
-        |
-        v
-explicit axiomatic foundations
-        |
-        v
-multiple foundational routes
-        |
-        v
-comparative architecture
+construction
+ -> SAS
+ -> equal angles
+ -> parallelogram reasoning
+ -> parallel transfer.
 ```
 
-Finlay's proof remains the principal organizing example, but the
-mathematical object of study has expanded.
+### Suppes
 
-The project now investigates how the same synthetic geometric reasoning
-is represented, derived, and reused across different formal
-foundations.
+```text
+Theorem 11
+ -> primitive parallelogram
+ -> derived parallelism.
+```
+
+### Tarski
+
+```text
+symmetric point
+ -> congruence + strict parallelism
+ -> parallelogram cases
+ -> orientation elimination
+ -> collinear transfer.
+```
+
+The theorem statement is classical, but the proof architecture changes with
+the foundational language.
+
+---
+
+## 21. Three Parallelogram Representations
+
+The routes also organize parallelograms differently.
+
+### Hilbert
+
+```text
+two pairs of opposite sides parallel
+        |
+        v
+IsParallelogram.
+```
+
+### Suppes
+
+```text
+nondegeneracy
+        +
+equality of diagonal midpoints
+        |
+        v
+PrimParallelogram.
+```
+
+### Tarski
+
+```text
+existence of a common diagonal midpoint
+        |
+        v
+TarskiParallelogram.
+```
+
+This difference has direct consequences for Finlay's proof.
+
+In the Hilbert route, diagonal bisection is an additional theorem.
+
+In the midpoint-based Suppes and Tarski representations, diagonal midpoint
+information lies much closer to the definition itself.
+
+---
+
+## 22. Three Finlay Routes
+
+The current comparison can be summarized as:
+
+```text
+Hilbert
+
+construct full configuration
+ -> Midsegment
+ -> parallel-side parallelogram
+ -> diagonal theorems
+ -> third median.
+```
+
+```text
+Suppes
+
+given higher-level configuration
+ -> Suppes Midsegment
+ -> parallel extension
+ -> parallelogram recognition
+ -> diagonal bisection
+ -> third median.
+```
+
+```text
+Tarski
+
+Tarski Midsegment
+ -> strict parallel pairs
+ -> midpoint-defined parallelogram
+ -> extract diagonal midpoint
+ -> collinearity
+ -> third median.
+```
+
+The three developments do not yet have identical constructive strength.
+
+This is part of the current research problem rather than an inconsistency to
+be hidden.
+
+---
+
+## 23. Foundational Debt
+
+The current project distinguishes between a compiling theorem and a fully
+reduced theorem.
+
+### Hilbert
+
+The active interface has been largely reduced to proved Hilbert results.
+
+### Suppes
+
+Several general affine principles remain explicit assumptions.
+
+### Tarski
+
+A substantial derived theory exists, but several order and affine results are
+still represented as deferred axioms.
+
+The current objective is therefore not simply to minimize the number of
+`axiom` declarations.
+
+It is to identify the mathematical status of each remaining assumption and
+determine the weakest foundation from which it can be derived.
+
+---
+
+## 24. Research Method
+
+The general methodology is:
+
+1. formalize or reconstruct a classical proof,
+2. inspect its actual dependency graph,
+3. distinguish definitions, axioms, derived results, and deferred results,
+4. move general mathematics out of proof-specific files,
+5. preserve short high-level synthetic proofs,
+6. reduce remaining assumptions independently,
+7. compare the resulting proof architectures across foundations.
+
+This process has already changed the structure of the library several times.
+
+The current file organization should therefore be read as the present state of
+an active research program rather than as a final architecture.
+
+---
+
+## 25. Current Status
+
+The library currently contains:
+
+- a reconstructed Hilbert route,
+- an active Suppes route based on `Mid`, `Dbl`, and `Col`,
+- an active Tarski route based on `Between` and `Congruent`,
+- three distinct Midsegment developments,
+- three high-level Finlay developments,
+- explicit maps of remaining foundational obligations,
+- reusable theories of midpoint, parallelism, and parallelograms,
+- research logs documenting the reconstruction of each route.
+
+The project has therefore evolved from the formalization of one classical
+proof into a comparative study of how synthetic geometry is represented over
+different axiomatic foundations.
+
+---
+
+## 26. Library Evolution
+
+The development can be summarized as:
+
+```text
+single classical proof
+        |
+        v
+formal verification
+        |
+        v
+reverse engineering
+        |
+        v
+reusable synthetic theory
+        |
+        v
+explicit foundational reconstruction
+        |
+        v
+Hilbert / Suppes / Tarski routes
+        |
+        v
+comparative geometry architecture.
+```
+
+Finlay's theorem remains the organizing test case.
+
+The deeper object of study is now the relation between foundational language,
+derived geometric structure, and the shape of a formal synthetic proof.

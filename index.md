@@ -103,6 +103,16 @@ Rather than designing an axiomatic geometry library from first principles, the p
 * **[28. Finlay's Proof on the Suppes Route](log-028.md)**
   - Reconstruction of the current Suppes-based Finlay argument and identification of the remaining explicit assumptions in parallel extension, parallelogram recognition and diagonal bisection.
 
+
+* **[29. The Axiomatic Structure of the Tarski Route](log-029.md)**
+  - Reconstruction of the Tarski axiom hierarchy and the derived point-based geometry built from betweenness and congruence, including the remaining deferred interface results.
+
+* **[30. The Midsegment Theorem on the Tarski Route](log-030.md)**
+  - Reconstruction of the Tarski Midsegment proof through central symmetry, congruence, strict parallelism, parallelogram cases and collinearity transfer.
+
+* **[31. Finlay's Proof on the Tarski Route](log-031.md)**
+  - Reconstruction of the active Tarski-based Finlay argument, including the midpoint-defined parallelogram structure and the remaining deferred dependencies below the high-level proof.
+
 ---
 
 ## Geometry Library
