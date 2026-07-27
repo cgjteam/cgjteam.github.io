@@ -27,7 +27,7 @@ Rather than designing an axiomatic geometry library from first principles, the p
 * **[3. Encapsulating Synthetic Arguments](log-003.md)**
   - Extracting reusable geometric arguments from a single proof.
 
-* **[4. Building the Mathematical Foundations](log-004.md)**
+* **[4. First Geometry API Extracted from Finlay](log-004.md)**
   - Transition from individual proof steps toward reusable mathematical structures.
 
 * **[5. Beyond the Proof](log-005.md)**
