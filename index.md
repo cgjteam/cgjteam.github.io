@@ -115,6 +115,12 @@ Rather than designing an axiomatic geometry library from first principles, the p
 
 * **[32. Architectural Separation of the Hilbert and Tarski Formalizations](log-032.md)**
   - Investigated the feasibility of a shared geometry core and established the project architecture as three independent formalization frameworks: Hilbert, Tarski and Suppes.
+
+* **[33. Reducing Dependencies and Simplifying the Project Architecture](log-033.md)**
+  - Removal of unnecessary Mathlib dependencies, introduction of the local `UnorderedPair` abstraction, simplification of the Suppes route, and reduction of the project dependency graph.
+
+* **[34. Architectural Principles Emerging from the Geometry Library](log-034.md)**
+  - Synthesis of the architectural principles that emerged from the development of the Hilbert, Tarski and Suppes formalizations, including modularity, interface design, dependency management and comparative formalization.
   
 ---
 

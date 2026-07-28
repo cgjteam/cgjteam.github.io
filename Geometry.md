@@ -5,8 +5,8 @@ title: "Geometry Library Index"
 
 # Geometry Library Index
 
-**Version:** 3.0  
-**Status:** Multiple Axiomatic Routes under Reconstruction
+**Version:** 3.1  
+**Status:** Three Independent Formalization Frameworks
 
 ---
 
@@ -334,6 +334,9 @@ uniformly throughout the proof.
 The current active Suppes route is:
 
 ```text
+SuppesCore
+    |
+    v
 SuppesAxioms
     |
     v
@@ -346,33 +349,16 @@ MidsegmentParallelSuppes
 FinlayProofSuppes
 ```
 
-A separate file
+`SuppesCore.lean` defines the primitive objects shared by the Suppes
+development.
 
-```lean
-SuppesCore.lean
-```
+`SuppesAxioms.lean` introduces the active axiomatic structure
+`SuppesGeometry`, while the remaining files progressively build the reusable
+affine interface, the Midsegment Theorem and Finlay's proof.
 
-currently defines a structure `SuppesGeo` with primitive data
-
-```text
-Point
-S
-I
-alpha
-beta
-gamma
-```
-
-but this structure is not part of the active dependency chain above.
-
-Therefore the current route should not be represented as
-
-```text
-SuppesCore -> SuppesAxioms.
-```
-
-The relation between `SuppesGeo` and the active `SuppesGeometry` structure
-remains a separate architectural question.
+Following the architectural refactoring documented in Logs 032 and 033, the
+Suppes route now has the same high-level organization as the Hilbert route:
+core, axioms, interface and proof layers.
 
 ---
 
@@ -516,7 +502,7 @@ recognition do not belong to this direct Midsegment path.
 
 ---
 
-## 13. Suppes Parallelogram Recognition
+## 13. Parallelogram Recognition inside the Midsegment Module
 
 The Finlay proof needs the converse transition:
 
@@ -530,7 +516,7 @@ PrimParallelogram.
 This is developed separately in
 
 ```lean
-ParallelogramRecognitionSuppes.lean.
+MidsegmentParallelSuppes.lean
 ```
 
 The theorem is mathematically general and is a natural candidate for eventual
@@ -542,8 +528,7 @@ At present its dependency tree still contains the explicit assumption
 parallel_vertex_unique.
 ```
 
-Keeping the recognition theorem in a separate file currently makes this
-remaining dependency visible.
+The recognition theorem is now integrated into the midsegment module because it forms part of the same mathematical development rather than an independent reusable theory.
 
 ---
 
