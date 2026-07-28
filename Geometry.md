@@ -29,7 +29,8 @@ Suppes
 Tarski
 ```
 
-These routes do not share one complete foundational theory.
+These routes are architecturally independent and do not share a common
+foundational geometry core.
 
 Instead, each begins from a different primitive language and develops enough
 geometry to support higher-level synthetic arguments.
@@ -597,6 +598,9 @@ principles still remain to be reduced.
 The current Tarski route is:
 
 ```text
+TarskiCore
+    |
+    v
 TarskiAxioms
     |
     v
@@ -609,16 +613,21 @@ MidSegmentTarski
 FinlayProofTarski
 ```
 
-`TarskiAxioms.lean` imports `HilbertCore.lean` only to reuse the shared
-primitive vocabulary, especially:
+`TarskiCore.lean` defines the independent primitive geometric language of the
+Tarski route inside the namespace
 
 ```text
-Point
-Between
-Congruent.
+Geometry.Tarski
 ```
 
-The Tarski route does not depend on the Hilbert axiom classes.
+Its primitive structure is therefore distinct from the Hilbert structure
+
+```text
+Geometry.Geo.
+```
+
+The Tarski route does not depend on `HilbertCore` or on the Hilbert axiom
+classes.
 
 ---
 
@@ -1016,7 +1025,7 @@ reusable synthetic theory
 explicit foundational reconstruction
         |
         v
-Hilbert / Suppes / Tarski routes
+Hilbert / Suppes / Tarski frameworks
         |
         v
 comparative geometry architecture.
