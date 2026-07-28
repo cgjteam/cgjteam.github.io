@@ -113,6 +113,9 @@ Rather than designing an axiomatic geometry library from first principles, the p
 * **[31. Finlay's Proof on the Tarski Route](log-031.md)**
   - Reconstruction of the active Tarski-based Finlay argument, including the midpoint-defined parallelogram structure and the remaining deferred dependencies below the high-level proof.
 
+* **[32. Architectural Separation of the Hilbert and Tarski Formalizations](log-032.md)**
+  - Investigated whether the Hilbert and Tarski formalizations could share a common foundational geometry core. The architectural experiment demonstrated that a shared `GeometryCore` was not an appropriate abstraction. The temporary module was removed, the Tarski framework was isolated in the `Geometry.Tarski` namespace, `HilbertCore` was restored as the entry point of the Hilbert formalization, and the project architecture stabilized as three independent frameworks: Hilbert, Tarski and Suppes.
+  
 ---
 
 ## Geometry Library
