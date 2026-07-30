@@ -121,6 +121,12 @@ Rather than designing an axiomatic geometry library from first principles, the p
 
 * **[34. Architectural Principles Emerging from the Geometry Library](log-034.md)**
   - Synthesis of the architectural principles that emerged from the development of the Hilbert, Tarski and Suppes formalizations, including modularity, interface design, dependency management and comparative formalization.
+
+* **[35. Common Infrastructure Audit](log-035.md)**
+  - Audit of the common infrastructure layer, extraction of representation-independent components, and comparison of the Hilbert, Tarski and Suppes interfaces.
+
+* **[36. Refactoring the Tarski Route](log-036.md)**
+  - Simplification of the Tarski proof architecture by eliminating temporary interface layers, refactoring the Finlay proof, and isolating the remaining deferred midpoint construction.
   
 ---
 
