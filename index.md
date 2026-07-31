@@ -127,6 +127,9 @@ Rather than designing an axiomatic geometry library from first principles, the p
 
 * **[36. Refactoring the Tarski Route](log-036.md)**
   - Simplification of the Tarski proof architecture by eliminating temporary interface layers, refactoring the Finlay proof, and isolating the remaining deferred midpoint construction.
+
+* **[37. Completing the Tarski Route to Finlay's Proof](log-037.md)**
+  - Completion of the Tarski-based reconstruction of Finlay's theorem, elimination of unnecessary hypotheses from the public interface, reorganization of the proof into reusable logical layers, and identification of the remaining local assumptions awaiting formal derivation.
   
 ---
 
