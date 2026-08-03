@@ -130,6 +130,18 @@ Rather than designing an axiomatic geometry library from first principles, the p
 
 * **[37. Completing the Tarski Route to Finlay's Proof](log-037.md)**
   - Completion of the Tarski-based reconstruction of Finlay's theorem, elimination of unnecessary hypotheses from the public interface, reorganization of the proof into reusable logical layers, and identification of the remaining local assumptions awaiting formal derivation.
+
+* **[38. Simplifying the Tarski Architecture](log-038.md)**
+  - Systematic reduction of the active Tarski interface using `FinlayProofTarski` and its real dependencies as the reference point.
+
+* **[39. Reconstructing the Tarski Dependencies](log-039.md)**
+  - Transformation of the remaining local axioms into explicit proof obligations and establishment of a dependency-driven reconstruction method.
+
+* **[40. Eliminating a Tarski Midpoint Axiom](log-040.md)**
+  - Reconstruction of a deferred midpoint result from the existing neutral Tarski theory and removal of the corresponding local axiom.
+
+* **[41. Isolating the Euclidean Parallelism Assumption](log-041.md)**
+  - Identification of `parallelogram_of_two_parallel_pairs` as a theorem belonging to the Euclidean parallelism layer rather than to neutral Tarski geometry.
   
 ---
 
