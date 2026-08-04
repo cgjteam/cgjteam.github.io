@@ -143,6 +143,9 @@ Rather than designing an axiomatic geometry library from first principles, the p
 * **[41. Isolating the Euclidean Parallelism Assumption](log-041.md)**
   - Identification of `parallelogram_of_two_parallel_pairs` as a theorem belonging to the Euclidean parallelism layer rather than to neutral Tarski geometry.
   
+* **[42. Book Zero as a Working Layer above Hilbert Geometry](log-042.md)**
+  - Reconstruction of the Beeson–Narboux–Wiedijk Book Zero over the CGJteamLab Hilbert foundation, testing an independently developed corpus of elementary synthetic geometry as the working layer between axioms and classical proofs.
+
 ---
 
 ## Geometry Library
