@@ -92,8 +92,7 @@ verified proofs and extracting their reusable mathematical components.
 -   **[22. The Axiomatic Structure of the Hilbert Route](log-022.md)**
     -   Reconstruction of the Hilbert axiom hierarchy and the logical
         boundary between neutral and Euclidean geometry.
--   **[23. The Hilbert Interface: From Axioms to Synthetic
-    Geometry](log-023.md)**
+-   **[23. The Hilbert Interface: From Axioms to Synthetic Geometry](log-023.md)**
     -   Analysis of the reduction layer connecting Hilbert's
         foundational geometry with the reusable synthetic API.
 -   **[24. Finlay's Proof on the Hilbert Route](log-024.md)**
@@ -104,8 +103,7 @@ verified proofs and extracting their reusable mathematical components.
     -   Reconstruction of the active Suppes foundation based on
         midpoint, doubling and collinearity, including the separation of
         `SuppesCore` from the current proof route.
--   **[26. The Suppes Interface: From Primitive Operations to Affine
-    Geometry](log-026.md)**
+-   **[26. The Suppes Interface: From Primitive Operations to Affine Geometry](log-026.md)**
     -   Analysis of the main Suppes theory layer, including primitive
         triangles, primitive parallelograms, `SuppesParallel`, derived
         affine results and the remaining explicit assumptions.
