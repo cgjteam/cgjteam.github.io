@@ -186,6 +186,13 @@ verified proofs and extracting their reusable mathematical components.
         boundaries, recurring proof automation patterns, and
         proof-specific arguments before designing a classical geometry
         interface.
+-   **[44. Completing Book Zero](log-044.md)**
+    -   Completion of the Beeson--Narboux--Wiedijk Book Zero reconstruction
+        over the CGJteamLab Hilbert foundation, elimination of almost all
+        temporary interface axioms, identification of the remaining primitive
+        null-segment assumptions, and transition from reconstructing
+        elementary synthetic geometry to studying the reusable architecture
+        of Euclidean proofs.
 
 ------------------------------------------------------------------------
 
