@@ -194,34 +194,34 @@ verified proofs and extracting their reusable mathematical components.
         from reconstructing elementary synthetic geometry toward
         studying the reusable architecture of Euclidean proofs.
 -   **[45. Beginning the Reconstruction of Book I](log-045.md)**
-    -   Beginning the reconstruction of Book I over the completed Book
-        Zero
--   **[46. Book I as a Test of the Book Zero Layer](log-046.md)**
-    -   First results from using Book Zero as working infrastructure in
-        Book I: classical constructions become reusable operations,
-        while several propositions acquire proof architectures different
-        from Euclid's original arguments.
--   **[47. Classical Proofs and Formal Reconstructions](log-047.md)**
-    -   Comparative analysis of the early Book I propositions,
-        separating reconstruction of a Euclidean theorem from
-        reconstruction of Euclid's historical proof and identifying
-        where Hilbert and Book Zero reorganize the synthetic argument.
--   **[48. Diagrams as Proof Analysis](log-048.md)**
-    -   Results of the Book I graphical audit: diagrams are used not
-        merely as illustrations but to expose hidden intersection
-        assumptions, positional cases, superposition choices, and
-        differences between classical and formal proof architecture.
-
+    -   Beginning the reconstruction of Book I over the completed Book Zero
         layer, using the classical propositions as a test of whether the
         elementary synthetic results form a practical interface for larger
-        geometric proofs.        
+        geometric proofs.
 
 -   **[46. The Equilateral Triangle as the First Book I Test](log-046.md)**
-    -   Reconstruction of Euclid's Proposition 1 reveals the first clear
+    -   Reconstruction of Euclid's Proposition I.1 reveals the first clear
         boundary between the derived synthetic reasoning supplied by Book Zero
         and the geometric existence principles required to construct new
         configurations.
-        
+
+-   **[47. Classical Proofs and Formal Reconstructions](log-047.md)**
+    -   Comparative analysis of the early Book I propositions, separating
+        reconstruction of a Euclidean theorem from reconstruction of Euclid's
+        historical proof and identifying where Hilbert and Book Zero reorganize
+        the synthetic argument.
+
+-   **[48. Diagrams as Proof Analysis](log-048.md)**
+    -   Results of the Book I graphical audit: diagrams are used not merely as
+        illustrations but to expose hidden intersection assumptions, positional
+        cases, superposition choices, and differences between classical and
+        formal proof architecture.
+
+-   **[49. Book I as a Test of the Book Zero Layer](log-049.md)**
+    -   Synthesis of the first Book I reconstruction stage: Book Zero is tested
+        as working infrastructure, classical constructions become reusable
+        operations, and the emerging proof language is evaluated on a larger
+        Euclidean corpus.
 
 ------------------------------------------------------------------------
 
