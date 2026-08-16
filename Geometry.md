@@ -5,8 +5,8 @@ title: Geometry Library Index
 
 # Geometry Library Index
 
-**Version:** 3.2\
-**Status:** Three Independent Formalization Frameworks
+**Version:** 4.0\
+**Status:** Foundational Routes, Book Zero, and Book I Reconstruction
 
 ------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ title: Geometry Library Index
 The Geometry Library studies classical synthetic geometry through formal
 verification in Lean 4.
 
-The project currently develops three foundational routes:
+The project began with three foundational routes:
 
 ``` text
 Hilbert
@@ -31,24 +31,54 @@ Tarski
 ```
 
 These routes are architecturally independent and do not share a common
-foundational geometry core.
+foundational geometry core. Each begins from a different primitive
+language and develops enough geometry to support higher-level synthetic
+arguments.
 
-Instead, each begins from a different primitive language and develops
-enough geometry to support higher-level synthetic arguments.
+The project now has a second axis of development. Above the Hilbert
+route, a reconstructed elementary working layer -- **Book Zero** -- is
+being tested against a growing reconstruction of Euclid's Book I.
 
-Finlay's proof of the concurrency of the medians of a triangle remains
-the principal comparison theorem.
+The current architecture is therefore better represented as:
 
-The current project therefore studies two related questions:
+``` text
+                         Hilbert
+                            |
+                            v
+                    HilbertInterface
+                     /            \
+                    /              \
+             Finlay route        Book Zero
+                                     |
+                                     v
+                              Euclid Book I
+                                     |
+                                     v
+                         proof-language analysis
+
+
+Suppes  -------------------------> Finlay route
+
+Tarski  -------------------------> Finlay route
+```
+
+Finlay's proof remains the principal comparison theorem for studying how
+one synthetic argument changes across different foundations.
+
+Book I has a different role. It provides a larger classical proof corpus
+for testing whether the Hilbert interface and Book Zero form a practical
+language for synthetic geometry, and for comparing classical proof
+architecture with the architecture of the formal reconstruction.
+
+The project therefore now studies three related questions:
 
 ``` text
 How can a classical synthetic proof be formalized?
-```
 
-and
-
-``` text
 How does the proof change when reconstructed over different foundations?
+
+Which intermediate language makes a larger corpus of synthetic geometry
+reusable, readable, and structurally transparent?
 ```
 
 ------------------------------------------------------------------------
@@ -331,7 +361,195 @@ distributed uniformly throughout the proof.
 
 ------------------------------------------------------------------------
 
-# Part II. Suppes Route
+# Part II. Book Zero
+
+## Book Zero as a Working Layer
+
+`HilbertBookZero.lean` develops an elementary synthetic layer above the
+Hilbert foundation and `HilbertInterface`.
+
+Its purpose is not to introduce another axiomatic system.
+
+Instead, Book Zero packages recurring low-level geometric arguments into
+named results that can be used as ordinary operations in later proofs.
+
+Schematically:
+
+``` text
+Hilbert axioms
+      |
+      v
+HilbertInterface
+      |
+      v
+HilbertBookZero
+      |
+      v
+reusable synthetic operations
+```
+
+The reconstructed corpus includes results for collinearity, betweenness,
+segment comparison, rays, segment transport, and related elementary
+configurations.
+
+The important test is not the number of Book Zero theorems in isolation.
+The test is whether later proofs can remain at this level rather than
+repeatedly descending to primitive incidence, order, and congruence
+reasoning.
+
+Early Book I propositions provide positive evidence for this
+interpretation.
+
+Examples include:
+
+``` text
+bookZero_45_partNotEqualWhole
+bookZero_49_layoff
+```
+
+which absorb arguments that would otherwise require substantial local
+betweenness or construction machinery.
+
+Book Zero should therefore be read as an experimental **working
+language** for classical synthetic geometry.
+
+------------------------------------------------------------------------
+
+# Part III. Euclid Book I Reconstruction
+
+## Book I as a Test Corpus
+
+The reconstruction of Euclid's Book I is developed over the Hilbert and
+Book Zero layers.
+
+Its role differs from the earlier Finlay experiment.
+
+Finlay tests the effect of changing foundations:
+
+``` text
+Hilbert / Suppes / Tarski
+          |
+          v
+same high-level theorem
+```
+
+Book I tests the effect of changing proof scale:
+
+``` text
+Hilbert foundation
+       |
+Hilbert interface
+       |
+Book Zero
+       |
+Euclidean propositions
+```
+
+The first reconstructed propositions already show several distinct forms
+of compression.
+
+A classical multi-stage construction may become a single reusable
+operation. A theorem may become a wrapper around a previously
+reconstructed congruence principle. In other cases a formal definition
+already contains the witness that Euclid constructs explicitly.
+
+This has led to an important distinction:
+
+> Reconstruction of a Euclidean proposition is not automatically
+> reconstruction of Euclid's historical proof of that proposition.
+
+For example, the formal reconstruction of Proposition I.1 does not
+reproduce the intersection of two circles. It obtains an equidistant
+point from the Hilbert theory and proves separately that the point is
+noncollinear with the base.
+
+Likewise, propositions whose classical proofs use superposition,
+reductio, or extended constructions may be reconstructed using already
+established SAS, SSS, ASA, uniqueness, or segment-layoff results.
+
+The theorem statement is preserved while the proof architecture may
+change.
+
+## Classical Proof and Formal Reconstruction
+
+The Book I documentation therefore separates several questions:
+
+``` text
+What does Euclid prove?
+How does Euclid prove it?
+
+What does the Lean theorem state?
+How does Lean prove it?
+
+Which earlier formal theorem absorbs the classical construction?
+```
+
+This distinction prevents the documentation from presenting a short
+formal proof as though it were a line-by-line encoding of the classical
+argument.
+
+It also turns Book I into a comparison of two organizations of synthetic
+geometry:
+
+``` text
+Euclidean construction language
+             |
+             v
+classical proposition
+
+Hilbert + Book Zero language
+             |
+             v
+same proposition
+```
+
+The differences between these routes are part of the mathematical
+result.
+
+## Diagrams as Proof Analysis
+
+The proposition documentation also uses diagrams as analytical objects
+rather than decoration.
+
+The graphical audit of the first part of Book I established the
+following working principle:
+
+> A figure should represent a geometrically distinct configuration or
+> clarify a logically significant step.
+
+Successive snapshots that merely add one construction object are
+normally removed.
+
+The audit has also shown that classical diagrams can expose foundational
+and logical issues. Examples include:
+
+``` text
+circle-intersection existence
+line extension and intersection
+side choices in superposition
+positional cases not represented by a single figure
+```
+
+Geometric TikZ figures are therefore kept separate from ASCII diagrams
+of formal proof architecture.
+
+The three presentation layers have different roles:
+
+``` text
+TikZ figure       -> geometric configuration
+
+ASCII diagram     -> proof or dependency structure
+
+Lean excerpt      -> decisive formal interface step
+```
+
+Long Lean theorem bodies are not reproduced when the repository already
+contains the complete source. Code excerpts are retained when they
+explain a mathematically significant transition.
+
+------------------------------------------------------------------------
+
+# Part IV. Suppes Route
 
 ## 9. Active Suppes Architecture
 
@@ -584,7 +802,7 @@ affine principles still remain to be reduced.
 
 ------------------------------------------------------------------------
 
-# Part III. Tarski Route
+# Part V. Tarski Route
 
 ## 15. Active Tarski Architecture
 
@@ -824,7 +1042,7 @@ analysis of its Euclidean status.
 
 ------------------------------------------------------------------------
 
-# Part IV. Comparative Geometry
+# Part VI. Comparative Geometry
 
 ## 20. Three Midsegment Proofs
 
@@ -983,6 +1201,8 @@ foundation from which each result can be derived.
 
 ------------------------------------------------------------------------
 
+# Part VII. Research Method and Current Status
+
 ## 24. Research Method
 
 The general methodology is:
@@ -994,7 +1214,13 @@ The general methodology is:
 4.  move general mathematics out of proof-specific files,
 5.  preserve short high-level synthetic proofs,
 6.  reduce remaining assumptions independently,
-7.  compare the resulting proof architectures across foundations.
+7.  compare the resulting proof architectures across foundations,
+8.  distinguish reconstruction of a theorem from reconstruction of its
+    historical proof,
+9.  use diagrams to audit geometric configurations, hidden existence
+    assumptions, and positional cases,
+10. test intermediate theorem layers by using them in a larger proof
+    corpus.
 
 This process has already changed the structure of the library several
 times.
@@ -1013,15 +1239,22 @@ The library currently contains:
 -   an active Tarski route based on `Between` and `Congruent`,
 -   three distinct Midsegment developments,
 -   three high-level Finlay developments,
+-   a substantial Book Zero layer above the Hilbert foundation,
+-   an active reconstruction of Euclid's Book I using that layer,
 -   explicit maps of remaining foundational obligations,
 -   a reduced Tarski dependency structure with remaining assumptions
     isolated as individual reconstruction problems,
--   reusable theories of midpoint, parallelism, and parallelograms,
--   research logs documenting the reconstruction of each route.
+-   reusable theories of midpoint, parallelism, parallelograms, order,
+    congruence, rays, and elementary constructions,
+-   proposition documentation comparing classical proofs, formal
+    reconstructions, and geometric diagrams,
+-   research logs documenting both foundational reconstruction and the
+    emerging proof-language analysis.
 
-The project has therefore evolved from the formalization of one
-classical proof into a comparative study of how synthetic geometry is
-represented over different axiomatic foundations.
+The project has therefore evolved in two directions at once: from one
+classical proof to a comparative study of axiomatic foundations, and
+from foundational reconstruction to the study of a reusable formal
+language for a larger corpus of synthetic geometry.
 
 ------------------------------------------------------------------------
 
@@ -1041,18 +1274,29 @@ reverse engineering
         v
 reusable synthetic theory
         |
-        v
-explicit foundational reconstruction
-        |
-        v
-Hilbert / Suppes / Tarski frameworks
-        |
-        v
-comparative geometry architecture.
+        +-----------------------------+
+        |                             |
+        v                             v
+foundational reconstruction      Book Zero
+        |                             |
+        v                             v
+Hilbert / Suppes / Tarski        Euclid Book I
+        |                             |
+        v                             v
+comparative foundations          proof-language analysis
+        |                             |
+        +--------------+--------------+
+                       |
+                       v
+          architecture of synthetic geometry
 ```
 
-Finlay's theorem remains the organizing test case.
+Finlay remains the organizing comparison case for the three foundational
+routes.
 
-The deeper object of study is now the relation between foundational
-language, derived geometric structure, and the shape of a formal
-synthetic proof.
+Book I is now the organizing test corpus for the Hilbert/Book Zero
+working language.
+
+The deeper object of study is therefore the relation between
+foundational language, derived geometric structure, reusable synthetic
+operations, and the shape of both classical and formal proofs.
