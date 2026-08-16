@@ -213,8 +213,15 @@ verified proofs and extracting their reusable mathematical components.
         differences between classical and formal proof architecture.
 
         layer, using the classical propositions as a test of whether the
-        elementary synthetic results form a practical interface for
-        larger geometric proofs.
+        elementary synthetic results form a practical interface for larger
+        geometric proofs.        
+
+-   **[46. The Equilateral Triangle as the First Book I Test](log-046.md)**
+    -   Reconstruction of Euclid's Proposition 1 reveals the first clear
+        boundary between the derived synthetic reasoning supplied by Book Zero
+        and the geometric existence principles required to construct new
+        configurations.
+        
 
 ------------------------------------------------------------------------
 
