@@ -186,19 +186,35 @@ verified proofs and extracting their reusable mathematical components.
         boundaries, recurring proof automation patterns, and
         proof-specific arguments before designing a classical geometry
         interface.
-        
 -   **[44. Completing Book Zero](log-044.md)**
-    -   Completion of the Beeson--Narboux--Wiedijk Book Zero reconstruction over the
-        CGJteamLab Hilbert foundation. Almost all temporary interface axioms
-        were eliminated, leaving only the primitive null-segment assumptions,
-        and the project now moves from reconstructing elementary synthetic
-        geometry toward studying the reusable architecture of Euclidean proofs.
-        
+    -   Completion of the Beeson--Narboux--Wiedijk Book Zero
+        reconstruction over the CGJteamLab Hilbert foundation. Almost
+        all temporary interface axioms were eliminated, leaving only the
+        primitive null-segment assumptions, and the project now moves
+        from reconstructing elementary synthetic geometry toward
+        studying the reusable architecture of Euclidean proofs.
 -   **[45. Beginning the Reconstruction of Book I](log-045.md)**
-    -   Beginning the reconstruction of Book I over the completed Book Zero
+    -   Beginning the reconstruction of Book I over the completed Book
+        Zero
+-   **[46. Book I as a Test of the Book Zero Layer](log-046.md)**
+    -   First results from using Book Zero as working infrastructure in
+        Book I: classical constructions become reusable operations,
+        while several propositions acquire proof architectures different
+        from Euclid's original arguments.
+-   **[47. Classical Proofs and Formal Reconstructions](log-047.md)**
+    -   Comparative analysis of the early Book I propositions,
+        separating reconstruction of a Euclidean theorem from
+        reconstruction of Euclid's historical proof and identifying
+        where Hilbert and Book Zero reorganize the synthetic argument.
+-   **[48. Diagrams as Proof Analysis](log-048.md)**
+    -   Results of the Book I graphical audit: diagrams are used not
+        merely as illustrations but to expose hidden intersection
+        assumptions, positional cases, superposition choices, and
+        differences between classical and formal proof architecture.
+
         layer, using the classical propositions as a test of whether the
-        elementary synthetic results form a practical interface for larger
-        geometric proofs.        
+        elementary synthetic results form a practical interface for
+        larger geometric proofs.
 
 ------------------------------------------------------------------------
 
@@ -221,11 +237,14 @@ The reusable Lean 4 geometry library developed within the project.
 
 **Active research project.**
 
-Current development currently focuses on two complementary directions:
+Current development focuses on three complementary directions:
 
--   extending the reusable Geometry Library,
--   refining its logical architecture by replacing primitive assumptions
-    with formally justified definitions and reusable geometric theories.
+-   reconstructing Euclid's Book I over the Hilbert and Book Zero
+    layers,
+-   testing Book Zero as a reusable working language for classical
+    synthetic proofs,
+-   comparing classical proof architecture with the formal Lean
+    reconstruction, including systematic analysis of geometric diagrams.
 
 The long-term objective is a modular Lean library in which the
 architecture emerges from the formal analysis of classical synthetic
