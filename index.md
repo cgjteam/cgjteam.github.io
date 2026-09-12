@@ -223,6 +223,12 @@ verified proofs and extracting their reusable mathematical components.
         operations, and the emerging proof language is evaluated on a larger
         Euclidean corpus.
 
+-   **[50. A Source-Faithful Hilbert Axiom Layer](log-050.md)**
+    -   Introduction of a source-faithful Hilbert axiom layer, separating
+        Groups I-V from the legacy plane API and reconnecting the existing
+        derived theory through the thin `HilbertPlaneAPI.lean` compatibility
+        bridge.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
