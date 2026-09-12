@@ -241,6 +241,13 @@ verified proofs and extracting their reusable mathematical components.
         `HilbertGrundlagen`, `HilbertInterface`, and `HilbertBookZero`, with
         `HilbertAxiomsWork` recorded explicitly as compatibility support.
 
+-   **[53. Replacing the Legacy 3D Axiom Layer](log-053.md)**
+    -   Replacement of the former 3D axiom module by
+        `HilbertSpaceIncidence.lean`, preserving the downstream Book XI,
+        dimension-free Smith/Wyler, and Coxeter E4 developments through a
+        compatibility facade and validating the migration with a complete
+        `lake build`.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
