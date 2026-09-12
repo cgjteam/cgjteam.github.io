@@ -229,6 +229,18 @@ verified proofs and extracting their reusable mathematical components.
         derived theory through the thin `HilbertPlaneAPI.lean` compatibility
         bridge.
 
+-   **[51. The Hilbert Plane Compatibility Bridge](log-051.md)**
+    -   Construction of the induced-plane compatibility layer connecting
+        the source-faithful Hilbert axioms with the frozen legacy plane API,
+        while preserving the existing `HilbertPlaneTheory.lean` theorem corpus
+        instead of re-proving it.
+
+-   **[52. The Foundational Boundary after the Hilbert Refactor](log-052.md)**
+    -   Establishment of the new production hierarchy from `HilbertCore`
+        through `HilbertAxioms`, `HilbertPlaneAPI`, `HilbertPlaneTheory`,
+        `HilbertGrundlagen`, `HilbertInterface`, and `HilbertBookZero`, with
+        `HilbertAxiomsWork` recorded explicitly as compatibility support.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
