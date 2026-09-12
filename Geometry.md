@@ -5,8 +5,8 @@ title: Geometry Library Index
 
 # Geometry Library Index
 
-**Version:** 4.0\
-**Status:** Foundational Routes, Book Zero, and Book I Reconstruction
+**Version:** 5.0\
+**Status:** Hilbert Foundational Refactor, Book Zero, and Euclid Reconstruction
 
 ------------------------------------------------------------------------
 
@@ -42,25 +42,46 @@ being tested against a growing reconstruction of Euclid's Book I.
 The current architecture is therefore better represented as:
 
 ``` text
-                         Hilbert
-                            |
-                            v
-                    HilbertInterface
-                     /            \
-                    /              \
-             Finlay route        Book Zero
-                                     |
-                                     v
-                              Euclid Book I
-                                     |
-                                     v
-                         proof-language analysis
+HilbertCore
+    |
+    v
+HilbertAxioms
+    |
+    v
+HilbertPlaneAPI <--- HilbertAxiomsWork
+    |                  legacy compatibility declarations
+    v
+HilbertPlaneTheory
+    |
+    v
+HilbertGrundlagen
+    |
+    v
+HilbertInterface
+    |\
+    | \
+    |  +-----------------------> Finlay route
+    |
+    v
+HilbertBookZero
+    |
+    v
+Euclid reconstruction
+    |
+    v
+proof-language analysis
 
 
 Suppes  -------------------------> Finlay route
 
 Tarski  -------------------------> Finlay route
 ```
+
+The Hilbert route now separates the source-faithful axiom layer from the
+legacy planar working API. `HilbertPlaneAPI.lean` is the interpretation and
+compatibility boundary, while `HilbertPlaneTheory.lean` retains the existing
+derived plane theory. `HilbertAxiomsWork.lean` is compatibility support for
+legacy declarations and is not the authoritative foundation.
 
 Finlay's proof remains the principal comparison theorem for studying how
 one synthetic argument changes across different foundations.
@@ -118,7 +139,8 @@ What is the actual dependency path of the final proof?
 
 ## 3. Hilbert Architecture
 
-The active Hilbert route is:
+The active Hilbert route is now stratified into source, compatibility,
+derived-theory, and working-language layers:
 
 ``` text
 HilbertCore
@@ -127,14 +149,31 @@ HilbertCore
 HilbertAxioms
     |
     v
+HilbertPlaneAPI <--- HilbertAxiomsWork
+    |
+    v
+HilbertPlaneTheory
+    |
+    v
+HilbertGrundlagen
+    |
+    v
 HilbertInterface
     |
-    v
-MidsegmentParallel
+    +-----------------> MidsegmentParallel -> FinlayProof
     |
     v
-FinlayProof
+HilbertBookZero
+    |
+    v
+Euclid reconstruction
 ```
+
+`HilbertAxioms.lean` is the source-faithful foundation.
+`HilbertPlaneAPI.lean` transports that structure to the legacy planar
+vocabulary, and `HilbertPlaneTheory.lean` retains the existing derived
+plane mathematics. The higher files package this theory into the synthetic
+language used by Book Zero and later applications.
 
 This is currently the most fully reconstructed route.
 
@@ -182,66 +221,143 @@ disjointness; it is not primitive.
 
 ------------------------------------------------------------------------
 
-## 5. Hilbert Axiom Hierarchy
+## 5. Hilbert Foundation and Compatibility Layers
 
-`HilbertAxioms.lean` introduces the actual Hilbert-style axiomatic
-hierarchy:
+The Hilbert route now distinguishes the source axiom system from the
+legacy planar API and from the derived theorem corpus.
+
+### 5.1 HilbertAxioms: source-faithful Groups I-V
+
+`HilbertAxioms.lean` imports `HilbertCore.lean` and records Hilbert's five
+axiom groups in source-oriented form:
+
+``` text
+Group I     incidence       I.1-I.8
+Group II    order           II.1-II.4
+Group III   congruence      III.1-III.5
+Group IV    parallels       IV
+Group V     continuity      V.1-V.2
+```
+
+The spatial incidence language is explicit. Planes and point-plane
+incidence are primitive data of the source layer, and I.4-I.8 retain their
+three-dimensional meaning.
+
+Several source-sensitive distinctions are preserved deliberately:
+
+-   I.3 states that every line contains at least two distinct points and
+    separately asserts the existence of three noncollinear points;
+-   II.4 (Pasch) is stated inside an explicit plane;
+-   Group III uses primitive `UnorientedAngleCongruent` rather than the
+    equivalence-closed working relation `AngleCongruent`;
+-   Group IV postulates uniqueness of a parallel in the relevant plane,
+    not existence;
+-   V.1 is Archimedean, while V.2 is represented as a genuine maximality
+    condition on ordered-congruence line structures.
+
+This file is the authoritative reference for the Hilbert source layer.
+Derived plane theorems do not belong here merely because downstream code
+uses them.
+
+### 5.2 HilbertAxiomsWork: frozen legacy declarations
+
+`HilbertAxiomsWork.lean` preserves the older public plane classes and
+definitions needed by the existing theorem corpus, including names such as
 
 ``` text
 HilbertIncidence
-        |
-        v
 HilbertPlaneIncidence
-        |
-        v
 HilbertOrder
-        |
-        v
 HilbertCongruence
-        |
-        v
 HilbertEuclideanPlane
-        |
-        v
 HilbertArchimedeanPlane
 ```
 
-These levels correspond broadly to the Hilbert groups:
+It is compatibility support, not the new foundational axiom system. New
+source-fidelity questions should be answered against `HilbertAxioms.lean`.
 
-  Layer                       Mathematical role
-  --------------------------- -----------------------------------
-  `HilbertPlaneIncidence`     incidence axioms
-  `HilbertOrder`              betweenness and Pasch
-  `HilbertCongruence`         segment and angle congruence, SAS
-  `HilbertEuclideanPlane`     Euclidean parallel axiom
-  `HilbertArchimedeanPlane`   Archimedean extension
+### 5.3 HilbertPlaneAPI: the interpretation boundary
 
-A substantial neutral theory is already derived below the Euclidean
-parallel axiom.
+`HilbertPlaneAPI.lean` imports both the source layer and the frozen legacy
+declarations. Its purpose is transport and realization, not redevelopment
+of plane geometry.
 
-This includes results such as:
+The key construction is a fixed source-faithful Hilbert plane regarded as
+its own geometry:
 
 ``` text
-strong Pasch theorems
-triangle congruence consequences
-midpoint existence
-equal alternate angles -> parallel
+ambient Hilbert geometry
+        |
+        | choose a plane pi
+        v
+HilbertPlaneGeo Geo pi
+        |
+        v
+legacy planar vocabulary
 ```
 
-The converse direction
+The induced geometry uses points lying in `pi` and ambient lines wholly
+contained in `pi`. This is the correct way to recover planar Pasch and the
+legacy order interface without incorrectly installing a global planar order
+instance on three-dimensional ambient space.
+
+The bridge transports incidence, order, segment-congruence data, same-side
+relations, rays, and primitive angle information as required by the legacy
+API. Primitive source angle congruence maps forward into the legacy
+`EqvGen`-based `AngleCongruent` relation; the adapter does not identify the
+two relations in both directions by definition.
+
+### 5.4 HilbertPlaneTheory: derived planar mathematics
+
+`HilbertPlaneTheory.lean` imports `HilbertPlaneAPI.lean` and contains the
+existing derived plane theory. The foundational refactor did not port this
+corpus theorem by theorem.
+
+This establishes the division:
 
 ``` text
-parallel -> equal alternate angles
+HilbertAxioms       source assumptions
+        |
+        v
+HilbertPlaneAPI     compatibility and transport
+        |
+        v
+HilbertPlaneTheory  derived plane mathematics
 ```
 
-is exposed at the Euclidean level.
+The complete project builds with this dependency chain. This verifies the
+production migration, while the remaining use of frozen legacy declarations
+continues to be treated as explicit compatibility debt rather than as part of
+the source-faithful foundation.
+
+### 5.5 HilbertGrundlagen: theorem package above plane theory
+
+The active `HilbertGrundlagen.lean` imports `HilbertPlaneTheory.lean`. It
+collects Hilbert-related theorem packages and local prerequisites used by the
+higher synthetic interface. Despite its name, it is therefore above the
+derived plane theory in the current production import graph.
+
+The resulting lower Hilbert stack is:
+
+``` text
+HilbertCore
+    |
+HilbertAxioms
+    |
+HilbertPlaneAPI
+    |
+HilbertPlaneTheory
+    |
+HilbertGrundlagen
+```
 
 ------------------------------------------------------------------------
 
 ## 6. HilbertInterface
 
-`HilbertInterface.lean` is the reduction and packaging boundary between
-the Hilbert foundation and the higher-level synthetic language.
+`HilbertInterface.lean` imports `HilbertGrundlagen.lean` and is the reduction
+and packaging boundary between the derived Hilbert development and the
+higher-level synthetic language.
 
 It exposes notions including:
 
@@ -267,7 +383,10 @@ The active interface is not intended as a second independent axiomatic
 system.
 
 Earlier provisional assumptions have been progressively replaced by
-theorems whose dependencies terminate in the Hilbert foundation.
+theorems whose dependencies terminate in the Hilbert development below the
+interface. Those dependencies can now be traced further through
+`HilbertGrundlagen`, `HilbertPlaneTheory`, `HilbertPlaneAPI`, and ultimately
+to the source-faithful axiom layer where appropriate.
 
 The interface is logically stratified:
 
@@ -365,8 +484,8 @@ distributed uniformly throughout the proof.
 
 ## Book Zero as a Working Layer
 
-`HilbertBookZero.lean` develops an elementary synthetic layer above the
-Hilbert foundation and `HilbertInterface`.
+`HilbertBookZero.lean` imports `HilbertInterface.lean` and develops an
+elementary synthetic working layer above the refactored Hilbert stack.
 
 Its purpose is not to introduce another axiomatic system.
 
@@ -376,7 +495,16 @@ named results that can be used as ordinary operations in later proofs.
 Schematically:
 
 ``` text
-Hilbert axioms
+HilbertAxioms
+      |
+      v
+HilbertPlaneAPI
+      |
+      v
+HilbertPlaneTheory
+      |
+      v
+HilbertGrundlagen
       |
       v
 HilbertInterface
@@ -1174,7 +1302,15 @@ fully reduced theorem.
 
 ### Hilbert
 
-The active interface has been largely reduced to proved Hilbert results.
+The source-faithful axiom layer is now separated from the legacy plane API.
+The active theorem corpus is preserved through `HilbertPlaneAPI` and
+`HilbertPlaneTheory`, while `HilbertAxiomsWork` remains as explicit
+compatibility support for frozen legacy declarations.
+
+The current Hilbert debt is therefore no longer primarily a question of
+provisional high-level interface axioms. It is the narrower task of deciding,
+where useful, which enriched legacy interface fields should be semantically
+reduced further to Groups I-V without duplicating the existing plane theory.
 
 ### Suppes
 
@@ -1234,7 +1370,9 @@ state of an active research program rather than as a final architecture.
 
 The library currently contains:
 
--   a reconstructed Hilbert route,
+-   a refactored Hilbert route with a source-faithful `HilbertAxioms.lean`
+    layer, an induced-plane compatibility bridge, and the existing derived
+    plane theory preserved above it,
 -   an active Suppes route based on `Mid`, `Dbl`, and `Col`,
 -   an active Tarski route based on `Between` and `Congruent`,
 -   three distinct Midsegment developments,
@@ -1280,7 +1418,7 @@ reusable synthetic theory
 foundational reconstruction      Book Zero
         |                             |
         v                             v
-Hilbert / Suppes / Tarski        Euclid Book I
+Hilbert / Suppes / Tarski        Euclid reconstruction
         |                             |
         v                             v
 comparative foundations          proof-language analysis
@@ -1294,8 +1432,9 @@ comparative foundations          proof-language analysis
 Finlay remains the organizing comparison case for the three foundational
 routes.
 
-Book I is now the organizing test corpus for the Hilbert/Book Zero
-working language.
+The Euclid reconstruction is now the organizing test corpus for the
+Hilbert/Book Zero working language, beginning with Book I and extending to
+other books as the formal corpus grows.
 
 The deeper object of study is therefore the relation between
 foundational language, derived geometric structure, reusable synthetic
