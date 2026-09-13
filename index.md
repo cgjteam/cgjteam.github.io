@@ -268,6 +268,13 @@ verified proofs and extracting their reusable mathematical components.
         spatial parallelism, parallel planes, section geometry, proportion,
         and the affine Wyler path. This log will be extended as Book XI develops.
 
+-   **[57. Coxeter Geometry in the Plane: Reflections, Braid Relations, and Finite Period](log-057.md)**
+    -   Reconstruction of the planar Coxeter mechanism from synthetic Hilbert
+        geometry: line reflection as a derived transformation, reflection
+        words, exact periods, the perpendicular case, the equilateral
+        carrier-transport proof of the braid relation, and the general
+        finite-period carrier telescope without numerical angle measure.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
