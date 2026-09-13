@@ -129,17 +129,17 @@ verified proofs and extracting their reusable mathematical components.
         including the midpoint-defined parallelogram structure and the
         remaining deferred dependencies below the high-level proof.
 -   **[32. Architectural Separation of the Hilbert and Tarski
-    Formalizations](log-032.md)**
+    Formalizations](log-032.html)**
     -   Investigated the feasibility of a shared geometry core and
         established the project architecture as three independent
         formalization frameworks: Hilbert, Tarski and Suppes.
 -   **[33. Reducing Dependencies and Simplifying the Project
-    Architecture](log-033.md)**
+    Architecture](log-033.html)**
     -   Removal of unnecessary Mathlib dependencies, introduction of the
         local `UnorderedPair` abstraction, simplification of the Suppes
         route, and reduction of the project dependency graph.
 -   **[34. Architectural Principles Emerging from the Geometry
-    Library](log-034.md)**
+    Library](log-034.html)**
     -   Synthesis of the architectural principles that emerged from the
         development of the Hilbert, Tarski and Suppes formalizations,
         including modularity, interface design, dependency management
