@@ -48,7 +48,7 @@ verified proofs and extracting their reusable mathematical components.
     -   From one theorem toward a systematic organization of geometric
         knowledge.
 -   **[11. Primitive Relations, Definitions and the Geometry
-    Core](log-011.md)**
+    Core](log-011.html)**
     -   Reducing the logical kernel by replacing primitive notions with
         definitions.
 -   **[12. Eliminating the First Axiom](log-012.md)**
@@ -63,7 +63,7 @@ verified proofs and extracting their reusable mathematical components.
         originating from the formal analysis of Finlay's synthetic
         proof.
 -   **[15. MidsegmentParallel: A Reusable Construction
-    Pattern](log-015.md)**
+    Pattern](log-015.html)**
     -   This log analyzes the reusable construction behind
         MidsegmentParallel.
 -   **[16. Reconstructing Suppes' Midsegment Theorem](log-016.md)**
@@ -73,7 +73,7 @@ verified proofs and extracting their reusable mathematical components.
     -   A Suppes-based alternative to the existing MidsegmentParallel
         development and Finlay proof.
 -   **[18. Refactoring the Hilbert and Suppes
-    Architecture](log-018.md)**
+    Architecture](log-018.html)**
     -   A more compact dependency structure preserving GeometryBase as
         the shared language of the Hilbert and Suppes proof routes.
 -   **[19. Tarski as a Third Route to Finlay's Proof](log-019.md)**
@@ -81,7 +81,7 @@ verified proofs and extracting their reusable mathematical components.
         and congruence, an explicit GeometryBase bridge, the Midsegment
         Theorem and Finlay's proof.
 -   **[20. Suppes Parallelism and Parallelogram
-    Recognition](log-020.md)**
+    Recognition](log-020.html)**
     -   Development of the Suppes parallelism interface, parallelogram
         recognition, and completion of the Suppes route to Finlay's
         proof.
@@ -93,7 +93,7 @@ verified proofs and extracting their reusable mathematical components.
     -   Reconstruction of the Hilbert axiom hierarchy and the logical
         boundary between neutral and Euclidean geometry.
 -   **[23. The Hilbert Interface: From Axioms to Synthetic
-    Geometry](log-023.md)**
+    Geometry](log-023.html)**
     -   Analysis of the reduction layer connecting Hilbert's
         foundational geometry with the reusable synthetic API.
 -   **[24. Finlay's Proof on the Hilbert Route](log-024.md)**
@@ -105,7 +105,7 @@ verified proofs and extracting their reusable mathematical components.
         midpoint, doubling and collinearity, including the separation of
         `SuppesCore` from the current proof route.
 -   **[26. The Suppes Interface: From Primitive Operations to Affine
-    Geometry](log-026.md)**
+    Geometry](log-026.html)**
     -   Analysis of the main Suppes theory layer, including primitive
         triangles, primitive parallelograms, `SuppesParallel`, derived
         affine results and the remaining explicit assumptions.
@@ -223,6 +223,38 @@ verified proofs and extracting their reusable mathematical components.
         operations, and the emerging proof language is evaluated on a larger
         Euclidean corpus.
 
+-   **[50. A Source-Faithful Hilbert Axiom Layer](log-050.md)**
+    -   Introduction of a source-faithful Hilbert axiom layer, separating
+        Groups I-V from the legacy plane API and reconnecting the existing
+        derived theory through the thin `HilbertPlaneAPI.lean` compatibility
+        bridge.
+
+-   **[51. The Hilbert Plane Compatibility Bridge](log-051.md)**
+    -   Construction of the induced-plane compatibility layer connecting
+        the source-faithful Hilbert axioms with the frozen legacy plane API,
+        while preserving the existing `HilbertPlaneTheory.lean` theorem corpus
+        instead of re-proving it.
+
+-   **[52. The Foundational Boundary after the Hilbert Refactor](log-052.md)**
+    -   Establishment of the new production hierarchy from `HilbertCore`
+        through `HilbertAxioms`, `HilbertPlaneAPI`, `HilbertPlaneTheory`,
+        `HilbertGrundlagen`, `HilbertInterface`, and `HilbertBookZero`, with
+        `HilbertAxiomsWork` recorded explicitly as compatibility support.
+
+-   **[53. Replacing the Legacy 3D Axiom Layer](log-053.md)**
+    -   Replacement of the former 3D axiom module by
+        `HilbertSpaceIncidence.lean`, preserving the downstream Book XI,
+        dimension-free Smith/Wyler, and Coxeter E4 developments through a
+        compatibility facade and validating the migration with a complete
+        `lake build`.
+
+-   **[54. Euclid Book I as a Test of the Synthetic Geometry Library](log-054.md)**
+    -   Synthesis of the completed reconstruction of Euclid's Book I:
+        forty-eight propositions used as an integration test for the
+        layered Hilbert architecture, Book Zero, reusable synthetic theories,
+        dependency analysis, diagram analysis, and the transition from
+        proposition-by-proposition formalization to geometry-library design.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
@@ -246,12 +278,12 @@ The reusable Lean 4 geometry library developed within the project.
 
 Current development focuses on three complementary directions:
 
--   reconstructing Euclid's Book I over the Hilbert and Book Zero
-    layers,
--   testing Book Zero as a reusable working language for classical
-    synthetic proofs,
--   comparing classical proof architecture with the formal Lean
-    reconstruction, including systematic analysis of geometric diagrams.
+-   consolidating the completed reconstruction of Euclid's Book I and
+    extracting reusable synthetic theories from its forty-eight propositions,
+-   extending the source-faithful Hilbert architecture into spatial,
+    dimension-free, Wyler, Smith, and Coxeter developments,
+-   comparing classical proof architecture with formal Lean dependency
+    structure, including systematic analysis of geometric diagrams.
 
 The long-term objective is a modular Lean library in which the
 architecture emerges from the formal analysis of classical synthetic
