@@ -262,6 +262,12 @@ verified proofs and extracting their reusable mathematical components.
         control, and the reuse of Book I as infrastructure for a synthetic
         theory of geometric content.
 
+-   **[56. Euclid Book XI: Synthetic Spatial Geometry in Progress](log-056.md)**
+    -   Living log for the current Book XI reconstruction through XI.17:
+        spatial Hilbert incidence, PlaneGeo slices, line--plane perpendicularity,
+        spatial parallelism, parallel planes, section geometry, proportion,
+        and the affine Wyler path. This log will be extended as Book XI develops.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
@@ -286,7 +292,8 @@ The reusable Lean 4 geometry library developed within the project.
 Current development focuses on three complementary directions:
 
 -   consolidating the completed reconstructions of Euclid's Books I and II
-    and extracting reusable synthetic geometry and content theories from them,
+    and continuing the synthetic reconstruction of Book XI, currently through
+    Proposition XI.17,
 -   extending the source-faithful Hilbert architecture into spatial,
     dimension-free, Wyler, Smith, and Coxeter developments,
 -   comparing classical proof architecture with formal Lean dependency
