@@ -275,6 +275,26 @@ verified proofs and extracting their reusable mathematical components.
         carrier-transport proof of the braid relation, and the general
         finite-period carrier telescope without numerical angle measure.
 
+-   **[58. Coxeter Geometry in E^3: The Tetrahedral A3 System and S4](log-058.md)**
+    -   Construction of the first genuinely spatial Coxeter system from a
+        synthetic regular tetrahedron: three perpendicular-bisector mirror
+        planes, the A3 relations, the induced adjacent-transposition action,
+        four-anchor rigidity, and the identification of the generated
+        reflection group with S4.
+
+-   **[59. E^3 Revisited: Wyler Flats and the Dimension-Free Incidence Bridge](log-059.md)**
+    -   Reinterpretation of the completed A3 geometry through mirror meets,
+        joins, exact common fixed flats, and active planar sections, followed
+        by the bridge from Hilbert E^3 incidence to Smith I.5, exchange, and
+        the dimension-free Smith-Wyler flat calculus.
+
+-   **[60. Entering E^4: a New Incidence Boundary and Synthetic Hyperplanes](log-060.md)**
+    -   First entry into four-dimensional synthetic geometry: replacement of
+        the specifically three-dimensional ambient incidence boundary by
+        `HilbertWylerAxioms`, derivation of Smith I.5 and exchange, isolation
+        of exact dimension four in `E4Dimension`, and construction of derived
+        E4 hyperplanes before metric and reflection geometry are introduced.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
@@ -301,8 +321,9 @@ Current development focuses on three complementary directions:
 -   consolidating the completed reconstructions of Euclid's Books I and II
     and continuing the synthetic reconstruction of Book XI, currently through
     Proposition XI.17,
--   extending the source-faithful Hilbert architecture into spatial,
-    dimension-free, Wyler, Smith, and Coxeter developments,
+-   extending the source-faithful Hilbert architecture through spatial and
+    dimension-free Smith-Wyler geometry into the current synthetic E^4
+    development,
 -   comparing classical proof architecture with formal Lean dependency
     structure, including systematic analysis of geometric diagrams.
 
