@@ -248,6 +248,13 @@ verified proofs and extracting their reusable mathematical components.
         compatibility facade and validating the migration with a complete
         `lake build`.
 
+-   **[54. Euclid Book I as a Test of the Synthetic Geometry Library](log-054.md)**
+    -   Synthesis of the completed reconstruction of Euclid's Book I:
+        forty-eight propositions used as an integration test for the
+        layered Hilbert architecture, Book Zero, reusable synthetic theories,
+        dependency analysis, diagram analysis, and the transition from
+        proposition-by-proposition formalization to geometry-library design.
+
 ------------------------------------------------------------------------
 
 ## Geometry Library
@@ -271,12 +278,12 @@ The reusable Lean 4 geometry library developed within the project.
 
 Current development focuses on three complementary directions:
 
--   reconstructing Euclid's Book I over the Hilbert and Book Zero
-    layers,
--   testing Book Zero as a reusable working language for classical
-    synthetic proofs,
--   comparing classical proof architecture with the formal Lean
-    reconstruction, including systematic analysis of geometric diagrams.
+-   consolidating the completed reconstruction of Euclid's Book I and
+    extracting reusable synthetic theories from its forty-eight propositions,
+-   extending the source-faithful Hilbert architecture into spatial,
+    dimension-free, Wyler, Smith, and Coxeter developments,
+-   comparing classical proof architecture with formal Lean dependency
+    structure, including systematic analysis of geometric diagrams.
 
 The long-term objective is a modular Lean library in which the
 architecture emerges from the formal analysis of classical synthetic
