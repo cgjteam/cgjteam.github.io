@@ -73,7 +73,7 @@ verified proofs and extracting their reusable mathematical components.
     -   A Suppes-based alternative to the existing MidsegmentParallel
         development and Finlay proof.
 -   **[18. Refactoring the Hilbert and Suppes
-    Architecture](log-018.html)**
+    Architecture](log-018.md)**
     -   A more compact dependency structure preserving GeometryBase as
         the shared language of the Hilbert and Suppes proof routes.
 -   **[19. Tarski as a Third Route to Finlay's Proof](log-019.md)**
@@ -81,7 +81,7 @@ verified proofs and extracting their reusable mathematical components.
         and congruence, an explicit GeometryBase bridge, the Midsegment
         Theorem and Finlay's proof.
 -   **[20. Suppes Parallelism and Parallelogram
-    Recognition](log-020.html)**
+    Recognition](log-020.md)**
     -   Development of the Suppes parallelism interface, parallelogram
         recognition, and completion of the Suppes route to Finlay's
         proof.
@@ -93,7 +93,7 @@ verified proofs and extracting their reusable mathematical components.
     -   Reconstruction of the Hilbert axiom hierarchy and the logical
         boundary between neutral and Euclidean geometry.
 -   **[23. The Hilbert Interface: From Axioms to Synthetic
-    Geometry](log-023.html)**
+    Geometry](log-023.md)**
     -   Analysis of the reduction layer connecting Hilbert's
         foundational geometry with the reusable synthetic API.
 -   **[24. Finlay's Proof on the Hilbert Route](log-024.md)**
@@ -105,7 +105,7 @@ verified proofs and extracting their reusable mathematical components.
         midpoint, doubling and collinearity, including the separation of
         `SuppesCore` from the current proof route.
 -   **[26. The Suppes Interface: From Primitive Operations to Affine
-    Geometry](log-026.html)**
+    Geometry](log-026.md)**
     -   Analysis of the main Suppes theory layer, including primitive
         triangles, primitive parallelograms, `SuppesParallel`, derived
         affine results and the remaining explicit assumptions.
@@ -175,7 +175,7 @@ verified proofs and extracting their reusable mathematical components.
         theorem belonging to the Euclidean parallelism layer rather than
         to neutral Tarski geometry.
 -   **[42. Book Zero as a Working Layer above Hilbert
-    Geometry](log-042.md)**
+    Geometry](log-042.html)**
     -   Reconstruction of the Beeson--Narboux--Wiedijk Book Zero over
         the CGJteamLab Hilbert foundation, testing an independently
         developed corpus of elementary synthetic geometry as the working
